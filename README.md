@@ -1,0 +1,91 @@
+# maths300-lessons
+
+## Project Background
+The Australian Association of Mathematics Teachers(AAMT) has a set of maths lessons desktop application(Maths300), which has 80 lessons for SA students and teachers. With the growing popularity of web world, AAMT plans to develop a web application which has same functions. Meanwhile, considering the variety of devices(computer, laptop, tablet and mobile), the new app should be responsive to different sizes of screens.
+
+## Current Progress
+* 22 out of 80 lessons have been completed but have bad responsive design. http://maths300-dev.herokuapp.com/lessons/lessons.html
+
+* Maths300 project has two lessons with functional responsive design. https://lessons.maths300.com
+
+* 56 lessons are to be developed.
+
+## Goal
+* Complete rest 56 lessons
+* Improve the responsive design for 22 finished lessons
+* Integrate the 22 lessons into the project.
+
+## Project Tech Stack
+Maths300 app is created by Vue CLI and uses the following techs.
+* Javascript(ES6)
+* Vue
+* Vue Router
+* Bootstrap
+
+Vue is one of the most popular Javascript frameworks for building highly responsive single page applications. Its 'components' system makes team work smooth and organized. Vue CLI helps us build up a skeleton from which we can effortlessly create a complete web app and meanwhile organize our code efficiently. It also has friendly learning curve compared to other Javascript frameworks or libraries but developers from other tech stacks are expected to spend some time learning its syntax.
+
+## Development Guideline
+This guideline helps new developers better understand project structure and work together under same standards and specifications.
+
+### Project Structure
+* /dist - Include files created by running `npm run build` for production deployment
+* /node_modules - Include all libraries or dependencies used in the project.
+* /public - The public folder that can be access by URL
+* **/src** - All source code which makes application work. Development work will be done under this folder.
+* .gitignore - List the files or folders that should be ignored by git.
+* babel.config.js - Babel config files. It is automatically created by Vue CLI.
+* package.json - Specifies the app info, dependencies, scripts and other configs used in the project.
+* package-lock.json - Specifies the operations that node_modules or package.json is changed.
+* README.md - This file, used as document and reference.
+
+### /src 
+* /assets - The images used in the app should be put here. 
+* App.vue - It is the root component or entry of the app.
+* main.js - The bootstrap script. Do NOT edit it if you are not sure.
+* router.js - Defines app router.
+* /components - All components/pages/lessons are put here.
+
+### Guideline
+* Each lesson has its own folder, it is under `/src/components/lessons/<lesson name>`. Each lesson is independent so each developer can work under their own lesson's folder. Use App.vue as the home page for the lesson. 
+* Under a lesson, there are a couple of sub-lessons. Each sub-lesson has its own component. 
+* Make sure to use `<style scoped> ... </style>` to write CSS code for a particular component.
+* If you want to write global CSS, go to `/src/App.vue`.
+* Each lesson has its own route. Add a new route in `/src/router.js` for your new lesson.
+* In order to navigate to lessons on homepage, edit `src/components/Home.vue` and add a record into `lessons` array. 
+* All images are put under `/assets` folder. If the image is used across the whole web app, it should be put under its root directory. If the image is only used in a particular lesson, you should create a sub-directory with lesson's name and put it under this directory. 
+* Under lesson folder: you can write `utils.js` to put functions which are repeatedly used in the lesson.
+* Under lesson folder: Write `readme.md` to put your development ideas, notes, functions for future reference.
+* This project uses [Bootstrap4](https://getbootstrap.com/docs/4.3/getting-started/introduction/) as UI framework, so feel free to use Bootstrap class but be sure to make your style identical with the rest part of app.
+* This project uses [fontawesome](https://fontawesome.com/icons?d=gallery), so feel free to use the icon from fontawesome if necessary.
+* Be sure to make new lesson's menu style identical to the existing lessons. You can copy `/src/components/lessons/<lesson name>/App.vue` and paste to your file. Only make necessary changes to options, titles and some wording.
+* Write comments whenever possible; write comments for each function in `utils.js`
+* Use self-explanatory name and camel case to name variables and arguments.
+
+### Responsive Design
+For responsive design, please follow the guidelines below:
+* Use Desktop First principle.
+* It is better to use Bootstrap grid system to make layout. How - https://getbootstrap.com/docs/4.1/layout/grid/ 
+* If you write your own media query, be sure to follow the Bootstrap responsive breakpoints. That is: 
+  * 1200px - extra large, 
+  * 992px - large, 
+  * 768px - medium, 
+  * 576px - small. 
+  * You are allowed to add one more tier for extra small, which is 425px. 
+* Make plans about how to make layout in different screen sizes.  
+* Normally, if there are two horizontal columns, they should be put vertically under medium or smaller(<=576px) screen size.
+* Use Chrome's inspect tool to check the layout under different screen sizes.
+
+## Project setup
+```
+npm install
+```
+
+### Compiles and hot-reloads for development
+```
+npm run serve
+```
+
+### Compiles and minifies for production
+```
+npm run build
+```
