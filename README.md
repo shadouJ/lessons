@@ -1,12 +1,16 @@
-# maths300-lessons
+# maths300-app
 
 ## Project Background
 The Australian Association of Mathematics Teachers(AAMT) has a set of maths lessons desktop application(Maths300), which has 80 lessons for SA students and teachers. With the growing popularity of web world, AAMT plans to develop a web application which has same functions. Meanwhile, considering the variety of devices(computer, laptop, tablet and mobile), the new app should be responsive to different sizes of screens.
 
+## Content
+* [Tackling Times Tables](./src/components/lessons/times-tables/readme.md)
+* [Trigonometry Walking](./src/components/lessons/trigonometry/readme.md)
+
 ## Current Progress
 * 22 out of 80 lessons have been completed but have bad responsive design. http://maths300-dev.herokuapp.com/lessons/lessons.html
 
-* Maths300 project has two lessons with functional responsive design. https://lessons.maths300.com
+* This project has two lessons with functional responsive design. https://lessons.maths300.com
 
 * 56 lessons are to be developed.
 
@@ -15,8 +19,8 @@ The Australian Association of Mathematics Teachers(AAMT) has a set of maths less
 * Improve the responsive design for 22 finished lessons
 * Integrate the 22 lessons into the project.
 
-## Project Tech Stack
-Maths300 app is created by Vue CLI and uses the following techs.
+## Intro to project
+This project is created by Vue CLI and uses the following techs.
 * Javascript(ES6)
 * Vue
 * Vue Router
@@ -28,22 +32,22 @@ Vue is one of the most popular Javascript frameworks for building highly respons
 This guideline helps new developers better understand project structure and work together under same standards and specifications.
 
 ### Project Structure
-* /dist - Include files created by running `npm run build` for production deployment
-* /node_modules - Include all libraries or dependencies used in the project.
-* /public - The public folder that can be access by URL
-* **/src** - All source code which makes application work. Development work will be done under this folder.
-* .gitignore - List the files or folders that should be ignored by git.
-* babel.config.js - Babel config files. It is automatically created by Vue CLI.
-* package.json - Specifies the app info, dependencies, scripts and other configs used in the project.
-* package-lock.json - Specifies the operations that node_modules or package.json is changed.
-* README.md - This file, used as document and reference.
+* `/dist` - Include files created by running `npm run build` for production deployment
+* `/node_modules` - Include all libraries or dependencies used in the project.
+* `/public` - The public folder that can be access by URL
+* `/src` - IMPORTANT! - All source code which makes application work. Development work will be done under this folder.
+* `.gitignore` - List the files or folders that should be ignored by git.
+* `babel.config.js` - Babel config files. It is automatically created by Vue CLI.
+* `package.json` - Specifies the app info, dependencies, scripts and other configs used in the project.
+* `package-lock.json` - Specifies the operations that node_modules or package.json is changed.
+* `README.md` - This file, used as document and reference.
 
 ### /src 
-* /assets - The images used in the app should be put here. 
-* App.vue - It is the root component or entry of the app.
-* main.js - The bootstrap script. Do NOT edit it if you are not sure.
-* router.js - Defines app router.
-* /components - All components/pages/lessons are put here.
+* `/assets` - The images used in the app should be put here. 
+* `App.vue` - It is the root component or entry of the app.
+* `main.js` - The bootstrap script. Do NOT edit it if you are not sure.
+* `router.js` - Defines app router.
+* `/components` - All components/pages/lessons are put here.
 
 ### Guideline
 * Each lesson has its own folder, it is under `/src/components/lessons/<lesson name>`. Each lesson is independent so each developer can work under their own lesson's folder. Use App.vue as the home page for the lesson. 
@@ -65,17 +69,15 @@ This guideline helps new developers better understand project structure and work
 For responsive design, please follow the guidelines below:
 * Use Desktop First principle.
 * It is better to use Bootstrap grid system to make layout. How - https://getbootstrap.com/docs/4.1/layout/grid/ 
-* If you write your own media query, be sure to follow the Bootstrap responsive breakpoints. That is: 
-  * 1200px - extra large, 
-  * 992px - large, 
-  * 768px - medium, 
-  * 576px - small. 
-  * You are allowed to add one more tier for extra small, which is 425px. 
+* If you write your own media query, be sure to follow the Bootstrap responsive breakpoints. That is: 1200px - extra large, 992px - large, 768px - medium, 576px - small. You are allowed to add one more tier for extra small, which is 425px. 
 * Make plans about how to make layout in different screen sizes.  
 * Normally, if there are two horizontal columns, they should be put vertically under medium or smaller(<=576px) screen size.
 * Use Chrome's inspect tool to check the layout under different screen sizes.
 
 ## Project setup
+Make sure Node and NPM are installed on computer. If not, go to [Node](https://nodejs.org/en/) to install. NPM is installed with Node.
+
+## Install Packages
 ```
 npm install
 ```
