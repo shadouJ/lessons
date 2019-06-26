@@ -4,7 +4,7 @@
 The Australian Association of Mathematics Teachers(AAMT) has a set of maths lessons desktop application(Maths300), which has 80 lessons for SA students and teachers. With the growing popularity of web world, AAMT plans to develop a web application which has same functions. Meanwhile, considering the variety of devices(computer, laptop, tablet and mobile), the new app should be responsive to different sizes of screens.
 
 ## Content
-* [Angle Estimation](./src/components/lessons/angle-estimation/readme.md)
+* [Angle Estimation](./src/components/lessons/angle-estimation/README.md)
 * [Tackling Times Tables](./src/components/lessons/times-tables/readme.md)
 * [Trigonometry Walking](./src/components/lessons/trigonometry/readme.md)
 
