@@ -16,7 +16,8 @@ export default {
     return {    // Add a lesson object with name and link properties whenever a new lesson is created
       lessons: [  
         {name: 'Tackling Times Tables', link: '/times-tables'},
-        {name: 'Trigonometry Walking', link: '/trigonometry'}
+        {name: 'Trigonometry Walking', link: '/trigonometry'},
+        {name: 'Angle Estimation', link: '/angle-estimation'}
       ]
     }
   }, 
