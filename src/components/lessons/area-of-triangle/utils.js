@@ -133,8 +133,12 @@ export const dragHeight = (canvas, clientX, clientY, p1, p2) => {
 	let {x, y} = convertCanvasPoint(canvasX, canvasY);	// 获得在平面直角坐标系中的位置
 
 	let newP1 = p1;
-	if(x>=0 && x<=15 && y<=10 && y>=1) {	// 如果y>=0.5 则移动三角形的高
-		newP1 = {x, y}; 
+	if(x>=0 && x<=15 && y>=1) {	// 如果y>=0.5 则移动三角形的高
+		if(y > 10) {
+			newP1 = { x, y: 10 };
+		} else {
+			newP1 = {x, y}; 
+		}
 		// console.log(newP1);
 		// if(x>=0 && x<=15 && y<=10) {
 			ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -164,8 +168,12 @@ export const dragBase = (canvas, clientX, clientY, p1, p2) => {
 	// if(y<=0.5) y=0.5;
 	// if(y>10) y=10;
 	let newP2 = p2;
-	if(y>=-0.5 && y<=0.5 && x>=1 && x<=10) {	// 如果y<0.5，则移动三角形的底边
-		newP2 = {x, y: 0};
+	if(y>=-0.5 && y<=0.5 && x>=1) {	// 如果y<0.5，则移动三角形的底边
+		if(x > 10) {
+			newP2 = {x: 10, y: 0};
+		} else {
+			newP2 = {x, y: 0};
+		}
 		// if(x>=0 && x<=10) {
 			ctx.clearRect(0, 0, canvas.width, canvas.height);
 			drawGrid(canvas);
