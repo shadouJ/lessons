@@ -5,6 +5,7 @@ The Australian Association of Mathematics Teachers(AAMT) has a set of maths less
 
 ## Content
 * [Angle Estimation](./src/components/lessons/angle-estimation/README.md)
+* [Area Of Triangle](./src/components/lessons/area-of-triangle/README.md)
 * [Tackling Times Tables](./src/components/lessons/times-tables/readme.md)
 * [Trigonometry Walking](./src/components/lessons/trigonometry/readme.md)
 

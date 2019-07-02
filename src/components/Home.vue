@@ -17,7 +17,8 @@ export default {
       lessons: [  
         {name: 'Tackling Times Tables', link: '/times-tables'},
         {name: 'Trigonometry Walking', link: '/trigonometry'},
-        {name: 'Angle Estimation', link: '/angle-estimation'}
+        {name: 'Angle Estimation', link: '/angle-estimation'},
+        {name: 'Area Of Triangle', link: '/area-of-triangle'}
       ]
     }
   }, 
