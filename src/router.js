@@ -4,6 +4,7 @@ import Trigonometry from './components/lessons/trigonometry/App.vue';
 import TimesTables from './components/lessons/times-tables/App.vue';
 import AngleEstimation from './components/lessons/angle-estimation/App.vue';
 import AreaOfTriangle from './components/lessons/area-of-triangle/App.vue';
+import BiggestVolume from './components/lessons/biggest-volume/App.vue';
 import Home from './components/Home.vue';
 
 Vue.use(VueRouter);
@@ -13,7 +14,8 @@ const routes = [
   {path: '/trigonometry', component: Trigonometry, name: 'Trigonometry Walking'},
   {path: '/times-tables', component: TimesTables, name: 'Tackling Times Tables'},
   {path: '/angle-estimation', component: AngleEstimation, name: 'Angle Estimation'},
-  {path: '/area-of-triangle', component: AreaOfTriangle, name: 'Area Of Triangle' }
+  {path: '/area-of-triangle', component: AreaOfTriangle, name: 'Area Of Triangle' },
+  {path: '/biggest-volume', component: BiggestVolume, name: 'Biggest Volume'}
 ];
 
 const router = new VueRouter({
