@@ -27,7 +27,7 @@
 <script>
 import TitleStatic from '../../layout/TitleStatic.vue';
 import TopNav from '../../layout/TopNav.vue';
-import BottomNav from '../../layout/BottomNav.vue';
+// import BottomNav from '../../layout/BottomNav.vue';
 import Options from '../../layout/Options.vue';
 import CutOutSquares from './CutOutSquares.vue';
 import CalculateAndDisplay from './CalculateAndDisplay.vue';
@@ -38,7 +38,7 @@ export default {
 		appTitleStatic: TitleStatic,
 		appTopNav: TopNav,
 		appOptions: Options,
-		appBottomNav: BottomNav,
+		// appBottomNav: BottomNav,
 		appCutOutSquares: CutOutSquares,
 		appCalculateAndDisplay: CalculateAndDisplay
 	},

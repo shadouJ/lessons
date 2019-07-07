@@ -31,7 +31,7 @@
 // import Title from '../../layout/Title.vue';
 import TitleStatic from '../../layout/TitleStatic.vue';
 import TopNav from '../../layout/TopNav.vue';
-import BottomNav from '../../layout/BottomNav.vue';
+// import BottomNav from '../../layout/BottomNav.vue';
 import Options from '../../layout/Options.vue';
 import AngleEst5To90 from './AngleEst5To90.vue';
 import AngleEst5To360 from './AngleEst5To360.vue';

@@ -25,7 +25,7 @@
 // import Title from '../../layout/Title.vue';
 import TitleStatic from '../../layout/TitleStatic.vue';
 import TopNav from '../../layout/TopNav.vue';
-import BottomNav from '../../layout/BottomNav.vue';
+// import BottomNav from '../../layout/BottomNav.vue';
 import Options from '../../layout/Options.vue';
 import AreaOfTriangle from './AreaOfTriangle.vue';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -35,7 +35,7 @@ export default {
 		appTitleStatic: TitleStatic,
 		appTopNav: TopNav,
 		appOptions: Options,
-		appBottomNav: BottomNav,
+		// appBottomNav: BottomNav,
 		appAreaOfTriangle: AreaOfTriangle
 	},
 	data: function() {

@@ -186,7 +186,7 @@ export const drawCoord = (canvas, boxVolumeArr, biggestVolumeIndex, smallestVolu
 		ctx.lineTo(i, 275);
 		ctx.stroke();
 	}	// 画X轴的刻度
-	 
+	
 	ctx.fillText(boxVolumeArr[0].squareSize, (20-3), 285);
 	ctx.fillText(boxVolumeArr[boxVolumeArr.length - 1].squareSize, (270-3), 285);
 
