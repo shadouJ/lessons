@@ -7,7 +7,7 @@
                     <div class="col-12 col-md-6 app--lesson-left">
                         <div>
                             <h5 class="text-success">
-                                Drag some number tiles to the blanks then click to test.
+                                Drag number tiles to the middle to test.
                             </h5>
 
                             <table>
