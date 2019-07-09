@@ -17,15 +17,22 @@ export default {
       lessons: [  
         {name: 'Tackling Times Tables', link: '/times-tables'},
         {name: 'Trigonometry Walking', link: '/trigonometry'},
-        {name: 'Angle Estimation', link: '/angle-estimation'},
-        {name: 'Area Of Triangle', link: '/area-of-triangle'},
-        {name: 'Biggest Volume', link: '/biggest-volume'}
+        {name:'Truth Tiles 1',link:'/truth-tiles-1'},
+        {name:'Truth Tiles 2',link:'/truth-tiles-2'},
+        {name:'Take Away Tiles',link:'/take-away-tiles'},
+        {name:'Steps',link:'/steps'},
+        {name:'Number Tiles',link:'/number-tiles'},
+        {name:'Chess Queens',link:'/chess-queens'},
+        {name:'Eight Queens',link:'/eight-queens'},
+        {name:'Sporting Finals(AFL)',link:'/sporting-finals-AFL'},
+        {name:'Crosses',link:'/crosses'},
+        {name:'Chances With Crosses',link:'/chances-with-crosses'},
       ]
     }
   }, 
   computed: {
     sortedLessons: function() { // Sort lessons on alphabetical order
-      const sorted = this.lessons.slice().sort(function(l1, l2) {
+      const sorted = this.lessons.sort(function(l1, l2) {
         if(l1.name <= l2.name) return -1;
         else return 1;
       });
