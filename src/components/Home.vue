@@ -25,6 +25,9 @@ export default {
         {name:'Chess Queens',link:'/chess-queens'},
         {name:'Eight Queens',link:'/eight-queens'},
         {name:'Crosses',link:'/crosses'},
+        {name:'Angle Estimation',link:'/angle-estimation'},
+        {name:'Area Of Triangle',link:'/area-of-triangle'},
+        {name:'Biggest Volume',link:'/biggest-volume'},
    
       ]
     }
