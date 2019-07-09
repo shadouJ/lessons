@@ -10,6 +10,8 @@ import Steps from "./components/lessons/steps/App.vue";
 import NumberTiles from "./components/lessons/number-tiles/App.vue";
 import ChessQueens from "./components/lessons/chess-queens/App.vue";
 import EightQueens from "./components/lessons/eight-queens/App.vue";
+import Crosses from "./components/lessons/crosses/App.vue";
+
 
 
 Vue.use(VueRouter);
@@ -24,6 +26,7 @@ const routes = [
   {path:'/steps',component:Steps,name:'Steps'},
   {path:'/number-tiles',component:NumberTiles,name:'Number Tiles'},
   {path:'/chess-queens',component:ChessQueens,name:'Chess Queens'},
+  {path:'/crosses',component:Crosses,name:'Crosses'},
   {path:'/eight-queens',component:EightQueens,name:'Eight Queens'},
  
 ];
