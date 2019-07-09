@@ -24,7 +24,8 @@ export default {
         {name:'Number Tiles',link:'/number-tiles'},
         {name:'Chess Queens',link:'/chess-queens'},
         {name:'Eight Queens',link:'/eight-queens'},
-     
+        {name:'Crosses',link:'/crosses'},
+   
       ]
     }
   }, 
