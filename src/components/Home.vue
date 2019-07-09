@@ -24,9 +24,7 @@ export default {
         {name:'Number Tiles',link:'/number-tiles'},
         {name:'Chess Queens',link:'/chess-queens'},
         {name:'Eight Queens',link:'/eight-queens'},
-        {name:'Sporting Finals(AFL)',link:'/sporting-finals-AFL'},
-        {name:'Crosses',link:'/crosses'},
-        {name:'Chances With Crosses',link:'/chances-with-crosses'},
+     
       ]
     }
   }, 
