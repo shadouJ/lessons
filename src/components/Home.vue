@@ -34,7 +34,7 @@ export default {
   }, 
   computed: {
     sortedLessons: function() { // Sort lessons on alphabetical order
-      const sorted = this.lessons.sort(function(l1, l2) {
+      const sorted = this.lessons.slice().sort(function(l1, l2) {
         if(l1.name <= l2.name) return -1;
         else return 1;
       });
