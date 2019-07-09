@@ -10,9 +10,7 @@ import Steps from "./components/lessons/steps/App.vue";
 import NumberTiles from "./components/lessons/number-tiles/App.vue";
 import ChessQueens from "./components/lessons/chess-queens/App.vue";
 import EightQueens from "./components/lessons/eight-queens/App.vue";
-import SportingFinalsAFL from "./components/lessons/sporting-finals-AFL/App.vue";
-import Crosses from "./components/lessons/crosses/App.vue";
-import ChancesWithCrosses from "./components/lessons/chances-with-crosses/App.vue"
+
 
 Vue.use(VueRouter);
 
@@ -27,9 +25,7 @@ const routes = [
   {path:'/number-tiles',component:NumberTiles,name:'Number Tiles'},
   {path:'/chess-queens',component:ChessQueens,name:'Chess Queens'},
   {path:'/eight-queens',component:EightQueens,name:'Eight Queens'},
-  {path:'/sporting-finals-AFL',component:SportingFinalsAFL,name:'Sporting Finals(AFL)'},
-  {path:'/crosses',component:Crosses,name:'Crosses'},
-  {path:'/chances-with-crosses',component:ChancesWithCrosses,name:"Chances With Crosses"}
+ 
 ];
 
 const router = new VueRouter({
