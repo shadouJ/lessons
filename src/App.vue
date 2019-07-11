@@ -33,6 +33,7 @@ export default {
 */
 .container-fluid {
   padding: 0;
+	margin-bottom: 5rem;
 }
 
 div.form-check label {

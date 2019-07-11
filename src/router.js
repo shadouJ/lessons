@@ -14,7 +14,7 @@ import Crosses from "./components/lessons/crosses/App.vue";
 import AngleEstimation from './components/lessons/angle-estimation/App.vue';
 import AreaOfTriangle from './components/lessons/area-of-triangle/App.vue';
 import BiggestVolume from './components/lessons/biggest-volume/App.vue';
-
+import IceCreamFlavours from './components/lessons/ice-cream-flavours/App.vue';
 
 Vue.use(VueRouter);
 
@@ -32,6 +32,7 @@ const routes = [
   {path:'/angle-estimation', component: AngleEstimation, name: 'Angle Estimation'},
   {path:'/area-of-triangle',component:AreaOfTriangle,name:'Area Of Triangle'},
   {path:'/biggest-volume',component:BiggestVolume,name:'Biggest Volume'}, 
+  {path: '/ice-cream-flavours', component: IceCreamFlavours, name: 'Ice Cream Flavours'}
 ];
 
 const router = new VueRouter({
