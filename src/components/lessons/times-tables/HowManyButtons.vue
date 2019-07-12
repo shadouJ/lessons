@@ -129,6 +129,11 @@ export default {
 	},
 	created() {
 		this.createQuestion(this.level);
+		window.addEventListener('keyup', (e) => {
+			if(e.code=="Space") {
+				this.createQuestion(this.level);
+			}
+		});
 	},
 	watch: {
 		level: function(levelVal) {

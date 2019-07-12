@@ -179,8 +179,8 @@ export default {
 					this.myNumber2 = null;
 					return;
 				}
-				// this.myNumber1 = null;
-				// this.myNumber2 = null;
+				this.myNumber1 = null;
+				this.myNumber2 = null;
 
 			} else {
 				this.answerResult.isRight = false;
@@ -196,6 +196,11 @@ export default {
 	},
 	created() {
 		this.createQuestion(this.level);
+		window.addEventListener('keyup', (e) => {
+			if(e.code=="Space") {
+				this.createQuestion(this.level);
+			}
+		});
 	},
 	watch: {
 		level: function(levelVal) {
