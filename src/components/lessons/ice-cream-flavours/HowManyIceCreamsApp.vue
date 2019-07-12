@@ -30,7 +30,7 @@
 						<div
 							v-for="(flavour, index) in flavoursSelected"
 							:key="index"
-							:style="{zIndex: flavour.zIndex, transform: 'translateY(' + flavour.transformY + '%)' } "   >
+							:style="{zIndex: 100-index*10, transform: 'translateY(' + (35-index*6) + '%)' } "   >
 							<img class="mr-1"
 								:src="flavour.imgSrc" 
 							/>
@@ -47,7 +47,7 @@
 						v-if="iceCreamExist">
 						This ice cream has already been made
 					</div>
-					<div>
+					<div class="app--ice-cream-combination-record">
 						<p><span class="badge badge-danger">{{combinationsList.length}}</span>&nbsp;recorded</p>
 						<p class="text text-success" v-if="iceCreamAllFound" >All ice creams are found. Please explain.</p>
 					</div>
@@ -204,15 +204,16 @@ export default {
 				imgSrc: require(`../../../assets/flavour-${index}.jpg`)
 			}
 		},
-		setFlavoursAvailable() {
+		setFlavoursAvailable() {  
 			this.flavoursAvailable.splice(0, this.flavoursAvailable.length);
 			for(let i = 1; i <= Number(this.numberOfFlavours); i++) {
-				this.flavoursAvailable.push(this.createFlavourObj(i));
-			}
+				const flavourObj = this.createFlavourObj(i);
+				this.flavoursAvailable.push(flavourObj); 
+			} 
 		},
 		setFlavoursSelected() {
-			for(let i = this.flavoursSelected.length-1, k=0; i>=0; i--, k++) {
-				this.flavoursSelected[i].zIndex = k*10;
+			for(let i = this.flavoursSelected.length-1, k=0; i>=0; i--, k++) {   
+				this.flavoursSelected[i].zIndex = k*10; 
 				this.flavoursSelected[i].transformY = k*15 + 5;	// Calculate each image's z-index and transformY property
 			}
 		},
@@ -269,8 +270,7 @@ export default {
 		},
 		handleCheckInput() { 
 			this.setNumberOfPossibleFlavoursInputCheck();
-			this.totalNumberOfIceCreamInputCheck = true;
-			// console.log(this.numberOfPossibleFlavoursInputCheck);
+			this.totalNumberOfIceCreamInputCheck = true; 
 		},
 		handleSeeAnswer() { 
 			this.numberOfPossibleFlavoursInput = this.numberOfPossibleFlavours;
@@ -278,14 +278,11 @@ export default {
 			this.answerSaw = true;
 		},
 
-		handleSelectFlavour(e) {
-			// console.log(this.flavoursAvailable);
-			// console.log(this.flavoursSelected);
+		handleSelectFlavour(e) { 
 			if(this.iceCreamAllFound) return;
 			if(this.foundOne) return;
 			const imgIndex = e.target.getAttribute('data-imgIndex');
-			const index =Number(e.target.getAttribute('data-index'));
-			// console.log(index);
+			const index =Number(e.target.getAttribute('data-index')); 
 
 			if(!this.allowRepeat) {
 				this.flavoursAvailable = this.flavoursAvailable.filter((flavour) => {
@@ -293,11 +290,10 @@ export default {
 				});
 			}
 
-			this.flavoursSelected.unshift( this.createFlavourObj(index) );
+			this.flavoursSelected.unshift( this.createFlavourObj(index) ); 
 			this.setFlavoursSelected();
 
 			if(this.flavoursAvailable.length === 0 || this.flavoursSelected.length === Number(this.numberOfScoops)) {
-				// console.log(this.flavoursSelected);
 				this.foundOne = true;
 				const combination = this.getCurrentCombination(this.flavoursSelected);
 				if(this.combinationsList.indexOf(combination) !== -1) {	// Check if the combination exists
@@ -305,8 +301,7 @@ export default {
 					return;
 				}
 				this.iceCreamExist = false;
-				this.setCombinationsList(this.flavoursSelected);
-				// console.log(this.combinationsList);
+				this.setCombinationsList(this.flavoursSelected); 
 			}
 			
 			if(this.totalNumberOfIceCream === this.combinationsList.length) {
@@ -323,18 +318,21 @@ export default {
 			}
 		},
 
-		setNextFlavours() {
+		setNextFlavours() { 
 			let nextFlavoursSelected, nextCombination;
 			do {
-				nextFlavoursSelected = this.combinationCtr.next();
+				nextFlavoursSelected = this.combinationCtr.next();  
 				if(!nextFlavoursSelected) break;	// 如果到达最后一个元素，则停止
 				// 如果还有接下来的元素 则先检查是否已经在combinationsList里
-				nextCombination = this.getCurrentCombination(nextFlavoursSelected);				
+				nextCombination = this.getCurrentCombination(nextFlavoursSelected);
 			} while(nextFlavoursSelected && this.combinationsList.indexOf(nextCombination) !== -1 )
 			
 			if(nextFlavoursSelected) {
-				this.flavoursSelected = [...nextFlavoursSelected];
-				this.setFlavoursSelected();
+				nextFlavoursSelected.forEach((value, index) => {
+					this.flavoursSelected[index] = value;
+				});
+				// this.flavoursSelected = nextFlavoursSelected;  
+				this.setFlavoursSelected(); 
 				this.setCombinationsList(this.flavoursSelected);
 				this.foundOne = true;
 			} else {
@@ -346,8 +344,9 @@ export default {
 			if(this.iceCreamAllFound) return;
 			// console.log(this.flavoursAvailable, this.numberOfScoops, this.allowRepeat);
 			// console.log(this.combinationsList); 
-			// console.log(iceCream);
-			this.setFlavoursAvailable();
+			// console.log(iceCream); 
+			// this.setFlavoursAvailable();
+			this.handleClear();
 			this.setNextFlavours();
 		},
 		handleToggleTimer() {
@@ -365,7 +364,7 @@ export default {
 		this.setFlavoursAvailable();
 		this.setNumberOfPossibleFlavours();
 		this.setTotalNumberOfIceCream();
-		this.setNumberOfPossibleFlavoursInputCheck(); 
+		this.setNumberOfPossibleFlavoursInputCheck();  
 		if(this.allowRepeat) {
 			this.combinationCtr = Combinatorics.baseN(this.flavoursAvailable, this.numberOfScoops);
 		} else if (this.numberOfScoops > this.numberOfFlavours) {
@@ -373,9 +372,6 @@ export default {
 		} else {
 			this.combinationCtr = Combinatorics.permutation(this.flavoursAvailable, this.numberOfScoops);
 		}
-		
-		// console.log(this.numberOfPossibleFlavours);
-		// console.log(this.totalNumberOfIceCream);
 	}
 }
 </script>
@@ -399,9 +395,13 @@ export default {
 
 .app--ice-cream-combination {
 	flex: 1;
-	overflow-y: scroll;
+}
+/* .app--ice-cream-combination-record {
+} */
+.app--ice-cream-combination ul {
 	height: auto !important;
 	max-height: 600px;
+	overflow-y: scroll;
 }
 .app--ice-cream {
 	display: flex;

@@ -122,8 +122,8 @@ export default {
 			}
 		},
 
-		setFlavours() {		// Reset this.flavours Array
-			this.flavours.splice(0, this.flavours.length);
+		setFlavours() {		// Reset this.flavours Array 
+			this.flavours.splice(0, this.flavours.length); 
 			for(let i = 1; i <= Number(this.numberOfFlavours); i++) { 
 				this.flavours.push( this.createImgObj(i) );
 			}
