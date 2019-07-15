@@ -745,7 +745,27 @@
                 }
             },
             generateFunction: function(){
-                var str = this.dropzone1 +"+"+this.dropzone2+"+"+this.dropzone3+"="+this.dropzone1+"+"+this.dropzone4+"+"+this.dropzone7+"="+this.dropzone5+"+"+this.dropzone6+"+"+this.dropzone7+"="+this.dropzone5+"+"+this.dropzone8+"+"+this.dropzone9
+                var num = []
+                num.push(this.dropzone1*1)
+                num.push(this.dropzone2*1)
+                num.push(this.dropzone3*1)
+                num.sort()
+                var numA = []
+                numA.push(this.dropzone1*1)
+                numA.push(this.dropzone4*1)
+                numA.push(this.dropzone7*1)
+                numA.sort()
+                var numB = []
+                numB.push(this.dropzone7*1)
+                numB.push(this.dropzone5*1)
+                numB.push(this.dropzone6*1)
+                numB.sort()
+                var numC = []
+                numC.push(this.dropzone5*1)
+                numC.push(this.dropzone8*1)
+                numC.push(this.dropzone9*1)
+                numC.sort()
+                var str = num[0] +"+"+num[1]+"+"+num[2]+"="+numA[0]+"+"+numA[1]+"+"+numA[2]+"="+numB[0]+"+"+numB[1]+"+"+numB[2]+"="+numC[0]+"+"+numC[1]+"+"+numC[2]
                 return str;
             },
             enableDrag: function(event){
