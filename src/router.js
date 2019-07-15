@@ -15,6 +15,8 @@ import Home from './components/Home.vue';
 // import AreaOfTriangle from './components/lessons/area-of-triangle/App.vue';
 // import BiggestVolume from './components/lessons/biggest-volume/App.vue';
 // import IceCreamFlavours from './components/lessons/ice-cream-flavours/App.vue';
+// import ChancesWithCrosses from "./components/lessons/chances-with-crosses/App.vue"
+// import FaysNines from "./components/lessons/fays-nines/App.vue"
 const Trigonometry = resolve => {
   require.ensure('./components/lessons/trigonometry/App.vue', () => {
     resolve(require('./components/lessons/trigonometry/App.vue'))
@@ -109,7 +111,10 @@ const routes = [
   {path:'/angle-estimation', component: AngleEstimation, name: 'Angle Estimation'},
   {path:'/area-of-triangle',component:AreaOfTriangle,name:'Area Of Triangle'},
   {path:'/biggest-volume',component:BiggestVolume,name:'Biggest Volume'}, 
-  {path: '/ice-cream-flavours', component: IceCreamFlavours, name: 'Ice Cream Flavours'}
+  {path: '/ice-cream-flavours', component: IceCreamFlavours, name: 'Ice Cream Flavours'},
+  {path:'/chances-with-crosses',component:ChancesWithCrosses,name:"Chances With Crosses"},
+  {path:'/fays-nines',component:FaysNines,name:"Fay's Nines"},
+  {path:'/eight-queens',component:EightQueens,name:'Eight Queens'},
 ];
 
 const router = new VueRouter({
