@@ -680,26 +680,26 @@
                     this.res5 = null
                     this.res6 = null
                 }else if(countM==2){
-                    this.res2 = this.square - this.res1
+                    this.res2 = this.square
                     this.res3 = null
                     this.res4 = null
                     this.res5 = null
                     this.res6 = null
                 }else if(countM==3){
-                    this.res3 = this.square - this.res2-this.res1
+                    this.res3 = this.square
                     this.res4 = null
                     this.res5 = null
                     this.res6 = null
                 }else if(countM==4){
-                    this.res4 = this.square - this.res3-this.res2-this.res1
+                    this.res4 = this.square
 
                     this.res5 = null
                     this.res6 = null
                 }else if(countM==5){
-                    this.res5 = this.square - this.res4-this.res3-this.res2-this.res1
+                    this.res5 = this.square
                     this.res6 = null
                 }else if(countM==6){
-                    this.res6 = this.square - this.res5- this.res4-this.res3-this.res2-this.res1
+                    this.res6 = this.square
                 }
             },
             reset:function () {
