@@ -718,15 +718,21 @@
                 if(this.dropzone1*100+this.dropzone2*10+this.dropzone3*1+this.dropzone4*100+this.dropzone5*10+this.dropzone6*1-this.dropzone7*100-this.dropzone8*10-this.dropzone9*1==0){
                     this.countOfSolutions++;
                     var res = this.generateFunction();
-                    if(!this.mapRes.has(res)){
+                    if(!this.mapRes.has(res[0])){
                         this.uniqueSolutions++;
-                        this.uniqueSolutionsHTML += "<option value='"+this.dropzone1+""+this.dropzone2+""+this.dropzone3+""+this.dropzone4+this.dropzone5+""+this.dropzone6+""+this.dropzone7+""+this.dropzone8+""+this.dropzone9+"'>"+res+"</option>"
-                        this.mapRes.add(res)}
+                        this.uniqueSolutionsHTML += "<option value='"+this.dropzone1+""+this.dropzone2+""+this.dropzone3+""+this.dropzone4+this.dropzone5+""+this.dropzone6+""+this.dropzone7+""+this.dropzone8+""+this.dropzone9+"'>"+res[0]+"</option>"
+                        this.mapRes.add(res[0])
+                        this.mapRes.add(res[1])
+                    }
                 }
             },
             generateFunction: function(){
                 var str = this.dropzone1 +""+this.dropzone2+""+this.dropzone3+"+"+this.dropzone4+""+this.dropzone5+""+this.dropzone6+"="+this.dropzone7+""+this.dropzone8+""+this.dropzone9
-                return str;
+                var str2 = this.dropzone4+""+this.dropzone5+""+this.dropzone6+"+"+this.dropzone1 +""+this.dropzone2+""+this.dropzone3+"="+this.dropzone7+""+this.dropzone8+""+this.dropzone9
+                var resList = []
+                resList.push(str)
+                resList.push(str2)
+                return resList;
             },
             enableDrag: function(event){
                 var cur = event.target

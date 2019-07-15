@@ -77,7 +77,7 @@
                                 <button
                                         type="submit"
                                         class="btn btn-outline-success btn-lg"
-                                        :disabled="finishAnswer" @click="reset">Reset</button>
+                                         @click="reset">Reset</button>
                             </div>
                             <div class="tt--solutions mb-5" style="padding-bottom: 30px">
                                 <div class="mr-3 tt--solutions-count">
