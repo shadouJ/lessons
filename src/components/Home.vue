@@ -28,7 +28,9 @@ export default {
         {name:'Angle Estimation',link:'/angle-estimation'},
         {name:'Area Of Triangle',link:'/area-of-triangle'},
         {name:'Biggest Volume',link:'/biggest-volume'},
-        {name: 'Ice Cream Flavours', link: '/ice-cream-flavours'}
+        {name: 'Ice Cream Flavours', link: '/ice-cream-flavours'},
+        {name:'Chances With Crosses',link:'/chances-with-crosses'},
+        {name:"Fays' Nines",link:'/fays-nines'},
       ]
     }
   }, 
