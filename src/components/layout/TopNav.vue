@@ -12,6 +12,7 @@
 			</router-link>
 		</div>
 		<h1 class="display-4 text-center tt--top-text"><slot></slot></h1>
+		<div><router-link class="btn btn-light" to="/"><i class="fas fa-home"></i>&nbsp;Home</router-link></div>
 		<div><button @click="backToMenu" class="btn btn-light"><i class="fas fa-long-arrow-alt-left"></i>&nbsp;Back</button></div>
 	</nav>
 </template>
