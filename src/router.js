@@ -95,6 +95,20 @@ const IceCreamFlavours = resolve => {
   });
 }
 
+const ChancesWithCrosses = resolve => {
+  require.ensure('./components/lessons/chances-with-crosses/App.vue', () => {
+    resolve(require('./components/lessons/chances-with-crosses/App.vue'))
+  });
+}
+
+const FaysNines = resolve => {
+  require.ensure('./components/lessons/fays-nines/App.vue', () => {
+    resolve(require('./components/lessons/fays-nines/App.vue'))
+  });
+}
+
+
+
 Vue.use(VueRouter);
 
 const routes = [
