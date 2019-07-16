@@ -107,6 +107,11 @@ const FaysNines = resolve => {
   });
 }
 
+const EightQueens = resolve => {
+  require.ensure('./components/lessons/eight-queens/App.vue', () => {
+    resolve(require('./components/lessons/eight-queens/App.vue'))
+  });
+}
 
 
 Vue.use(VueRouter);
