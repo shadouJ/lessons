@@ -31,6 +31,7 @@ export default {
         {name: 'Ice Cream Flavours', link: '/ice-cream-flavours'},
         {name:'Chances With Crosses',link:'/chances-with-crosses'},
         {name:"Fays' Nines",link:'/fays-nines'},
+        {name:"Magic Squares",link:'/magic-squares'},
       ]
     }
   }, 

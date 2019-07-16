@@ -113,6 +113,11 @@ const EightQueens = resolve => {
   });
 }
 
+const MagicSquares = resolve => {
+  require.ensure('./components/lessons/magic-squares/App.vue', () => {
+    resolve(require('./components/lessons/magic-squares/App.vue'))
+  });
+}
 
 Vue.use(VueRouter);
 
@@ -134,6 +139,7 @@ const routes = [
   {path:'/chances-with-crosses',component:ChancesWithCrosses,name:"Chances With Crosses"},
   {path:'/fays-nines',component:FaysNines,name:"Fay's Nines"},
   {path:'/eight-queens',component:EightQueens,name:'Eight Queens'},
+  {path:'/magic-squares',component:MagicSquares,name:'Magic Squares'},
 ];
 
 const router = new VueRouter({
