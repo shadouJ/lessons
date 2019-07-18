@@ -132,9 +132,9 @@
                                     Sum to<span style="font-size: 115%;" class="badge badge-dark">{{ sumOfDigit }}</span>
                                 </p>
                                 <div class="row" style="margin-bottom: 20px">
-                                    <select style="width: 40%;overflow-y:scroll;margin-right: 10%;font-weight: bold;font-size: 15px;text-align: center;" size="20" v-html="threeSumHTML" class="styled" @change="addGridValue($event)">
+                                    <ol ref="olRef" style="max-height: 420px;width: 40%;overflow-y:scroll;margin-right: 10%;font-weight: bold;font-size: 15px;text-align: center;" size="20" v-html="threeSumHTML" class="styled" @click="addGridValue($event)">
 
-                                    </select>
+                                    </ol>
                                     <div style="width: 50%">
                                         <div style="width: 100%;border: solid grey 2px;text-align: center;">{{numberCount}}</div>
 
@@ -162,9 +162,9 @@
                                 <span style="font-size: 115%;" class="badge badge-dark">{{ uniqueSolutions }}</span> Unique solutions found
                             </p>
 
-                            <select name="uniqueRes" @change="changeGridValue($event)" v-html="uniqueSolutionsHTML" style="text-align: left;font-size:15px;border:white 0px;overflow-y:scroll" size="6" class="style-select">
+                            <ol name="uniqueRes" ref="olRefT" @click="changeGridValue($event)" v-html="uniqueSolutionsHTML" style="max-height: 120px;text-align: left;font-size:15px;border:white 0px;overflow-y:scroll" size="6" class="style-select">
 
-                            </select>
+                            </ol>
                         </div>
                     </div>
                 </div>
@@ -232,19 +232,19 @@
             this.initInteract(myDraggble8)
             this.initInteract(myDraggble9)
 
-            let dragzone = this.$refs.dropzonePlace7;
+            let dragzone = this.$refs.dropzonePlace3;
             this.initDropArea(dragzone)
-            this.initDropArea(this.$refs.dropzonePlace8);
+            this.initDropArea(this.$refs.dropzonePlace6);
             this.initDropArea(this.$refs.dropzonePlace9);
 
 
-            this.initInteract2(this.$refs.dropzonePlace7.children[0])
-            this.initInteract2(this.$refs.dropzonePlace8.children[0])
+            this.initInteract2(this.$refs.dropzonePlace3.children[0])
+            this.initInteract2(this.$refs.dropzonePlace6.children[0])
             this.initInteract2(this.$refs.dropzonePlace9.children[0])
 
 
-            this.disabledDraggable(this.$refs.dropzonePlace7.children[0])
-            this.disabledDraggable(this.$refs.dropzonePlace8.children[0])
+            this.disabledDraggable(this.$refs.dropzonePlace3.children[0])
+            this.disabledDraggable(this.$refs.dropzonePlace6.children[0])
             this.disabledDraggable(this.$refs.dropzonePlace9.children[0])
 
             this.threeSum()
@@ -285,8 +285,13 @@
             addGridValue:function(event){
                 this.reset()
                 this.enableAll()
-                var cur = event.target.value
-                var res = cur.split("")
+                var m = event.target
+                if(m.tagName=="LI") {
+                    m.classList = "add"
+                    var cur = event.target.value
+                    cur = cur.toString()
+                    var res = cur.split("")
+
 
                 this.dropzone3 = res[0]
                 this.dropzone6 = res[1]
@@ -295,9 +300,9 @@
                 this.changeGridAndBox(res[0])
                 this.changeGridAndBox(res[1])
                 this.changeGridAndBox(res[2])
-                this.initInteract3(this.$refs.dropzonePlace7.children[0])
-                this.initInteract3(this.$refs.dropzonePlace8.children[0])
-                this.initInteract3(this.$refs.dropzonePlace9.children[0])
+                this.initInteract3(this.$refs.dropzonePlace3.children[0])
+                this.initInteract3(this.$refs.dropzonePlace6.children[0])
+                this.initInteract3(this.$refs.dropzonePlace9.children[0])}
 
 
 
@@ -340,7 +345,7 @@
                     for (var j = 0; j < cur.length; j++) {
                         for (var k = 0; k < cur.length; k++) {
                             if (cur[i] + cur[j] + cur[k] ==this.sumOfDigit && i != j && i != k && j != k) {
-                                this.threeSumHTML += "<option>" + cur[i] + cur[j] + cur[k] + "</option>"
+                                this.threeSumHTML += "<li value='"+cur[i]+cur[j]+cur[k]+"'>" + cur[i] + cur[j] + cur[k] + "</li>"
                                 this.numberCount++;
                             }
 
@@ -350,8 +355,17 @@
                 }
             },
             changeGridValue: function(event){
-                var value = event.target.value
-                this.addToGridChange(value)
+
+                if(event.target.tagName=="LI"){
+                    var refOLt = this.$refs.olRefT
+                    var olChildren = refOLt.children
+                    for(var i=0;i<olChildren.length;i++){
+                        var m = olChildren[i]
+                        m.classList = ""
+                    }
+                    event.target.classList = "add"
+                    var value = event.target.value.toString()
+                    this.addToGridChange(value)}
 
             },
             addToGridChange:function(num){
@@ -523,8 +537,8 @@
                     this.shouldAlert = false
 
                     if (i == 0) {
-                        this.disabledDraggable(this.$refs.dropzonePlace7.children[0])
-                        this.disabledDraggable(this.$refs.dropzonePlace8.children[0])
+                        this.disabledDraggable(this.$refs.dropzonePlace3.children[0])
+                        this.disabledDraggable(this.$refs.dropzonePlace6.children[0])
                         this.disabledDraggable(this.$refs.dropzonePlace9.children[0])
 
                         let myDraggble = this.$refs.myDraggable;
@@ -610,6 +624,18 @@
 
             },
             reset: function(){
+                var refOL = this.$refs.olRef;
+                var olChildren = refOL.children
+                for(var i=0;i<olChildren.length;i++){
+                    var m = olChildren[i]
+                    m.classList = ""
+                }
+                var refOLt = this.$refs.olRefT
+                olChildren = refOLt.children
+                for(i=0;i<olChildren.length;i++){
+                    m = olChildren[i]
+                    m.classList = ""
+                }
                 this.finish = true;
                 this.countOfSolutions = 0,
                     this.countOfFound = 0,
@@ -679,8 +705,8 @@
                     this.$refs.myDraggable9.classList.remove("dropped")
                     this.$refs.myDraggable9.classList.add("drag-drop")
                 }
-                this.disabledDraggable(this.$refs.dropzonePlace7.children[0])
-                this.disabledDraggable(this.$refs.dropzonePlace8.children[0])
+                this.disabledDraggable(this.$refs.dropzonePlace3.children[0])
+                this.disabledDraggable(this.$refs.dropzonePlace6.children[0])
                 this.disabledDraggable(this.$refs.dropzonePlace9.children[0])
 
 
@@ -727,7 +753,7 @@
                     var res = this.generateFunction();
                     if(!this.mapRes.has(res)){
                         this.uniqueSolutions++;
-                        this.uniqueSolutionsHTML += "<option value='"+this.dropzone1+""+this.dropzone2+""+this.dropzone3+""+this.dropzone4+this.dropzone5+""+this.dropzone6+""+this.dropzone7+""+this.dropzone8+""+this.dropzone9+"'>"+res+"</option>"
+                        this.uniqueSolutionsHTML += "<li value='"+this.dropzone1+""+this.dropzone2+""+this.dropzone3+""+this.dropzone4+this.dropzone5+""+this.dropzone6+""+this.dropzone7+""+this.dropzone8+""+this.dropzone9+"'>"+res+"</option>"
                         this.mapRes.add(res)}
                 }
             },
@@ -1346,6 +1372,21 @@
         -webkit-box-shadow: inset 0 1px 2px rgba(0,0,0,0.2);
         -moz-box-shadow: inset 0 1px 2px rgba(0,0,0,0.2);
         box-shadow: inset 0 1px 2px rgba(0,0,0,0.2);
+    }
+    ol{
+        list-style-type:
+                none;
+        text-align: left;
+        padding-left: 0;
+    }
+    /deep/ li{
+        padding-left: 0;
+    }
+
+
+    /deep/ .add{
+        background: #aaaaaa
+    ;
     }
 
 
