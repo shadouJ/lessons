@@ -119,6 +119,12 @@ const MagicSquares = resolve => {
   });
 }
 
+const MakeAMillion = resolve => {
+  require.ensure('./components/lessons/make-a-million/App.vue', () => {
+    resolve(require('./components/lessons/make-a-million/App.vue'))
+  });
+}
+
 Vue.use(VueRouter);
 
 const routes = [
@@ -140,6 +146,7 @@ const routes = [
   {path:'/fays-nines',component:FaysNines,name:"Fay's Nines"},
   {path:'/eight-queens',component:EightQueens,name:'Eight Queens'},
   {path:'/magic-squares',component:MagicSquares,name:'Magic Squares'},
+  {path:'/make-a-million',component:MakeAMillion,name:'Make A Million'},
 ];
 
 const router = new VueRouter({

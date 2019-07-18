@@ -12,6 +12,7 @@
     "core-js": "^2.6.5",
     "interactjs": "^1.4.12",
     "js-combinatorics": "^0.5.4",
+    "number-to-words": "^1.2.4",
     "vue": "^2.6.10",
     "vue-router": "^3.0.6"
   },

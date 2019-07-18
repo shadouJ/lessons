@@ -32,6 +32,7 @@ export default {
         {name:'Chances With Crosses',link:'/chances-with-crosses'},
         {name:"Fays' Nines",link:'/fays-nines'},
         {name:"Magic Squares",link:'/magic-squares'},
+        {name:"Make A Million", link: '/make-a-million'}
       ]
     }
   }, 
