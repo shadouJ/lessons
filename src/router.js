@@ -125,6 +125,19 @@ const MakeAMillion = resolve => {
   });
 }
 
+const SportingFinalsAFL = resolve => {
+  require.ensure('./components/lessons/sporting-finals-AFL/App.vue', () => {
+    resolve(require('./components/lessons/sporting-finals-AFL/App.vue'))
+  });
+}
+
+
+const SportingFinalsNRL = resolve => {
+  require.ensure('./components/lessons/sporting-finals-NRL/App.vue', () => {
+    resolve(require('./components/lessons/sporting-finals-NRL/App.vue'))
+  });
+}
+
 Vue.use(VueRouter);
 
 const routes = [
@@ -147,6 +160,8 @@ const routes = [
   {path:'/eight-queens',component:EightQueens,name:'Eight Queens'},
   {path:'/magic-squares',component:MagicSquares,name:'Magic Squares'},
   {path:'/make-a-million',component:MakeAMillion,name:'Make A Million'},
+  {path:'/sporting-finals-NRL',component:SportingFinalsNRL,name:'Sporting Finals(NRL)'},
+  {path:'/sporting-finals-AFL',component:SportingFinalsAFL,name:'Sporting Finals(AFL)'},
 ];
 
 const router = new VueRouter({
