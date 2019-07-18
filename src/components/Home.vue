@@ -32,7 +32,10 @@ export default {
         {name:'Chances With Crosses',link:'/chances-with-crosses'},
         {name:"Fays' Nines",link:'/fays-nines'},
         {name:"Magic Squares",link:'/magic-squares'},
-        {name:"Make A Million", link: '/make-a-million'}
+        {name:"Make A Million", link: '/make-a-million'},
+        {name:'Sporting Finals(NRL)',link:'/sporting-finals-NRL'},
+        {name:'Sporting Finals(AFL)',link:'/sporting-finals-AFL'},
+        
       ]
     }
   }, 
