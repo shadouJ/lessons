@@ -125,9 +125,9 @@
                                     Sum to<span style="font-size: 115%;" class="badge badge-dark">{{ sumOfDigit }}</span>
                                 </p>
                                 <div class="row" style="margin-bottom: 20px">
-                                    <select style="width: 40%;overflow-y:scroll;margin-right: 10%;font-weight: bold;font-size: 15px;text-align: center;" size="20" v-html="threeSumHTML" class="styled" @change="addGridValue($event)">
+                                    <ol ref="olRef" style="max-height:420px;width: 40%;overflow-y:scroll;margin-right: 10%;font-weight: bold;font-size: 15px;text-align: center;" size="20" v-html="threeSumHTML" class="styled" @click="addGridValue($event)">
 
-                                    </select>
+                                    </ol>
                                     <div style="width: 50%">
                                         <div style="width: 100%;border: solid grey 2px;text-align: center;">{{numberCount}}</div>
 
@@ -155,9 +155,9 @@
                                 <span style="font-size: 115%;" class="badge badge-dark">{{ uniqueSolutions }}</span> Unique solutions found
                             </p>
 
-                            <select name="uniqueRes" @change="changeGridValue($event)" v-html="uniqueSolutionsHTML" style="text-align: left;font-size:15px;border:white 0px;overflow-y:scroll" size="6" class="style-select">
+                            <ol ref="olRefT" name="uniqueRes" @click="changeGridValue($event)" v-html="uniqueSolutionsHTML" style="text-align: left;font-size:15px;border:white 0px;overflow-y:scroll;max-height: 120px;" size="6" class="style-select">
 
-                            </select>
+                            </ol>
                         </div>
                     </div>
                 </div>
@@ -278,19 +278,25 @@
             addGridValue:function(event){
                 this.reset()
                 this.enableAll()
-                var cur = event.target.value
-                var res = cur.split("")
+                var m = event.target
+                if(m.tagName=="LI") {
+                    m.classList = "add"
+                    var cur = event.target.value
+                    cur = cur.toString()
+                    var res = cur.split("")
 
-                this.dropzone7 = res[0]
-                this.dropzone8 = res[1]
-                this.dropzone9 = res[2]
 
-                this.changeGridAndBox(res[0])
-                this.changeGridAndBox(res[1])
-                this.changeGridAndBox(res[2])
-                this.initInteract3(this.$refs.dropzonePlace7.children[0])
-                this.initInteract3(this.$refs.dropzonePlace8.children[0])
-                this.initInteract3(this.$refs.dropzonePlace9.children[0])
+                    this.dropzone7 = res[0]
+                    this.dropzone8 = res[1]
+                    this.dropzone9 = res[2]
+
+                    this.changeGridAndBox(res[0])
+                    this.changeGridAndBox(res[1])
+                    this.changeGridAndBox(res[2])
+                    this.initInteract3(this.$refs.dropzonePlace7.children[0])
+                    this.initInteract3(this.$refs.dropzonePlace8.children[0])
+                    this.initInteract3(this.$refs.dropzonePlace9.children[0])
+                }
 
 
 
@@ -333,7 +339,7 @@
                     for (var j = 0; j < cur.length; j++) {
                         for (var k = 0; k < cur.length; k++) {
                             if (cur[i] + cur[j] + cur[k] ==this.sumOfDigit && i != j && i != k && j != k) {
-                                this.threeSumHTML += "<option>" + cur[i] + cur[j] + cur[k] + "</option>"
+                                this.threeSumHTML += "<li value='"+cur[i]+cur[j]+cur[k]+"'>" + cur[i] + cur[j] + cur[k] + "</li>"
                                 this.numberCount++;
                             }
 
@@ -343,9 +349,16 @@
                 }
             },
             changeGridValue: function(event){
-                var value = event.target.value
-                this.addToGridChange(value)
-
+                if(event.target.tagName=="LI"){
+                    var refOLt = this.$refs.olRefT
+                    var olChildren = refOLt.children
+                    for(var i=0;i<olChildren.length;i++){
+                        var m = olChildren[i]
+                        m.classList = ""
+                    }
+                    event.target.classList = "add"
+                    var value = event.target.value.toString()
+                    this.addToGridChange(value)}
             },
             addToGridChange:function(num){
                 var res = num.split("")
@@ -603,6 +616,18 @@
 
             },
             reset: function(){
+                var refOL = this.$refs.olRef;
+                var olChildren = refOL.children
+                for(var i=0;i<olChildren.length;i++){
+                    var m = olChildren[i]
+                    m.classList = ""
+                }
+                var refOLt = this.$refs.olRefT
+                olChildren = refOLt.children
+                for(i=0;i<olChildren.length;i++){
+                    m = olChildren[i]
+                    m.classList = ""
+                }
                 this.finish = true;
                 this.countOfSolutions = 0,
                     this.countOfFound = 0,
@@ -720,7 +745,7 @@
                     var res = this.generateFunction();
                     if(!this.mapRes.has(res[0])){
                         this.uniqueSolutions++;
-                        this.uniqueSolutionsHTML += "<option value='"+this.dropzone1+""+this.dropzone2+""+this.dropzone3+""+this.dropzone4+this.dropzone5+""+this.dropzone6+""+this.dropzone7+""+this.dropzone8+""+this.dropzone9+"'>"+res[0]+"</option>"
+                        this.uniqueSolutionsHTML += "<li value='"+this.dropzone1+""+this.dropzone2+""+this.dropzone3+""+this.dropzone4+this.dropzone5+""+this.dropzone6+""+this.dropzone7+""+this.dropzone8+""+this.dropzone9+"'>"+res[0]+"</li>"
                         this.mapRes.add(res[0])
                         this.mapRes.add(res[1])
                     }
@@ -1345,6 +1370,21 @@
         -webkit-box-shadow: inset 0 1px 2px rgba(0,0,0,0.2);
         -moz-box-shadow: inset 0 1px 2px rgba(0,0,0,0.2);
         box-shadow: inset 0 1px 2px rgba(0,0,0,0.2);
+    }
+    ol{
+        list-style-type:
+                none;
+        text-align: left;
+        padding-left: 0;
+    }
+    /deep/ li{
+        padding-left: 0;
+    }
+
+
+    /deep/ .add{
+        background: #aaaaaa
+    ;
     }
 
 

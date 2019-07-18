@@ -105,9 +105,9 @@
                                 <span style="font-size: 115%;" class="badge badge-dark">{{ uniqueSolutions }}</span> Unique solutions found
                             </p>
 
-                            <select name="uniqueRes" @change="changeGridValue($event)" v-html="uniqueSolutionsHTML" style="text-align: left;font-size:15px;border:white 0px;overflow-y:scroll" size="20" class="style-select">
+                            <ol ref="olRefT" name="uniqueRes" @click="changeGridValue($event)" v-html="uniqueSolutionsHTML" style="max-height:500px;text-align: left;font-size:15px;border:white 0px;overflow-y:scroll" size="20" class="style-select">
 
-                            </select>
+                            </ol>
                         </div>
                     </div>
                 </div>
@@ -203,8 +203,17 @@
         },
         methods: {
             changeGridValue: function(event){
-                var value = event.target.value
-                this.addToGridChange(value)
+                if(event.target.tagName=="LI"){
+                    var refOL = this.$refs.olRefT;
+                    var olChildren = refOL.children
+                    for(var i=0;i<olChildren.length;i++){
+                        var m = olChildren[i]
+                        m.classList = ""
+                    }
+                    event.target.classList = "add"
+                    var value = event.target.value.toString()
+
+                    this.addToGridChange(value)}
 
             },
             addToGridChange:function(num){
@@ -310,6 +319,12 @@
             },
 
             reset: function(){
+                var refOL = this.$refs.olRefT;
+                var olChildren = refOL.children
+                for(var i=0;i<olChildren.length;i++){
+                    var m = olChildren[i]
+                    m.classList = ""
+                }
                 this.dropzone1 = null
                 this.dropzone2 = null
                 this.dropzone3 = null
@@ -397,7 +412,7 @@
                     if(!this.setRes.has(res)){
                         this.setRes.add(res)
                         this.uniqueSolutions++;
-                        this.uniqueSolutionsHTML += "<option value='"+this.dropzone1+""+this.dropzone2+""+this.dropzone3+""+this.dropzone4+this.dropzone5+""+this.dropzone6+""+this.dropzone7+""+this.dropzone8+""+this.dropzone9+"'>"+res+"</option>"
+                        this.uniqueSolutionsHTML += "<li value='"+this.dropzone1+""+this.dropzone2+""+this.dropzone3+""+this.dropzone4+this.dropzone5+""+this.dropzone6+""+this.dropzone7+""+this.dropzone8+""+this.dropzone9+"'>"+res+"</li>"
                     }
                 }
             },
@@ -929,5 +944,20 @@
         -webkit-border-radius: 5px;
         -moz-border-radius: 5px;
         border-radius: 5px;
+    }
+    ol{
+        list-style-type:
+                none;
+        text-align: left;
+        padding-left: 0;
+    }
+    /deep/ li{
+        padding-left: 0;
+    }
+
+
+    /deep/ .add{
+        background: #aaaaaa
+    ;
     }
 </style>
