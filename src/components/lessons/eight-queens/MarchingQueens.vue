@@ -111,9 +111,9 @@
                             <p>
                                 <span style="font-size: 115%;" class="badge badge-dark">{{ countOfSolutions }}</span> Solutions
                             </p>
-                            <select name="uniqueRes"  v-html="uniqueSolutionsHTML" style="text-align: left;font-size:15px;border:white 0px;overflow-y:scroll" size="20" class="style-select">
+                            <ol ref="olRefT" name="uniqueRes"  v-html="uniqueSolutionsHTML" style="max-height: 500px;text-align: left;font-size:15px;border:white 0px;overflow-y:scroll" size="20" class="style-select" @click="changeGridValue($event)">
 
-                            </select>
+                            </ol>
 
                             <br>
                         </div>
@@ -377,7 +377,7 @@
             },
 
             changeGridValue:function(event) {
-                var value = event.target.value
+                var value = event.target.value.toString()
                 var res = value.split("")
 
                 this.reset()
@@ -414,6 +414,10 @@
                         }
                     }
                 }
+                this.PlayAuto = "Reset"
+                this.button2 = true
+
+
             },
             trOne:function(event){
                 this.button1 = true
@@ -545,7 +549,7 @@
                 if(!this.resSet.has(res)){
                     this.terminate = true
                     this.PlayAuto = "Play Auto"
-                        this.uniqueSolutionsHTML += "<option value='"+this.classOneValue+""+this.classTwoValue+""+this.classThreeValue+""+this.classFourValue+this.classFiveValue+""+this.classSixValue+""+this.classSevenValue+""+this.classEightValue+"'>"+res+"</option>"
+                        this.uniqueSolutionsHTML += "<li value='"+this.classOneValue+""+this.classTwoValue+""+this.classThreeValue+""+this.classFourValue+this.classFiveValue+""+this.classSixValue+""+this.classSevenValue+""+this.classEightValue+"'>"+res+"</li>"
                         this.resSet.add(res);
                         this.countOfSolutions ++;
                     }
@@ -899,6 +903,21 @@
     }
     .imageOrange.coveredTD{
         background: #A1D4AD;
+    }
+    ol{
+        list-style-type:
+                none;
+        text-align: left;
+        padding-left: 0;
+    }
+    /deep/ li{
+        padding-left: 0;
+    }
+
+
+    /deep/ .add{
+        background: #aaaaaa
+    ;
     }
 
 

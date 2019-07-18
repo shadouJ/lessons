@@ -107,9 +107,9 @@
                             <p>
                                 <span style="font-size: 115%;" class="badge badge-dark">{{ countOfSolutions }}</span> Solutions
                             </p>
-                            <select name="uniqueRes" @change="changeGridValue($event)" v-html="uniqueSolutionsHTML" style="text-align: left;font-size:15px;border:white 0px;overflow-y:scroll" size="20" class="style-select">
+                            <ol  ref="olRefT" name="uniqueRes" @click="changeGridValue($event)" v-html="uniqueSolutionsHTML" style="max-height: 500px;text-align: left;font-size:15px;border:white 0px;overflow-y:scroll" size="20" class="style-select">
 
-                            </select>
+                            </ol>
 
                             <br>
                             <button @click="reset" class="btn btn-outline-success btn-lg">Clear Board</button>
@@ -217,47 +217,58 @@
 
         methods:{
             changeGridValue:function(event) {
-                var value = event.target.value
-                var res = value.split("")
+                if(event.target.tagName=="LI") {
+                    var refOLt = this.$refs.olRefT
+                    var olChildren = refOLt.children
+                    for (var i = 0; i < olChildren.length; i++) {
+                        var m = olChildren[i]
+                        m.classList = ""
+                    }
 
-                this.reset()
+                    var value = event.target.value.toString()
 
-                this.greenOrRed1 = "blindCircleGreen";
-                this.greenOrRed2 = "blindCircleGreen";
-                this.greenOrRed3 = "blindCircleGreen";
-                this.greenOrRed4 = "blindCircleGreen";
-                this.greenOrRed5 = "blindCircleGreen";
-                this.greenOrRed6 = "blindCircleGreen";
-                this.greenOrRed7 = "blindCircleGreen";
-                this.greenOrRed8 = "blindCircleGreen";
+                    var res = value.split("")
 
-                this.classOne = false;
-                this.classTwo = false;
-                this.classThree = false;
-                this.classFour = false;
-                this.classFive = false;
-                this.classSix = false;
-                this.classSeven = false;
-                this.classEight = false;
+                    this.reset()
+                    event.target.classList = "add"
 
-                this.classOneValue = res[0]
-                this.classTwoValue = res[1]
-                this.classThreeValue = res[2]
-                this.classFourValue = res[3]
-                this.classFiveValue = res[4]
-                this.classSixValue = res[5]
-                this.classSevenValue = res[6]
-                this.classEightValue = res[7]
+                    this.greenOrRed1 = "blindCircleGreen";
+                    this.greenOrRed2 = "blindCircleGreen";
+                    this.greenOrRed3 = "blindCircleGreen";
+                    this.greenOrRed4 = "blindCircleGreen";
+                    this.greenOrRed5 = "blindCircleGreen";
+                    this.greenOrRed6 = "blindCircleGreen";
+                    this.greenOrRed7 = "blindCircleGreen";
+                    this.greenOrRed8 = "blindCircleGreen";
 
-                var body = this.$refs.tbody
-                var trow = body.children
+                    this.classOne = false;
+                    this.classTwo = false;
+                    this.classThree = false;
+                    this.classFour = false;
+                    this.classFive = false;
+                    this.classSix = false;
+                    this.classSeven = false;
+                    this.classEight = false;
 
-                for (var aa = 0; aa < trow.length; aa++) {
-                    var mrow = trow[aa].children
-                    var target = res[aa]-1
-                    for (var bb = 0; bb < mrow.length; bb++) {
-                        if (target == bb) {
-                            mrow[bb].children[0].classList = "addImg"
+                    this.classOneValue = res[0]
+                    this.classTwoValue = res[1]
+                    this.classThreeValue = res[2]
+                    this.classFourValue = res[3]
+                    this.classFiveValue = res[4]
+                    this.classSixValue = res[5]
+                    this.classSevenValue = res[6]
+                    this.classEightValue = res[7]
+
+                    var body = this.$refs.tbody
+                    var trow = body.children
+
+                    for (var aa = 0; aa < trow.length; aa++) {
+                        var mrow = trow[aa].children
+                        var target = res[aa] - 1
+                        for (var bb = 0; bb < mrow.length; bb++) {
+                            if (target == bb) {
+                                mrow[bb].children[0].classList = "addImg"
+                            }
                         }
                     }
                 }
@@ -704,7 +715,7 @@
                     var res = this.classOneValue+""+this.classTwoValue+""+this.classThreeValue+""+this.classFourValue+this.classFiveValue+""+this.classSixValue+""+this.classSevenValue+""+this.classEightValue ;
 
                     if(!this.resSet.has(res)){
-                    this.uniqueSolutionsHTML += "<option value='"+this.classOneValue+""+this.classTwoValue+""+this.classThreeValue+""+this.classFourValue+this.classFiveValue+""+this.classSixValue+""+this.classSevenValue+""+this.classEightValue+"'>"+res+"</option>"
+                    this.uniqueSolutionsHTML += "<li value='"+this.classOneValue+""+this.classTwoValue+""+this.classThreeValue+""+this.classFourValue+this.classFiveValue+""+this.classSixValue+""+this.classSevenValue+""+this.classEightValue+"'>"+res+"</li>"
                     this.resSet.add(res);
                     this.countOfSolutions ++;
                     }
@@ -785,6 +796,12 @@
 
 
             reset:function () {
+                var refOL = this.$refs.olRefT;
+                var olChildren = refOL.children
+                for(var i=0;i<olChildren.length;i++){
+                    var m = olChildren[i]
+                    m.classList = ""
+                }
                 this.classOne = true
                 this.classTwo = true
                 this.classThree = true
@@ -1013,7 +1030,21 @@
         -moz-border-radius: 5px;
         border-radius: 5px;
     }
+    ol{
+        list-style-type:
+                none;
+        text-align: left;
+        padding-left: 0;
+    }
+    /deep/ li{
+        padding-left: 0;
+    }
 
+
+    /deep/ .add{
+        background: #aaaaaa
+    ;
+    }
 
 
 </style>
