@@ -119,7 +119,15 @@
                     <div class="col-12 col-md-6 app--lesson-right" style="overflow: visible;">
                         <div class="tt-right-box"></div>
 
-                        <div>
+                        <div class="row">
+                            <div>
+                            <p>
+                                <span style="font-size: 115%;" class="badge badge-dark">{{ uniqueSolutions }}</span> Unique solutions found
+                            </p>
+                            <ol ref="olRefT" name="uniqueRes" @click="changeGridValue($event)" v-html="uniqueSolutionsHTML" style="text-align: left;font-size:15px;border:white 0px;overflow-y:scroll;max-height: 420px;" size="6" class="style-select">
+
+                            </ol>
+                            </div>
                             <div>
                                 <p style="">
                                     Sum to<span style="font-size: 115%;" class="badge badge-dark">{{ sumOfDigit }}</span>
@@ -151,13 +159,9 @@
                                     </div>
                                 </div>
                             </div>
-                            <p>
-                                <span style="font-size: 115%;" class="badge badge-dark">{{ uniqueSolutions }}</span> Unique solutions found
-                            </p>
 
-                            <ol ref="olRefT" name="uniqueRes" @click="changeGridValue($event)" v-html="uniqueSolutionsHTML" style="text-align: left;font-size:15px;border:white 0px;overflow-y:scroll;max-height: 120px;" size="6" class="style-select">
 
-                            </ol>
+
                         </div>
                     </div>
                 </div>
