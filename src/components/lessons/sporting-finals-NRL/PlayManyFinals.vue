@@ -279,12 +279,19 @@
                     this.pause = false
                     this.AutoWord = "Pause"
                     var sleepNumber = 1 / this.numberOfTiles * 5000
+                    if(sleepNumber>250){
+                        sleepNumber = 250
+                    }
                     while (this.totalCount < this.numberOfTiles) {
                         if(this.pause == true)
                             break;
 
                         var temple = await this.sleep(sleepNumber);
                         this.oneTrial()
+                    }
+                    if(this.totalCount==this.numberOfTiles){
+                        this.AutoWord = "Reset"
+                        this.playDemoGame = false
                     }
                 }
                 else if(this.AutoWord=="Pause"){

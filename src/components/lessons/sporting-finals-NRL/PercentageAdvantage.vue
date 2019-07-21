@@ -8,6 +8,7 @@
                         <div>
                             <div class="app--lesson-action">
                                 <div class="text-success">
+                                    <h4 class="text-dark">Please click to choose the percentage, then click back button to go back.</h4>
                                     <h5 class="text-success" >
                                         Explanation:
                                     </h5>
@@ -30,7 +31,6 @@
                             <div class="tt--solutions mb-5" style="padding-bottom: 30px">
 
                                 <div class="mr-3 tt--solutions-count" >
-                                    <button class="btn-outline-success btn" @click="submit">OK</button>
 
                                 </div>
                             </div>
@@ -118,6 +118,9 @@
             },
             returnPicked:function () {
                 return p;
+            },
+            backToMenu() {
+
             }
         }
     }

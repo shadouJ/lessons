@@ -1,3 +1,5 @@
+
+
 <template>
     <div>
         <transition appear appear-class="app-appear" appear-active-class="app-appear-active">
@@ -13,7 +15,7 @@
                                 <div @change="remeberWords" ref="dropzone">
                                     <div class="row" style="margin-bottom: 15px">
                                         <span style="font-size: 115%;display: inline-block;width: 30px" class="badge badge-success"  ref="span1">1</span>
-                                        <div ref="drag1"  id="dragID1" ><label for="input" class="inp"><input type="text" ref="input" minlength="1" id="input" placeholder="Team Name" v-model="input1" v-bind:disabled="dataDisabled" ></label></div>
+                                        <div ref="drag1"  id="dragID1"  ><label for="input" class="inp"><input type="text" ref="input" minlength="1" id="input" placeholder="Team Name" v-model="input1" v-bind:disabled="dataDisabled" ></label></div>
                                     </div>
 
                                     <div class="row" style="margin-bottom: 15px">
@@ -175,7 +177,7 @@
 <script>
     import interact from "interactjs";
     var finalTeam = ["Dragons","Bulldogs","Titans","Storm","Broncos","Cowboys","Panthers","Knights","Sea Eagles","Rabbitohs","Warriors","Wests Tigers",
-        "Raiders","Eels","Sharks","Roosters","Magpies","Gold Coast Chargers"]
+            "Raiders","Eels","Sharks","Roosters","Magpies","Gold Coast Chargers"]
 
     export default {
         finalTeam,
@@ -1353,6 +1355,14 @@
     }
     .badge.badge-secondary.badge-alert{
         background: #CC3333;
+    }
+    #dragID1, #dragID2,#dragID3,#dragID4,#dragID5,#dragID6,#dragID7,#dragID8,#dragID9,#dragID10,#dragID11,#dragID12,#dragID13,#dragID14,#dragID15,#dragID16,#dragID17,#dragID18{
+        -ms-touch-action: none;
+        touch-action: none;
+        -webkit-user-select:none;
+        -moz-user-select:none;
+        -ms-user-select:none;
+        user-select:none;
     }
 
 
