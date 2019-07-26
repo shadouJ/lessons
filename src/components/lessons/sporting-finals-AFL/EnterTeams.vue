@@ -1,3 +1,7 @@
+
+
+
+
 <template>
     <div>
         <transition appear appear-class="app-appear" appear-active-class="app-appear-active">
@@ -13,97 +17,120 @@
                                 <div @change="remeberWords" ref="dropzone">
                                     <div class="row" style="margin-bottom: 15px">
                                         <span style="font-size: 115%;display: inline-block;width: 30px" class="badge badge-success"  ref="span1">1</span>
-                                        <div><label ref="drag1"  id="dragID1" for="input" class="inp drag-drop"><input class="drag-drop" type="text" ref="input" minlength="1" id="input" placeholder="Team Name" v-model="input1" v-bind:disabled="dataDisabled" ></label></div>
+                                        <div v-bind:class="classV"><label for="input" class="inp drag-drop"><input type="text" ref="input" minlength="1" id="input" placeholder="Team Name" v-model="input1" v-bind:disabled="dataDisabled" ></label></div>
+                                        <div ref="drag1"  id="dragID1" class="drag-drop" v-bind:class="classC">{{input1}}</div>
                                     </div>
 
                                     <div class="row" style="margin-bottom: 15px">
                                         <span style="font-size: 115%;display: inline-block;width: 30px" class="badge badge-secondary"  ref="span2">2</span>
-                                        <div ><label ref="drag2" id="dragID2" for="input2" class="inp drag-drop"><input class="drag-drop" type="text" ref="input2" minlength="1" id="input2" placeholder="Team Name" v-model="input2" v-bind:disabled="dataDisabled"></label></div>
+                                        <div v-bind:class="classV"><label for="input2" class="inp drag-drop"><input class="drag-drop" type="text" ref="input2" minlength="1" id="input2" placeholder="Team Name" v-model="input2" v-bind:disabled="dataDisabled"></label></div>
+                                        <div ref="drag2"  id="dragID2" class="drag-drop" v-bind:class="classC">{{input2}}</div>
                                     </div>
                                     <div class="row" style="margin-bottom: 15px">
                                         <span style="font-size: 115%;display: inline-block;width: 30px" class="badge badge-success"  ref="span3">3</span>
-                                        <div  ><label ref="drag3" id="dragID3" for="input3" class="inp drag-drop"><input class="drag-drop"  type="text" ref="input3" minlength="1" id="input3" placeholder="Team Name" v-model="input3" v-bind:disabled="dataDisabled"></label></div>
+                                        <div  v-bind:class="classV"><label class="inp drag-drop"><input class="drag-drop"  type="text" ref="input3" minlength="1" id="input3" placeholder="Team Name" v-model="input3" v-bind:disabled="dataDisabled"></label></div>
+                                        <div ref="drag3"  id="dragID3" class="drag-drop" v-bind:class="classC">{{input3}}</div>
                                     </div>
                                     <div class="row" style="margin-bottom: 15px">
                                         <span style="font-size: 115%;display: inline-block;width: 30px" class="badge badge-secondary"  ref="span4">4</span>
-                                        <div ><label ref="drag4" id="dragID4" for="input4" class="inp drag-drop"><input class="drag-drop"  type="text" ref="input4" minlength="1" id="input4" placeholder="Team Name" v-model="input4" v-bind:disabled="dataDisabled"></label></div>
+                                        <div v-bind:class="classV"><label for="input4" class="inp drag-drop"><input class="drag-drop"  type="text" ref="input4" minlength="1" id="input4" placeholder="Team Name" v-model="input4" v-bind:disabled="dataDisabled"></label></div>
+                                        <div ref="drag4"  id="dragID4" class="drag-drop" v-bind:class="classC">{{input4}}</div>
+
                                     </div>
                                     <div class="row" style="margin-bottom: 15px">
                                         <span style="font-size: 115%;display: inline-block;width: 30px" class="badge badge-success"  ref="span5">5</span>
-                                        <div  ><label ref="drag5" id="dragID5" for="input5" class="inp drag-drop"><input class="drag-drop"  type="text" ref="input5" minlength="1" id="input5" placeholder="Team Name" v-model="input5" v-bind:disabled="dataDisabled"></label></div>
+                                        <div v-bind:class="classV"><label for="input5" class="inp drag-drop"><input class="drag-drop"  type="text" ref="input5" minlength="1" id="input5" placeholder="Team Name" v-model="input5" v-bind:disabled="dataDisabled"></label></div>
+                                        <div ref="drag5"  id="dragID5" class="drag-drop" v-bind:class="classC">{{input5}}</div>
                                     </div>
                                     <div class="row" style="margin-bottom: 15px">
                                         <span style="font-size: 115%;display: inline-block;width: 30px" class="badge badge-secondary"  ref="span6">6</span>
-                                        <div><label ref="drag6" id="dragID6" for="input6" class="inp drag-drop"><input class="drag-drop"  type="text" ref="input6" minlength="1" id="input6" placeholder="Team Name" v-model="input6" v-bind:disabled="dataDisabled"></label></div>
+                                        <div v-bind:class="classV"><label  class="inp drag-drop"><input class="drag-drop"  type="text" ref="input6" minlength="1" id="input6" placeholder="Team Name" v-model="input6" v-bind:disabled="dataDisabled"></label></div>
+                                        <div ref="drag6"  id="dragID6" class="drag-drop" v-bind:class="classC">{{input6}}</div>
                                     </div>
                                     <div class="row" style="margin-bottom: 15px">
                                         <span style="font-size: 115%;display: inline-block;width: 30px" class="badge badge-success" ref="span7">7</span>
-                                        <div><label ref="drag7" id="dragID7"  for="input7" class="inp drag-drop"><input class="drag-drop"  type="text" ref="input7" minlength="1" id="input7" placeholder="Team Name" v-model="input7" v-bind:disabled="dataDisabled"></label></div>
+                                        <div v-bind:class="classV"><label for="input7" class="inp drag-drop"><input class="drag-drop"  type="text" ref="input7" minlength="1" id="input7" placeholder="Team Name" v-model="input7" v-bind:disabled="dataDisabled"></label></div>
+                                        <div ref="drag7"  id="dragID7" class="drag-drop" v-bind:class="classC">{{input7}}</div>
                                     </div>
                                     <div class="row"  style="margin-bottom: 15px">
                                         <span style="font-size: 115%;display: inline-block;width: 30px" class="badge badge-secondary" ref="span8">8</span>
-                                        <div><label  ref="drag8" id="dragID8" for="input8" class="inp drag-drop"><input class="drag-drop"  type="text" ref="input8" minlength="1" id="input8" placeholder="Team Name" v-model="input8" v-bind:disabled="dataDisabled">
+                                        <div v-bind:class="classV"><label for="input8" class="inp drag-drop"><input class="drag-drop"  type="text" ref="input8" minlength="1" id="input8" placeholder="Team Name" v-model="input8" v-bind:disabled="dataDisabled">
                                             <span  v-if="plus" @click="plusFunction(0)" class="badge badge-dark plusAName" style="font-size: 115%;height:30px;width: 30px;border-radius: 20px"  >+</span>
                                         </label></div>
+                                        <div ref="drag8"  id="dragID8" class="drag-drop" v-bind:class="classC">{{input8}}</div>
                                     </div>
                                     <div class="row"  style="margin-bottom: 15px" v-if="minus">
                                         <span style="font-size: 115%;display: inline-block;width: 30px" class="badge badge-success" ref="span9">9</span>
-                                        <div><label  ref="drag9" id="dragID9" for="input9" class="inp drag-drop"><input class="drag-drop"  type="text" ref="input9" minlength="1" id="input9" placeholder="Team Name" v-model="input9" v-bind:disabled="dataDisabled">
+                                        <div v-bind:class="classV"><label  for="input9" class="inp drag-drop"><input class="drag-drop"  type="text" ref="input9" minlength="1" id="input9" placeholder="Team Name" v-model="input9" v-bind:disabled="dataDisabled">
                                             <span  v-if="plus2" @click="plusFunction(1)" class="badge badge-dark plusAName" style="font-size: 115%;height:30px;width: 30px;border-radius: 20px"  >+</span>
                                         </label></div>
+                                        <div ref="drag9"  id="dragID9" class="drag-drop" v-bind:class="classC">{{input9}}</div>
+
                                     </div>
                                     <div class="row"  style="margin-bottom: 15px" v-if="minus2">
                                         <span style="font-size: 115%;display: inline-block;width: 30px" class="badge badge-secondary" ref="span10">10</span>
-                                        <div ><label ref="drag10" id="dragID10" for="input10" class="inp drag-drop"><input class="drag-drop"  type="text" ref="input10" minlength="1" id="input10" placeholder="Team Name" v-model="input10" v-bind:disabled="dataDisabled">
+                                        <div v-bind:class="classV"><label for="input10" class="inp drag-drop"><input class="drag-drop"  type="text" ref="input10" minlength="1" id="input10" placeholder="Team Name" v-model="input10" v-bind:disabled="dataDisabled">
                                             <span  v-if="plus3" @click="plusFunction(2)" class="badge badge-dark plusAName" style="font-size: 115%;height:30px;width: 30px;border-radius: 20px"  >+</span>
                                         </label></div>
+                                        <div ref="drag10"  id="dragID10" class="drag-drop" v-bind:class="classC">{{input10}}</div>
+
                                     </div>
                                     <div class="row"  style="margin-bottom: 15px" v-if="minus3">
                                         <span style="font-size: 115%;display: inline-block;width: 30px" class="badge badge-success" ref="span11">11</span>
-                                        <div><label  ref="drag11" id="dragID11" for="input11" class="inp drag-drop"><input class="drag-drop"  type="text" ref="input11" minlength="1" id="input11" placeholder="Team Name" v-model="input11" v-bind:disabled="dataDisabled">
+                                        <div v-bind:class="classV"><label   for="input11" class="inp drag-drop"><input class="drag-drop"  type="text" ref="input11" minlength="1" id="input11" placeholder="Team Name" v-model="input11" v-bind:disabled="dataDisabled">
                                             <span  v-if="plus4" @click="plusFunction(3)" class="badge badge-dark plusAName" style="font-size: 115%;height:30px;width: 30px;border-radius: 20px"  >+</span>
                                         </label></div>
+                                        <div ref="drag11"  id="dragID11" class="drag-drop" v-bind:class="classC">{{input11}}</div>
                                     </div>
                                     <div class="row"  style="margin-bottom: 15px" v-if="minus4">
                                         <span style="font-size: 115%;display: inline-block;width: 30px" class="badge badge-secondary" ref="span12">12</span>
-                                        <div><label  ref="drag12" id="dragID12" for="input12" class="inp drag-drop"><input class="drag-drop"  type="text" ref="input12" minlength="1" id="input12" placeholder="Team Name" v-model="input12" v-bind:disabled="dataDisabled">
+                                        <div v-bind:class="classV"><label  for="input12" class="inp drag-drop"><input class="drag-drop"  type="text" ref="input12" minlength="1" id="input12" placeholder="Team Name" v-model="input12" v-bind:disabled="dataDisabled">
                                             <span  v-if="plus5" @click="plusFunction(4)" class="badge badge-dark plusAName" style="font-size: 115%;height:30px;width: 30px;border-radius: 20px"  >+</span>
                                         </label></div>
+                                        <div ref="drag12"  id="dragID12" class="drag-drop" v-bind:class="classC">{{input12}}</div>
                                     </div>
                                     <div class="row"  style="margin-bottom: 15px" v-if="minus5">
                                         <span style="font-size: 115%;display: inline-block;width: 30px" class="badge badge-success" ref="span13">13</span>
-                                        <div><label  ref="drag13" id="dragID13" for="input13" class="inp drag-drop"><input class="drag-drop"  type="text" ref="input13" minlength="1" id="input13" placeholder="Team Name" v-model="input13" v-bind:disabled="dataDisabled">
+                                        <div v-bind:class="classV"><label for="input13" class="inp drag-drop"><input class="drag-drop"  type="text" ref="input13" minlength="1" id="input13" placeholder="Team Name" v-model="input13" v-bind:disabled="dataDisabled">
                                             <span  v-if="plus6"  @click="plusFunction(5)" class="badge badge-dark plusAName" style="font-size: 115%;height:30px;width: 30px;border-radius: 20px"  >+</span>
                                         </label></div>
+                                        <div ref="drag13"  id="dragID13" class="drag-drop" v-bind:class="classC">{{input13}}</div>
+
                                     </div>
                                     <div class="row"  style="margin-bottom: 15px" v-if="minus6">
                                         <span style="font-size: 115%;display: inline-block;width: 30px" class="badge badge-secondary" ref="span14">14</span>
-                                        <div ><label ref="drag14" id="dragID14" for="input14" class="inp drag-drop"><input class="drag-drop"  type="text" ref="input14" minlength="1" id="input14" placeholder="Team Name" v-model="input14" v-bind:disabled="dataDisabled">
+                                        <div v-bind:class="classV"><label for="input14" class="inp drag-drop"><input class="drag-drop"  type="text" ref="input14" minlength="1" id="input14" placeholder="Team Name" v-model="input14" v-bind:disabled="dataDisabled">
                                             <span  v-if="plus7" @click="plusFunction(6)" class="badge badge-dark plusAName" style="font-size: 115%;height:30px;width: 30px;border-radius: 20px"  >+</span>
                                         </label></div>
+                                        <div ref="drag14"  id="dragID14" class="drag-drop" v-bind:class="classC">{{input14}}</div>
                                     </div>
                                     <div class="row"  style="margin-bottom: 15px" v-if="minus7">
                                         <span style="font-size: 115%;display: inline-block;width: 30px" class="badge badge-success"  ref="span15">15</span>
-                                        <div><label  ref="drag15" id="dragID15" for="input15" class="inp drag-drop"><input class="drag-drop"  type="text" ref="input15" minlength="1" id="input15" placeholder="Team Name" v-model="input15" v-bind:disabled="dataDisabled">
+                                        <div v-bind:class="classV"><label for="input15" class="inp drag-drop"><input class="drag-drop"  type="text" ref="input15" minlength="1" id="input15" placeholder="Team Name" v-model="input15" v-bind:disabled="dataDisabled">
                                             <span  v-if="plus8" @click="plusFunction(7)" class="badge badge-dark plusAName" style="font-size: 115%;height:30px;width: 30px;border-radius: 20px"  >+</span>
                                         </label></div>
+                                        <div ref="drag15"  id="dragID15" class="drag-drop" v-bind:class="classC">{{input15}}</div>
                                     </div>
                                     <div class="row"  style="margin-bottom: 15px" v-if="minus8">
                                         <span style="font-size: 115%;display: inline-block;width: 30px" class="badge badge-secondary" ref="span16">16</span>
-                                        <div><label ref="drag16" id="dragID16"  for="input16" class="inp drag-drop"><input class="drag-drop"  type="text" ref="input16" minlength="1" id="input16" placeholder="Team Name" v-model="input16" v-bind:disabled="dataDisabled">
+                                        <div v-bind:class="classV"><label for="input16" class="inp drag-drop"><input class="drag-drop"  type="text" ref="input16" minlength="1" id="input16" placeholder="Team Name" v-model="input16" v-bind:disabled="dataDisabled">
                                             <span  v-if="plus9" @click="plusFunction(8)" class="badge badge-dark plusAName" style="font-size: 115%;height:30px;width: 30px;border-radius: 20px"  >+</span>
                                         </label></div>
+                                        <div ref="drag16"  id="dragID16" class="drag-drop" v-bind:class="classC">{{input16}}</div>
                                     </div>
                                     <div class="row"  style="margin-bottom: 15px" v-if="minus9">
                                         <span style="font-size: 115%;display: inline-block;width: 30px" class="badge badge-success"  ref="span17">17</span>
-                                        <div ><label  ref="drag17" id="dragID17" for="input17" class="inp drag-drop"><input class="drag-drop"  type="text" ref="input17" minlength="1" id="input17" placeholder="Team Name" v-model="input17" v-bind:disabled="dataDisabled">
+                                        <div v-bind:class="classV"><label  for="input17" class="inp drag-drop"><input class="drag-drop"  type="text" ref="input17" minlength="1" id="input17" placeholder="Team Name" v-model="input17" v-bind:disabled="dataDisabled">
                                             <span  v-if="plus10" @click="plusFunction(9)" class="badge badge-dark plusAName" style="font-size: 115%;height:30px;width: 30px;border-radius: 20px"  >+</span>
                                         </label></div>
+                                        <div ref="drag17"  id="dragID17" class="drag-drop" v-bind:class="classC">{{input17}}</div>
                                     </div>
                                     <div class="row"  style="margin-bottom: 15px" v-if="minus10">
                                         <span style="font-size: 115%;display: inline-block;width: 30px" class="badge badge-secondary" ref="span18">18</span>
-                                        <div><label  ref="drag18" id="dragID18" for="input18" class="inp drag-drop"><input class="drag-drop"  type="text" ref="input18" minlength="1" id="input18" placeholder="Team Name" v-model="input18" v-bind:disabled="dataDisabled">
+                                        <div v-bind:class="classV"><label for="input18" class="inp drag-drop"><input class="drag-drop"  type="text" ref="input18" minlength="1" id="input18" placeholder="Team Name" v-model="input18" v-bind:disabled="dataDisabled">
                                         </label></div>
+                                        <div ref="drag18"  id="dragID18" class="drag-drop" v-bind:class="classC">{{input18}}</div>
+
                                     </div>
 
 
@@ -118,9 +145,9 @@
                                 </div>
 
                                 <div class="row">
-                                <div><button style="margin-right:30px" class="btn btn-outline-success btn-lg" @click="submit">OK</button></div>
+                                    <div><button style="margin-right:30px" class="btn btn-outline-success btn-lg" @click="submit">OK</button></div>
 
-                                <div><button class="btn btn-outline-success btn-lg" @click="clear">Clear</button></div>
+                                    <div><button class="btn btn-outline-success btn-lg" @click="clear">Clear</button></div>
                                 </div>
                             </div>
 
@@ -131,24 +158,24 @@
                     <!-- Right part -->
                     <div class="col-12 col-md-6 app--lesson-right" style="overflow: visible;">
                         <div class="tt-right-box">
-                        <div @change="changeRadio">
-                            <input type="radio" id="one" value="One" style="outline: none;transition: 300ms ease-out;background: #1fc2f5;color: #fff;" v-model="picked">
-                            <label for="one" style="font-family:'Font Awesome 5 Pro',sans-serif;font-size: 20px;margin-left:5px;color: inherit;">Enter teams</label>
-                            <br>
-                            <div v-if="countOfOwnTeamsGreater">
-                            <input type="radio" id="two" value="Two" v-model="picked">
-                            <label for="two" style="font-family:'Font Awesome 5 Pro',sans-serif;font-size: 20px;margin-left:5px;color: inherit;">Select final eight</label>
-                            </div>
+                            <div @change="changeRadio">
+                                <input type="radio" id="one" value="One" style="outline: none;transition: 300ms ease-out;background: #1fc2f5;color: #fff;" v-model="picked">
+                                <label for="one" style="font-family:'Font Awesome 5 Pro',sans-serif;font-size: 20px;margin-left:5px;color: inherit;">Enter teams</label>
+                                <br>
+                                <div v-if="countOfOwnTeamsGreater">
+                                    <input type="radio" id="two" value="Two" v-model="picked">
+                                    <label for="two" style="font-family:'Font Awesome 5 Pro',sans-serif;font-size: 20px;margin-left:5px;color: inherit;">Select final eight</label>
+                                </div>
 
-                        </div>
+                            </div>
                             <br>
                             <br>
 
                             <div class="sketchy" v-if="hide">
 
-                        <div >
-                            <button class="btn btn-outline-secondary btn-lg" style="border: white" @click="ourTeamGenerator">Our teams</button></div>
-                            <br>
+                                <div >
+                                    <button class="btn btn-outline-secondary btn-lg" style="border: white" @click="ourTeamGenerator">Our teams</button></div>
+                                <br>
                                 <div> <button class="btn btn-outline-secondary btn-lg " style="border: white" @click="AFLteamGenerator">AFL teams</button></div></div>
                             <br>
                             <br>
@@ -156,8 +183,8 @@
 
 
                             <div><button class="btn btn-outline-success btn-lg" v-if="randomPick" @click="randomPickMethod">Random pick</button></div></div>
-                            <br>
-                            <br>
+                        <br>
+                        <br>
 
 
 
@@ -174,8 +201,7 @@
 <script>
     import interact from "interactjs";
     var finalTeam = ["Adelaide Crows","Brisbane Lions","GWS Giants","Carlton","Gold Coast Suns","Collingwood","Essendon","Fremantle","Geelong Cats","Hawthorn","Kangaroos","Melbourne",
-            "Port Adelaide","Richmond","St Kilda","Sydney Swans","West Coast Eagles","Western Bulldogs"]
-
+        "Port Adelaide","Richmond","St Kilda","Sydney Swans","West Coast Eagles","Western Bulldogs"]
     export default {
         finalTeam,
         name: "EnterTeams",
@@ -238,9 +264,12 @@
                 countOfSelected:0,
 
                 hide :true,
-
+                select:true,
 
                 dataDisabled : false,
+
+                classV:"",
+                classC:"hiddenClass",
 
             }
         },
@@ -251,6 +280,7 @@
         mounted:function(){
             this.initAllInteract()
             this.disableMinus()
+
             this.initDropArea(this.$refs.drag1)
             this.initDropArea(this.$refs.drag2)
             this.initDropArea(this.$refs.drag3)
@@ -259,6 +289,8 @@
             this.initDropArea(this.$refs.drag6)
             this.initDropArea(this.$refs.drag7)
             this.initDropArea(this.$refs.drag8)
+
+
         },
         methods:{
             disableMinus: function(){
@@ -472,6 +504,7 @@
             },
 
             initAllInteract:function(){
+
                 this.initInteract(this.$refs.drag1)
                 this.initInteract(this.$refs.drag2)
                 this.initInteract(this.$refs.drag3)
@@ -509,26 +542,6 @@
                 this.disabledDraggable(this.$refs.drag16)
                 this.disabledDraggable(this.$refs.drag17)
                 this.disabledDraggable(this.$refs.drag18)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
             },
@@ -623,13 +636,13 @@
                 var m = array.length,
                     t, i;
                 while (m) {
-                i = Math.floor(Math.random() * m--);
-                t = array[m];
-                array[m] = array[i];
-                array[i] = t;
+                    i = Math.floor(Math.random() * m--);
+                    t = array[m];
+                    array[m] = array[i];
+                    array[i] = t;
                 }
-            return array;
-    },
+                return array;
+            },
             initAllTeamDraggable:function(i){
                 this.initInteract3(this.$refs.drag1)
                 this.initInteract3(this.$refs.drag2)
@@ -685,12 +698,25 @@
             },
             changeRadio: function(){
                 if(this.picked=="Two"){
+
                     this.recentTeams = this.remeberWordsChange()
                     this.randomPick = true
+
                     this.instruction = "Hold mouse down and drag to select final 8 positions."
+
                     var teamNumbers = this.teamGenerator(this.recentTeams)
+                    this.classV="displayClass"
+                    this.classC = ""
                     this.initAllTeamDraggable(teamNumbers)
+                    this.hide = false
+
+                    //this.initAllInteract()
+
+
+                    //this.initAllTeamDraggable(teamNumbers)
                     this.dataDisabled = true
+
+                    //this.initAllInteract()
 
 
                 }else {
@@ -700,7 +726,9 @@
                     this.dataDisabled = false
                     this.countOfSelected = 0;
                     this.removeAlertTag()
-                    this.disableAllTeamDraggable()
+                    this.disableAllTeamDraggable();
+                    this.classV="";
+                    this.classC = "hiddenClass"
                 }
             },
             removeAlertTag:function(){
@@ -1075,7 +1103,8 @@
                     this.remainEight(i)
                 }
                 this.countOfOwnTeamsGreater = false
-                this.disableAllTeamDraggable()
+                //this.disableAllTeamDraggable()
+
 
             },
             plusFunction: function (i) {
@@ -1138,7 +1167,9 @@
                 }
             },
             teamGenerator: function(team){
+
                 this.clear()
+
                 var length = team.length
                 var count =0
 
@@ -1240,7 +1271,7 @@
 
 
             }
-    },
+        },
     }
 </script>
 
@@ -1309,7 +1340,6 @@
         color: #223254;
         transition: all .15s ease;
     }
-
     .inp :focus, .inp :focus input{
         background: #eeeeee;
         outline: none;
@@ -1344,6 +1374,14 @@
         -moz-user-select:none;
         -ms-user-select:none;
         user-select:none;
+        min-width: 100px;
+        min-height: 20px;
+    }
+    .hiddenClass{
+        visibility: hidden;
+    }
+    .displayClass{
+        display: none;
     }
 
 
