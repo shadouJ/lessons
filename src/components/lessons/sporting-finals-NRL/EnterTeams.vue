@@ -15,7 +15,7 @@
                                 <div @change="remeberWords" ref="dropzone">
                                     <div class="row" style="margin-bottom: 15px">
                                         <span style="font-size: 115%;display: inline-block;width: 30px" class="badge badge-success"  ref="span1">1</span>
-                                        <div><label ref="drag1"  id="dragID1" for="input" class="inp drag-drop"><input class="drag-drop" type="text" ref="input" minlength="1" id="input" placeholder="Team Name" v-model="input1" v-bind:disabled="dataDisabled" ></label></div>
+                                        <div class="drag-drop" ><label ref="drag1"  id="dragID1" for="input" class="inp drag-drop"><input class="drag-drop" type="text" ref="input" minlength="1" id="input" placeholder="Team Name" v-model="input1" v-bind:disabled="dataDisabled" ></label></div>
                                     </div>
 
                                     <div class="row" style="margin-bottom: 15px">
