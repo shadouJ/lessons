@@ -138,6 +138,12 @@ const SportingFinalsNRL = resolve => {
   });
 }
 
+const DiceBasketball = resolve => {
+  require.ensure('./components/lessons/dice-basketball/App.vue', () => {
+    resolve(require('./components/lessons/dice-basketball/App.vue'))
+  });
+}
+
 Vue.use(VueRouter);
 
 const routes = [
@@ -162,6 +168,7 @@ const routes = [
   {path:'/make-a-million',component:MakeAMillion,name:'Make A Million'},
   {path:'/sporting-finals-NRL',component:SportingFinalsNRL,name:'Sporting Finals(NRL)'},
   {path:'/sporting-finals-AFL',component:SportingFinalsAFL,name:'Sporting Finals(AFL)'},
+  {path: '/dice-basketball', component: DiceBasketball, name: 'Dice Basketball'}
 ];
 
 const router = new VueRouter({
