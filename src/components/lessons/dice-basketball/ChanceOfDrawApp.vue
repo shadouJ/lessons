@@ -127,7 +127,7 @@
 <script>
 import ChangeRule from './ChangeRule.vue';
 import DemoAutoOption from './DemoAutoOption.vue';
-import { throwDiceOnce, throwDiceThree, fillArray, sumArray } from './utils';
+import { throwDiceOnce, throwDiceThree } from './utils';
 export default {
 	props: ['trialNumber'],
 	components: {
