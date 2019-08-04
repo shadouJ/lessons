@@ -144,6 +144,12 @@ const DiceBasketball = resolve => {
   });
 }
 
+const DiceFooty = resolve => {
+  require.ensure('./components/lessons/dice-footy/App.vue', () => {
+    resolve(require('./components/lessons/dice-footy/App.vue'))
+  });
+}
+
 Vue.use(VueRouter);
 
 const routes = [
@@ -168,7 +174,8 @@ const routes = [
   {path:'/make-a-million',component:MakeAMillion,name:'Make A Million'},
   {path:'/sporting-finals-NRL',component:SportingFinalsNRL,name:'Sporting Finals(NRL)'},
   {path:'/sporting-finals-AFL',component:SportingFinalsAFL,name:'Sporting Finals(AFL)'},
-  {path: '/dice-basketball', component: DiceBasketball, name: 'Dice Basketball'}
+  {path: '/dice-basketball', component: DiceBasketball, name: 'Dice Basketball'},
+  {path: '/dice-footy', component: DiceFooty, name: 'Dice Footy'}
 ];
 
 const router = new VueRouter({
