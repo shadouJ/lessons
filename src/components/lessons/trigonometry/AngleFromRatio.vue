@@ -60,7 +60,17 @@ export default {
 	data: function() {
 		return {
 			questions: [],
-			degree: null
+			degree: null,
+			isDrawing: false
+		}
+	},
+	watch: {
+		isDrawing(value) {
+			if(value===true) {
+				document.querySelector('body').setAttribute('style', 'overflow: hidden');
+			} else {
+				document.querySelector('body').removeAttribute('style');
+			}
 		}
 	},
 	methods: {
@@ -79,7 +89,8 @@ export default {
 				seeAngle1Answer: false,
 				seeAngle2Answer: false,
 				angle1Result: null,
-				angle2Result: null
+				angle2Result: null,
+				isDrawing: false
 			};
 			question['angle1' + degree + 'answer'] = null;	// The user's input in angle1
 			question['angle2' + degree + 'answer'] = null;	// The user's input in angle2
@@ -134,21 +145,37 @@ export default {
 			// console.log(canvas);
 			if(canvas.getContext) {
 				drawCircle(canvas);
-				let isDrawing = false;
+				// let isDrawing = false;
 				canvas.addEventListener('mousedown', (e) => {
 					this.degree = drawPosition(canvas, e.clientX, e.clientY);
-					isDrawing = true;
+					this.isDrawing = true;
 					// this.degree = degree;		
 				});
 				canvas.addEventListener('mousemove', (e) => {
 					// console.log(e);
-					if(isDrawing) {
+					if(this.isDrawing) {
 						this.degree = drawPosition(canvas, e.clientX, e.clientY);
 					}
 				});
 				canvas.addEventListener('mouseup', (e) => {
 					this.degree = drawPosition(canvas, e.clientX, e.clientY);
-					isDrawing = false;
+					this.isDrawing = false;
+				});
+
+				canvas.addEventListener('touchstart', (e) => {
+					this.degree = drawPosition(canvas, e.touches[0].clientX, e.touches[0].clientY);
+					this.isDrawing = true;
+					// this.degree = degree;		
+				});
+				canvas.addEventListener('touchmove', (e) => {
+					// console.touches[0].log(e);
+					if(this.isDrawing) {
+						this.degree = drawPosition(canvas, e.touches[0].clientX, e.touches[0].clientY);
+					}
+				});
+				canvas.addEventListener('touchend', (e) => {
+					this.isDrawing = false;
+					this.degree = drawPosition(canvas, e.touches[0].clientX, e.touches[0].clientY);
 				});
 			}
 		},

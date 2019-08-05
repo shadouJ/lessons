@@ -133,7 +133,7 @@ import {
 	drawGrid, 
 	drawTriangle, 
 	drawDraggableArea,
-	resizeTriangle,
+	// resizeTriangle,
 	dragHeight,
 	dragBase 
 } from './utils';
@@ -164,6 +164,7 @@ export default {
 			if(this.areaDiff === 0) return "Correct!";
 			if(this.areaDiff < 0) return `Down by ${-this.areaDiff.toFixed(0)}%`;
 			if(this.areaDiff > 0) return `Up by ${this.areaDiff.toFixed(0)}%`;
+			return null;
 		}
 	},
 	watch: {

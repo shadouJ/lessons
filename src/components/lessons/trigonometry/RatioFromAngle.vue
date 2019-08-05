@@ -63,7 +63,17 @@ export default {
 	data: function() {
 		return {
 			questions: [],
-			degree: null
+			degree: null,
+			isDrawing: false
+		}
+	},
+	watch: {
+		isDrawing(value) {
+			if(value===true) {
+				document.querySelector('body').setAttribute('style', 'overflow: hidden');
+			} else {
+				document.querySelector('body').removeAttribute('style');
+			}
 		}
 	},
 	methods: {
@@ -107,21 +117,37 @@ export default {
 			// console.log(canvas);
 			if(canvas.getContext) {
 				drawCircle(canvas);
-				let isDrawing = false;
+				// let isDrawing = false;
 				canvas.addEventListener('mousedown', (e) => {
 					this.degree = drawPosition(canvas, e.clientX, e.clientY);
-					isDrawing = true;
+					this.isDrawing = true;
 					// this.degree = degree;		
 				});
 				canvas.addEventListener('mousemove', (e) => {
 					// console.log(e);
-					if(isDrawing) {
+					if(this.isDrawing) {
 						this.degree = drawPosition(canvas, e.clientX, e.clientY);
 					}
 				});
 				canvas.addEventListener('mouseup', (e) => {
+					this.isDrawing = false;
 					this.degree = drawPosition(canvas, e.clientX, e.clientY);
-					isDrawing = false;
+				});
+
+				canvas.addEventListener('touchstart', (e) => {
+					this.degree = drawPosition(canvas, e.touches[0].clientX, e.touches[0].clientY);
+					this.isDrawing = true;
+					// this.degree = degree;		
+				});
+				canvas.addEventListener('touchmove', (e) => {
+					// console.log(e);
+					if(this.isDrawing) {
+						this.degree = drawPosition(canvas, e.touches[0].clientX, e.touches[0].clientY);
+					}
+				});
+				canvas.addEventListener('touchend', (e) => {
+					this.isDrawing = false;
+					this.degree = drawPosition(canvas, e.touches[0].clientX, e.touches[0].clientY);
 				});
 			}
 		},
