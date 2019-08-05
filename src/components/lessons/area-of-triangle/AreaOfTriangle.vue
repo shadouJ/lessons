@@ -166,6 +166,15 @@ export default {
 			if(this.areaDiff > 0) return `Up by ${this.areaDiff.toFixed(0)}%`;
 		}
 	},
+	watch: {
+		isDragging(value) {
+			if(value===true) {
+				document.querySelector('body').setAttribute('style', 'overflow: hidden');
+			} else {
+				document.querySelector('body').removeAttribute('style');
+			}
+		}
+	},
 	methods: {
 		initializeStatus() {
 			this.startDragging = false;
@@ -236,6 +245,30 @@ export default {
 				this.p1 = dragHeight(canvas, e.clientX, e.clientY, this.p1, this.p2);
 				this.p2 = dragBase(canvas, e.clientX, e.clientY, this.p1, this.p2);
 				this.isDragging = false;
+			});
+
+			canvas.addEventListener('touchstart', (e) => {
+				if(!this.checkInput()) return;	// If input is invalid, not allow to drag triangle
+				if(!this.allowDragging) return;
+				this.isDragging = true;
+				this.startDragging = true;
+				this.p1 = dragHeight(canvas, e.touches[0].clientX, e.touches[0].clientY, this.p1, this.p2);
+				this.p2 = dragBase(canvas, e.touches[0].clientX, e.touches[0].clientY, this.p1, this.p2);
+			});
+			canvas.addEventListener('touchmove', (e) => {				
+				if(!this.checkInput()) return;
+				if(!this.allowDragging) return;
+				if(this.isDragging) {
+					this.p1 = dragHeight(canvas, e.touches[0].clientX, e.touches[0].clientY, this.p1, this.p2);
+					this.p2 = dragBase(canvas, e.touches[0].clientX, e.touches[0].clientY, this.p1, this.p2);
+				}
+			});
+			canvas.addEventListener('touchend', (e) => {
+				if(!this.checkInput()) return;
+				if(!this.allowDragging) return;
+				this.isDragging = false;
+				this.p1 = dragHeight(canvas, e.touches[0].clientX, e.touches[0].clientY, this.p1, this.p2);
+				this.p2 = dragBase(canvas, e.touches[0].clientX, e.touches[0].clientY, this.p1, this.p2);
 			});
 		}
 	},

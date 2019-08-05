@@ -35,7 +35,12 @@ export default {
   padding: 0;
 	margin-bottom: 5rem;
 }
-
+.container {
+	margin-bottom: 5rem;
+}
+.app--link-list {
+	margin-bottom: 5rem;
+}
 div.form-check label {
 	cursor: pointer;
 }

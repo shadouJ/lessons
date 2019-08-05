@@ -66,6 +66,15 @@ export default {
       isDrawing: false
     }
   },
+  watch: {
+		isDrawing(value) {
+			if(value===true) {
+				document.querySelector('body').setAttribute('style', 'overflow: hidden');
+			} else {
+				document.querySelector('body').removeAttribute('style');
+			}
+		}
+	},
   methods: {
     createOneAngle() {
       return pickRandomNumberWithExcept(5, this.maxDegree);
@@ -105,22 +114,38 @@ export default {
       canvas.height = canvas.width*.5;
       if(canvas.getContext) {
         drawAngleStarter(canvas);
-        let isDrawing = false;
+        // let isDrawing = false;
         canvas.addEventListener('mousedown', (e) => { 
           if(this.isChecked) return;
           this.estimateDegree = drawPosition(canvas, e.clientX, e.clientY);
-          isDrawing = true;
+          this.isDrawing = true;
         });
         canvas.addEventListener('mousemove', (e) => {
           if(this.isChecked) return;
-          if(isDrawing) {
+          if(this.isDrawing) {
             this.estimateDegree = drawPosition(canvas, e.clientX, e.clientY);
           }
         });
         canvas.addEventListener('mouseup', (e) => {
           if(this.isChecked) return;
           this.estimateDegree = drawPosition(canvas, e.clientX, e.clientY);
-          isDrawing = false;
+          this.isDrawing = false;
+        });
+        canvas.addEventListener('touchstart', (e) => { 
+          if(this.isChecked) return;
+          this.isDrawing = true;
+          this.estimateDegree = drawPosition(canvas, e.touches[0].clientX, e.touches[0].clientY);
+        });
+        canvas.addEventListener('touchmove', (e) => {
+          if(this.isChecked) return;
+          if(this.isDrawing) {
+            this.estimateDegree = drawPosition(canvas, e.touches[0].clientX, e.touches[0].clientY);
+          }
+        });
+        canvas.addEventListener('touchend', (e) => {
+          if(this.isChecked) return;
+          this.isDrawing = false;
+          this.estimateDegree = drawPosition(canvas, e.touches[0].clientX, e.touches[0].clientY);
         });
       }
     },
