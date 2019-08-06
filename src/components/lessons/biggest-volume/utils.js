@@ -156,6 +156,11 @@ export const drawPaper = (canvas, width, length, squareSize, unit) => {
 		ctx.lineTo(15+(width-squareSize)*unit, 15+length*unit);
 		ctx.stroke();
 		ctx.stroke();
+
+		ctx.beginPath();	// Draw the size of paper
+		ctx.fillStyle = 'blue';
+		ctx.font = '14px';
+		ctx.fillText(squareSize, 10+squareSize*unit/2, 15+squareSize*unit/2); 
 	}
 }
 
