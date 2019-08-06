@@ -188,7 +188,7 @@ export const drawCoord = (canvas, boxVolumeArr, biggestVolumeIndex, smallestVolu
 	}	// 画X轴的刻度
 	
 	ctx.fillText(boxVolumeArr[0].squareSize, (20-3), 285);
-	ctx.fillText(boxVolumeArr[boxVolumeArr.length - 1].squareSize, (270-3), 285);
+	ctx.fillText(boxVolumeArr[boxVolumeArr.length - 1].squareSize, (boxVolumeArr.length-1)*25 + 20-3, 285);
 
 	ctx.fillText(boxVolumeArr[smallestVolumeIndex].volume, 3, 265);
 	ctx.fillText(boxVolumeArr[biggestVolumeIndex].volume, 1, 16);

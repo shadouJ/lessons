@@ -195,6 +195,14 @@ export default {
 			timer: null
 		}
 	},
+	watch: {
+		demoAutoOption(value) {
+			if(value === "0") {
+				clearInterval(this.timer);
+				this.timer = null;
+			}
+		}
+	},
 	methods: {
 		createFlavourObj(index) {	// index is starting from 1
 			return {
