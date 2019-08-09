@@ -150,6 +150,12 @@ const DiceFooty = resolve => {
   });
 }
 
+const CounterEscape = resolve => {
+  require.ensure('./components/lessons/counter-escape/App.vue', () => {
+    resolve(require('./components/lessons/counter-escape/App.vue'))
+  });
+}
+
 Vue.use(VueRouter);
 
 const routes = [
@@ -175,7 +181,8 @@ const routes = [
   {path:'/sporting-finals-NRL',component:SportingFinalsNRL,name:'Sporting Finals(NRL)'},
   {path:'/sporting-finals-AFL',component:SportingFinalsAFL,name:'Sporting Finals(AFL)'},
   {path: '/dice-basketball', component: DiceBasketball, name: 'Dice Basketball'},
-  {path: '/dice-footy', component: DiceFooty, name: 'Dice Footy'}
+  {path: '/dice-footy', component: DiceFooty, name: 'Dice Footy'},
+  {path: '/counter-escape', component: CounterEscape, name: 'Counter Escape'}
 ];
 
 const router = new VueRouter({

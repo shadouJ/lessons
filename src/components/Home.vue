@@ -36,7 +36,8 @@ export default {
         {name:'Sporting Finals(NRL)',link:'/sporting-finals-NRL'},
         {name:'Sporting Finals(AFL)',link:'/sporting-finals-AFL'},
         {name: 'Dice Basketball', link: '/dice-basketball'},
-        {name: 'Dice Footy', link: '/dice-footy'}
+        {name: 'Dice Footy', link: '/dice-footy'},
+        {name: 'Counter Escape', link: '/counter-escape'}
       ]
     }
   }, 
