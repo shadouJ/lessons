@@ -22,9 +22,9 @@
 							</div>
 						</div>
 						<div class="text-success">
-							<div>A = {{ degree }} degrees</div>
-							<div>A = {{ radian}} radians</div>
-							<div>{{operator}}A = {{ ratio }} </div>
+							<div>X = {{ degree }} degrees</div>
+							<div>X = {{ radian}} radians</div>
+							<div>{{operator}}X = {{ ratio }} </div>
 						</div>
 					</div>
 				</div>
@@ -66,7 +66,7 @@ export default {
 				drawCircle(canvas);
 				// let isDrawing = false;
 				canvas.addEventListener('mousedown', (e) => {
-					this.degree = drawPosition(canvas, e.touches[0].clientX, e.touches[0].clientY);
+					this.degree = drawPosition(canvas, e.clientX, e.clientY);
 					if(this.operator === 'sin') drawSinWave(coordCanvas, this.degree);
 					if(this.operator === 'cos') drawCosWave(coordCanvas, this.degree);
 					this.isDrawing = true;
@@ -75,13 +75,13 @@ export default {
 				canvas.addEventListener('mousemove', (e) => {
 					// console.log(e);
 					if(this.isDrawing) {
-						this.degree = drawPosition(canvas, e.touches[0].clientX, e.touches[0].clientY);
+						this.degree = drawPosition(canvas, e.clientX, e.clientY);
 						if(this.operator === 'sin') drawSinWave(coordCanvas, this.degree);
 						if(this.operator === 'cos') drawCosWave(coordCanvas, this.degree);
 					}
 				});
 				canvas.addEventListener('mouseup', (e) => {
-					this.degree = drawPosition(canvas, e.touches[0].clientX, e.touches[0].clientY); 
+					this.degree = drawPosition(canvas, e.clientX, e.clientY); 
 					if(this.operator === 'sin') drawSinWave(coordCanvas, this.degree);
 					if(this.operator === 'cos') drawCosWave(coordCanvas, this.degree);
 					this.isDrawing = false;
