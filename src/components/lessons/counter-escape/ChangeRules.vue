@@ -233,10 +233,10 @@ export default {
 			}
 
 			for(let dice = 1; dice <= this.numberOfDiceFaces; dice++) {
-				console.log(dice);
+				// console.log(dice);
 				let hasDice = false;
 				for(let key in rule) {
-					console.log(rule[key].indexOf(dice));
+					// console.log(rule[key].indexOf(dice));
 					if(rule[key].indexOf(dice) !== -1) {
 						hasDice = true;
 					}

@@ -67,13 +67,13 @@ export default {
     }
   },
   watch: {
-		isDrawing(value) {
-			if(value===true) {
-				document.querySelector('body').setAttribute('style', 'overflow: hidden');
-			} else {
-				document.querySelector('body').removeAttribute('style');
-			}
-		}
+		// isDrawing(value) {
+		// 	if(value===true) {
+		// 		document.querySelector('body').setAttribute('style', 'overflow: hidden');
+		// 	} else {
+		// 		document.querySelector('body').removeAttribute('style');
+		// 	}
+		// }
 	},
   methods: {
     createOneAngle() {
@@ -137,6 +137,7 @@ export default {
           this.estimateDegree = drawPosition(canvas, e.touches[0].clientX, e.touches[0].clientY);
         });
         canvas.addEventListener('touchmove', (e) => {
+          e.preventDefault();
           if(this.isChecked) return;
           if(this.isDrawing) {
             this.estimateDegree = drawPosition(canvas, e.touches[0].clientX, e.touches[0].clientY);

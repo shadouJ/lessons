@@ -288,7 +288,7 @@ export default {
 
 				// console.log(selectedNumberIndex, '-', selectedNumber, 'dropped');
 				// console.log(targetNumberIndex, '-', targetNumber, 'target');
-				console.log('selected:', selectedNumberIndexXY, 'target:', targetNumberIndexXY);
+				// console.log('selected:', selectedNumberIndexXY, 'target:', targetNumberIndexXY);
 				if( this.strategy=='colsFirst' && this.step==2 ) {
 					//只能行间移动，除此以外不允许移动
 					if(selectedNumberIndexXY.y != targetNumberIndexXY.y) {
@@ -325,10 +325,8 @@ export default {
 					// this.squareArrInit[selectedNumberIndex] = this.squareArrInit[targetNumberIndex];
 					// this.squareArrInit[targetNumberIndex] = temp;
 					this.squareArrInit = [...this.squareArrInit];
-					[
-						this.squareArrInit[selectedNumberIndex], this.squareArrInit[targetNumberIndex]
-					] = [
-						 this.squareArrInit[targetNumberIndex], this.squareArrInit[selectedNumberIndex]
+					[this.squareArrInit[selectedNumberIndex], this.squareArrInit[targetNumberIndex]] = [
+						this.squareArrInit[targetNumberIndex], this.squareArrInit[selectedNumberIndex]
 					];
 
 					// Move the number to their correct positions

@@ -168,13 +168,13 @@ export default {
 		}
 	},
 	watch: {
-		isDragging(value) {
-			if(value===true) {
-				document.querySelector('body').setAttribute('style', 'overflow: hidden');
-			} else {
-				document.querySelector('body').removeAttribute('style');
-			}
-		}
+		// isDragging(value) {
+		// 	if(value===true) {
+		// 		document.querySelector('body').setAttribute('style', 'overflow: hidden');
+		// 	} else {
+		// 		document.querySelector('body').removeAttribute('style');
+		// 	}
+		// }
 	},
 	methods: {
 		initializeStatus() {
@@ -256,7 +256,8 @@ export default {
 				this.p1 = dragHeight(canvas, e.touches[0].clientX, e.touches[0].clientY, this.p1, this.p2);
 				this.p2 = dragBase(canvas, e.touches[0].clientX, e.touches[0].clientY, this.p1, this.p2);
 			});
-			canvas.addEventListener('touchmove', (e) => {				
+			canvas.addEventListener('touchmove', (e) => {		
+        e.preventDefault();		
 				if(!this.checkInput()) return;
 				if(!this.allowDragging) return;
 				if(this.isDragging) {

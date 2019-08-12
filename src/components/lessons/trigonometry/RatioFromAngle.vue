@@ -68,13 +68,13 @@ export default {
 		}
 	},
 	watch: {
-		isDrawing(value) {
-			if(value===true) {
-				document.querySelector('body').setAttribute('style', 'overflow: hidden');
-			} else {
-				document.querySelector('body').removeAttribute('style');
-			}
-		}
+		// isDrawing(value) {
+		// 	if(value===true) {
+		// 		document.querySelector('body').setAttribute('style', 'overflow: hidden');
+		// 	} else {
+		// 		document.querySelector('body').removeAttribute('style');
+		// 	}
+		// }
 	},
 	methods: {
 		/**
@@ -140,6 +140,7 @@ export default {
 					// this.degree = degree;		
 				});
 				canvas.addEventListener('touchmove', (e) => {
+          e.preventDefault();
 					// console.log(e);
 					if(this.isDrawing) {
 						this.degree = drawPosition(canvas, e.touches[0].clientX, e.touches[0].clientY);

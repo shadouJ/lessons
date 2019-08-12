@@ -165,7 +165,7 @@ export default {
 		},
 		checkRemoveCounter(diceNumber) {
 			// Give a diceNumber, return the index of the box should be removed
-			let removedBox, counterIndexToRemove;
+			let removedBox;
 			for(let key in this.rule) {
 				if(this.gameRule.rule[key].indexOf(diceNumber) !== -1) {
 					removedBox = this.boxNames[key-1];
