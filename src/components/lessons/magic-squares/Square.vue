@@ -360,7 +360,7 @@ export default {
 				// isDiagnoalMagic2: this.isDiagnoalMagic2
 			});
 		},
-		handleOndropdeactivate(e) {
+		handleOndropdeactivate() {
 			// console.log('drop deactivate');
 			this.displayShadow = false;
 		},
