@@ -201,10 +201,10 @@ export const drawCoord = (canvas) => {
 
 		ctx.beginPath();
 		ctx.fillStyle = 'blue';
-		ctx.font="12px";
+		ctx.font="12px sans-serif";
 		ctx.fillText('X', 287, 65);
-		ctx.fillText('Y', 5, 20);
-		ctx.fillText('0', 5, 80);
+		ctx.fillText('Y', 3, 25);
+		// ctx.fillText('0', 5, 80);
 
 }
 
@@ -243,9 +243,10 @@ export const drawSinWave = (canvas, degree = 0) => {
 	}
 	
 	ctx.beginPath();
-	ctx.font = '10px';
-	ctx.fillText('X:' + (degree*Math.PI/180).toFixed(2) + 'radian', 12, 115);
-	ctx.fillText('Y:' + Math.sin(degree*Math.PI/180).toFixed(2), 12, 125);
+	ctx.font = '10px sans-serif';
+	// ctx.fillText('X:' + (degree*Math.PI/180).toFixed(2) + 'radian', 12, 115);
+	// ctx.fillText('Y:' + Math.sin(degree*Math.PI/180).toFixed(2), 12, 125);
+	ctx.fillText( (degree*Math.PI/180).toFixed(2), degree/360*300, 80);
 	
 	ctx.beginPath();
 	ctx.strokeStyle="#ffb3b3";
@@ -283,9 +284,10 @@ export const drawCosWave = (canvas, degree = 0) => {
 	}
  
 	ctx.beginPath();
-	ctx.font = '10px';
-	ctx.fillText('X:' + (degree*Math.PI/180).toFixed(2) + 'radian', 12, 115);
-	ctx.fillText('Y:' + Math.cos(degree*Math.PI/180).toFixed(2), 12, 125);
+	ctx.font = '10px sans-serif';
+	// ctx.fillText('X:' + (degree*Math.PI/180).toFixed(2) + 'radian', 12, 115);
+	// ctx.fillText('Y:' + Math.cos(degree*Math.PI/180).toFixed(2), 12, 125);	
+	ctx.fillText( (degree*Math.PI/180).toFixed(2), degree/360*300, 80);
 
 	ctx.beginPath();
 	ctx.strokeStyle="#ffb3b3";
