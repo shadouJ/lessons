@@ -49,27 +49,7 @@
 							</div>
 						</div> -->
 					</div>
-					<div class="app--action">
-						<button class="btn btn-outline-success" 
-							v-if="demoAutoOption==0" 
-							@click="()=> { if(!this.isStart) this.isStart=true; this.count++;}">
-							{{ isStart ? "Tap here for next counter" : "Tap here to start"  }}
-						</button>
-						<button class="btn btn-outline-success" 
-							v-if="demoAutoOption==1"
-							@click="handleToggleTimer"
-						>
-							{{ isStart ? ( timer ? "Tap here to pause" : "Tap here to resume" ) : "Tap here to begin" }}
-						</button>
-						<div class="app--demo-auto-option mt-2">
-							<div class="form-check form-check-inline">
-								<input type="radio" name="demoAutoOption" value="0" class="form-check-input" id="radio-demo" v-model="demoAutoOption">
-								<label for="radio-demo" class="form-check-label">Demo</label>
-								<input type="radio" name="demoAutoOption" value="1" class="ml-2 form-check-input" id="radio-auto" v-model="demoAutoOption">
-								<label for="radio-auto" class="form-check-label">Auto</label>
-							</div>
-						</div>
-					</div>
+					
 				</div>
 				<div class="col-12 col-md-5">
 					<div class="app--calculator-container">	<!-- Counting calculator -->
@@ -169,6 +149,27 @@
 							<label for="counting-speed-2" class="form-check-label">
 								Faster counting
 							</label>
+						</div>
+					</div>
+					<div class="app--action mt-3">
+						<button class="btn btn-outline-success" 
+							v-if="demoAutoOption==0" 
+							@click="()=> { if(!this.isStart) this.isStart=true; this.count++;}">
+							{{ isStart ? "Tap here for next counter" : "Tap here to start"  }}
+						</button>
+						<button class="btn btn-outline-success" 
+							v-if="demoAutoOption==1"
+							@click="handleToggleTimer"
+						>
+							{{ isStart ? ( timer ? "Tap here to pause" : "Tap here to resume" ) : "Tap here to begin" }}
+						</button>
+						<div class="app--demo-auto-option mt-2">
+							<div class="form-check form-check-inline">
+								<input type="radio" name="demoAutoOption" value="0" class="form-check-input" id="radio-demo" v-model="demoAutoOption">
+								<label for="radio-demo" class="form-check-label">Demo</label>
+								<input type="radio" name="demoAutoOption" value="1" class="ml-2 form-check-input" id="radio-auto" v-model="demoAutoOption">
+								<label for="radio-auto" class="form-check-label">Auto</label>
+							</div>
 						</div>
 					</div>
 				</div>
