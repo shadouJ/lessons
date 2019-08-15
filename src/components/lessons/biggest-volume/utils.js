@@ -173,38 +173,41 @@ export const drawPaper = (canvas, width, length, squareSize, unit) => {
  */
 export const drawCoord = (canvas, boxVolumeArr, biggestVolumeIndex, smallestVolumeIndex) => {
 	// const biggestVolume = boxVolumeArr[biggestVolumeIndex].volume;
-
+	const xOffset = 10;
+	const xUnit = (270-xOffset)/10;
 	const ctx = canvas.getContext('2d');
 
 	ctx.beginPath();
 	ctx.strokeStyle = '#222';
-	ctx.strokeRect(20, 20, 250, 250); 
+	ctx.strokeRect(xOffset, 20, 270, 250); 
 	
-	ctx.font = '14px';
-	ctx.fillText('Vol', 2, 145);
-	ctx.fillText('Square length', 110, 295);	// Fill the text
+	ctx.font = '16px sans-serif';
+	// ctx.fillText('Vol', 2, 145);
+	// ctx.fillText('Square length', 110, 298);	// Fill the text
 	
 	ctx.beginPath();
 	ctx.strokeStyle = 'blue';
-	for(let i = 20; i<= 270; i+=25) {
+	for(let i = xOffset; i<= 270; i+= (270-xOffset)/10 ) {
 		ctx.moveTo(i, 270);
 		ctx.lineTo(i, 275);
 		ctx.stroke();
 	}	// 画X轴的刻度
 	
-	ctx.fillText(boxVolumeArr[0].squareSize, (20-3), 285);
-	ctx.fillText(boxVolumeArr[boxVolumeArr.length - 1].squareSize, (boxVolumeArr.length-1)*25 + 20-3, 285);
+	ctx.beginPath();
+	ctx.font = '16px sans-serif';
+	ctx.fillText(boxVolumeArr[0].squareSize, (xOffset-3), 290);
+	ctx.fillText(boxVolumeArr[boxVolumeArr.length - 1].squareSize, (boxVolumeArr.length-1)*xUnit + xOffset-3, 290);
 
-	ctx.fillText(boxVolumeArr[smallestVolumeIndex].volume, 3, 265);
-	ctx.fillText(boxVolumeArr[biggestVolumeIndex].volume, 1, 16);
+	// ctx.fillText(boxVolumeArr[smallestVolumeIndex].volume, 0, 280);	// 最小值在y轴上的刻度
+	// ctx.fillText(boxVolumeArr[biggestVolumeIndex].volume, 0, 25);		// 最大值在y轴上的刻度
 
 	ctx.beginPath();
 	ctx.fillStyle = 'red';
 	ctx.strokeStyle = 'red';
-	ctx.fillText(boxVolumeArr[biggestVolumeIndex].squareSize, (biggestVolumeIndex*25+20-3), 285 );	// 最大值对应的square size
-	ctx.fillText(boxVolumeArr[biggestVolumeIndex].volume, (biggestVolumeIndex*25+20-3), 16);	// 最大volume值
-	ctx.moveTo((biggestVolumeIndex*25+20), 270);
-	ctx.lineTo((biggestVolumeIndex*25+20), 20);
+	ctx.fillText(boxVolumeArr[biggestVolumeIndex].squareSize, (biggestVolumeIndex*xUnit+xOffset-3), 290 );	// 最大值对应的square size
+	ctx.fillText(boxVolumeArr[biggestVolumeIndex].volume, (biggestVolumeIndex*xUnit+xOffset-3), 16);	// 最大volume值
+	ctx.moveTo((biggestVolumeIndex*((270-xOffset)/10))+xOffset, 270);
+	ctx.lineTo((biggestVolumeIndex*((270-xOffset)/10))+xOffset, 20);
 	ctx.stroke();
 
 	// 画在坐标上的每一个点，每个点对应一个box volume	 
@@ -215,7 +218,7 @@ export const drawCoord = (canvas, boxVolumeArr, biggestVolumeIndex, smallestVolu
 		// console.log((boxVolumeArr[i].volume-smallestVolume) / yDiff);
 		ctx.beginPath();
 		ctx.fillStyle = 'blue';
-		ctx.arc(25*i+20, 270 - (boxVolumeArr[i].volume-smallestVolume) / yDiff * 250, 4, 0, Math.PI*2, true);
+		ctx.arc( (270-xOffset)/10 *i+xOffset, 270 - (boxVolumeArr[i].volume-smallestVolume) / yDiff * 250, 4, 0, Math.PI*2, true);
 		ctx.fill();
 	}
 }

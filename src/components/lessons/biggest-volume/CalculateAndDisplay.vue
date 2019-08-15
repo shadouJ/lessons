@@ -58,8 +58,19 @@
 						</tr>
 					</table>
 				</div>
-				<div class="col-12 col-md-6">
-					<canvas id="app-canvas" style="margin-bottom: 5rem;"></canvas>
+				<div class="col-12 col-md-6 app--canvas-container">
+					<div class="app--canvas-container-row">
+						<div style="transform: translateX(10%);" class="app--canvas-label" v-if="boxVolumeArr[biggestVolumeIndex]">
+							<div style="transform: translateY(10px);">{{ boxVolumeArr[biggestVolumeIndex].volume }}</div>
+							<div style="transform: translateY(115px);">Vol</div>
+							<div style="transform: translateY(210px);">{{ boxVolumeArr[smallestVolumeIndex].volume }}</div>
+						</div>
+						<canvas id="app-canvas" style="margin-bottom: 5rem;"></canvas>
+					</div>
+					<div 
+						v-if="boxVolumeArr[biggestVolumeIndex]"
+						style="transform: translate(100px, -90px);"
+					>Square length</div>
 				</div>
 			</div>
 		</div>
@@ -197,5 +208,12 @@ export default {
 <style scoped>
 	#app-canvas {
 		border: none;
+	}
+
+	.app--canvas-container-row {
+		display: flex;
+	}
+	.app--canvas-label {
+		text-align: right;
 	}
 </style>
