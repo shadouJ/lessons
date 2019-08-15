@@ -38,7 +38,8 @@ export default {
         {name: 'Dice Basketball', link: '/dice-basketball'},
         {name: 'Dice Footy', link: '/dice-footy'},
         {name: 'Counter Escape', link: '/counter-escape'},
-        {name: 'Building Views', link: '/building-views'}
+        {name: 'Building Views', link: '/building-views'},
+        {name: 'Problem Dice', link: '/problem-dice'}
       ]
     }
   }, 

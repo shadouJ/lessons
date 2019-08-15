@@ -162,6 +162,12 @@ const BuildingViews = resolve => {
   });
 }
 
+const ProblemDice = resolve => {
+  require.ensure('./components/lessons/problem-dice/App.vue', () => {
+    resolve(require('./components/lessons/problem-dice/App.vue'))
+  });
+}
+
 Vue.use(VueRouter);
 
 const routes = [
@@ -189,7 +195,8 @@ const routes = [
   {path: '/dice-basketball', component: DiceBasketball, name: 'Dice Basketball'},
   {path: '/dice-footy', component: DiceFooty, name: 'Dice Footy'},
   {path: '/counter-escape', component: CounterEscape, name: 'Counter Escape'},
-  {path: '/building-views', component: BuildingViews, name: 'Building Views'}
+  {path: '/building-views', component: BuildingViews, name: 'Building Views'},
+  {path: '/problem-dice', component: ProblemDice, name: 'Problem Dice'},
 ];
 
 const router = new VueRouter({
