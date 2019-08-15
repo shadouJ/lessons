@@ -314,7 +314,7 @@ export default {
 	.app--counting-word {
 		width: 100%;
 		height: auto;
-		min-height: 5rem;
+		min-height: 3rem;
 		border: 1px solid #ddd;
 		margin: 1rem 0;
 		padding: .5rem;
