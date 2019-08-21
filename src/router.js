@@ -168,6 +168,12 @@ const ProblemDice = resolve => {
   });
 }
 
+const CrazyAnimals = resolve => {
+  require.ensure('./components/lessons/crazy-animals/App.vue', () => {
+    resolve(require('./components/lessons/crazy-animals/App.vue'))
+  });
+}
+
 Vue.use(VueRouter);
 
 const routes = [
@@ -197,6 +203,7 @@ const routes = [
   {path: '/counter-escape', component: CounterEscape, name: 'Counter Escape'},
   {path: '/building-views', component: BuildingViews, name: 'Building Views'},
   {path: '/problem-dice', component: ProblemDice, name: 'Problem Dice'},
+  {path: '/crazy-animals', component: CrazyAnimals, name: 'Problem Dice'},
 ];
 
 const router = new VueRouter({

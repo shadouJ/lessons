@@ -39,7 +39,8 @@ export default {
         {name: 'Dice Footy', link: '/dice-footy'},
         {name: 'Counter Escape', link: '/counter-escape'},
         {name: 'Building Views', link: '/building-views'},
-        {name: 'Problem Dice', link: '/problem-dice'}
+        {name: 'Problem Dice', link: '/problem-dice'},
+        {name: 'Crazy Animals', link: 'crazy-animals'}
       ]
     }
   }, 
