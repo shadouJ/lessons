@@ -40,7 +40,8 @@ export default {
         {name: 'Counter Escape', link: '/counter-escape'},
         {name: 'Building Views', link: '/building-views'},
         {name: 'Problem Dice', link: '/problem-dice'},
-        {name: 'Crazy Animals', link: 'crazy-animals'}
+        {name: 'Crazy Animals', link: '/crazy-animals'},
+        {name: 'Cat and mouse', link: '/cat-and-mouse'}
       ]
     }
   }, 
