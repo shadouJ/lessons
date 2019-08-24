@@ -48,6 +48,6 @@ export default {
 .app--mouse-image {
 	position: absolute;
 	width: 10%;
-	
+	z-index: 100;
 }
 </style>
