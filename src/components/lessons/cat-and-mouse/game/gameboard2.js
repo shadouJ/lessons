@@ -1,8 +1,6 @@
 const map = [
 	{
-		id: 1,		// 0
-		isStart: true,	// If mouse is at starting point
-		isEnd: false,		// If mouse reaches end point
+		id: 1,		// 0 
 		result: null,		// 0 - Cat wins, 1 - Mouse wins, null - Game not end
 		position: {		// Position of the mouse
 			left: 87,
@@ -13,8 +11,6 @@ const map = [
 	},
 	{
 		id: 2,	// 1
-		isStart: false,
-		isEnd: false,
 		result: null,
 		position: {
 			left: 67,
@@ -25,8 +21,6 @@ const map = [
 	},
 	{
 		id: 3,	// 2
-		isStart: false,
-		isEnd: false,
 		result: null,
 		position: {
 			left: 69,
@@ -37,8 +31,6 @@ const map = [
 	},
 	{
 		id: 4,	// 3
-		isStart: false,
-		isEnd: false,
 		result: null,
 		position: {
 			left: 28,
@@ -49,8 +41,6 @@ const map = [
 	},
 	{
 		id: 5,	// 4
-		isStart: false,
-		isEnd: false,
 		result: null,
 		position: {
 			left: 26,
@@ -63,7 +53,7 @@ const map = [
 		id: 6,	// 5
 		isStart: false,
 		isEnd: true,
-		result: 0,
+		result: null,
 		position: {
 			left: 43,
 			top: 77
@@ -73,8 +63,6 @@ const map = [
 	},
 	{
 		id: 7,	// 6
-		isStart: false,
-		isEnd: false,
 		result: null,
 		position: {
 			left: 16,
@@ -85,8 +73,6 @@ const map = [
 	},
 	{
 		id: 8,	// 7
-		isStart: false,
-		isEnd: true,
 		result: 0,	// cat wins
 		position: {
 			left: 2,
@@ -96,8 +82,6 @@ const map = [
 	},
 	{
 		id: 9,	// 8
-		isStart: false,
-		isEnd: true,
 		result: 1,	// mouse wins
 		position: {
 			left: 53,
