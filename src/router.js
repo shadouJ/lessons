@@ -180,6 +180,12 @@ const CatAndMouse = resolve => {
   });
 }
 
+const DiceCricket = resolve => {
+  require.ensure('./components/lessons/dice-cricket/App.vue', () => {
+    resolve(require('./components/lessons/dice-cricket/App.vue'))
+  });
+}
+
 Vue.use(VueRouter);
 
 const routes = [
@@ -210,7 +216,8 @@ const routes = [
   {path: '/building-views', component: BuildingViews, name: 'Building Views'},
   {path: '/problem-dice', component: ProblemDice, name: 'Problem Dice'},
   {path: '/crazy-animals', component: CrazyAnimals, name: 'Problem Dice'},
-  {path: '/cat-and-mouse', component: CatAndMouse, name: 'Cat and Mouse'}
+  {path: '/cat-and-mouse', component: CatAndMouse, name: 'Cat and Mouse'},  
+  {path: '/dice-cricket', component: DiceCricket, name: 'Dice Cricket'}
 ];
 
 const router = new VueRouter({
