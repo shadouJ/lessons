@@ -42,7 +42,9 @@ export default {
         {name: 'Problem Dice', link: '/problem-dice'},
         {name: 'Crazy Animals', link: '/crazy-animals'},
         {name: 'Cat and mouse', link: '/cat-and-mouse'},
-        {name: 'Dice Cricket', link: '/dice-cricket'}
+        {name: 'Dice Cricket', link: '/dice-cricket'},
+        {name: 'Have A Hexagon', link: '/have-a-hexagon'},
+        {name: 'Walk The Plank', link: '/walk-the-plank'}
       ]
     }
   }, 

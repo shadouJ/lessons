@@ -77,6 +77,9 @@ div.form-check label {
 	overflow-y: auto;
 	margin-bottom: 3rem;
 } 
+table {
+	table-layout: fixed;
+}
 
 @media only screen and (max-width: 768px) {
 	.display-4 {

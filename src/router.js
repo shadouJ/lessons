@@ -186,6 +186,18 @@ const DiceCricket = resolve => {
   });
 }
 
+const HaveAHexagon = resolve => {
+  require.ensure('./components/lessons/have-a-hexagon/App.vue', () => {
+    resolve(require('./components/lessons/have-a-hexagon/App.vue'))
+  });
+}
+
+const WalkThePlank = resolve => {
+  require.ensure('./components/lessons/walk-the-plank/App.vue', () => {
+    resolve(require('./components/lessons/walk-the-plank/App.vue'))
+  });
+}
+
 Vue.use(VueRouter);
 
 const routes = [
@@ -217,7 +229,9 @@ const routes = [
   {path: '/problem-dice', component: ProblemDice, name: 'Problem Dice'},
   {path: '/crazy-animals', component: CrazyAnimals, name: 'Problem Dice'},
   {path: '/cat-and-mouse', component: CatAndMouse, name: 'Cat and Mouse'},  
-  {path: '/dice-cricket', component: DiceCricket, name: 'Dice Cricket'}
+  {path: '/dice-cricket', component: DiceCricket, name: 'Dice Cricket'},
+  {path: '/have-a-hexagon', component: HaveAHexagon, name: 'Have A Hexagon'}, 
+  {path: '/walk-the-plank', component: WalkThePlank, name: 'Walk The Plank'}, 
 ];
 
 const router = new VueRouter({
