@@ -44,7 +44,8 @@ export default {
         {name: 'Cat and mouse', link: '/cat-and-mouse'},
         {name: 'Dice Cricket', link: '/dice-cricket'},
         {name: 'Have A Hexagon', link: '/have-a-hexagon'},
-        {name: 'Walk The Plank', link: '/walk-the-plank'}
+        {name: 'Walk The Plank', link: '/walk-the-plank'},
+        {name: 'Nine And Over', link: '/nine-and-over'}
       ]
     }
   }, 

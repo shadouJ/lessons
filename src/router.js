@@ -198,6 +198,12 @@ const WalkThePlank = resolve => {
   });
 }
 
+const NineAndOver = resolve => {
+  require.ensure('./components/lessons/nine-and-over/App.vue', () => {
+    resolve(require('./components/lessons/nine-and-over/App.vue'))
+  });
+}
+
 Vue.use(VueRouter);
 
 const routes = [
@@ -227,11 +233,12 @@ const routes = [
   {path: '/counter-escape', component: CounterEscape, name: 'Counter Escape'},
   {path: '/building-views', component: BuildingViews, name: 'Building Views'},
   {path: '/problem-dice', component: ProblemDice, name: 'Problem Dice'},
-  {path: '/crazy-animals', component: CrazyAnimals, name: 'Problem Dice'},
+  {path: '/crazy-animals', component: CrazyAnimals, name: 'Crazy Animals'},
   {path: '/cat-and-mouse', component: CatAndMouse, name: 'Cat and Mouse'},  
   {path: '/dice-cricket', component: DiceCricket, name: 'Dice Cricket'},
   {path: '/have-a-hexagon', component: HaveAHexagon, name: 'Have A Hexagon'}, 
-  {path: '/walk-the-plank', component: WalkThePlank, name: 'Walk The Plank'}, 
+  {path: '/walk-the-plank', component: WalkThePlank, name: 'Walk The Plank'},
+  {path: '/nine-and-over', component: NineAndOver, name: 'Nine And Over'} 
 ];
 
 const router = new VueRouter({
