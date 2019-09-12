@@ -204,6 +204,12 @@ const NineAndOver = resolve => {
   });
 }
 
+const WhatsItWorth = resolve => {
+  require.ensure('./components/lessons/whats-it-worth/App.vue', () => {
+    resolve(require('./components/lessons/whats-it-worth/App.vue'))
+  });
+}
+
 Vue.use(VueRouter);
 
 const routes = [
@@ -238,7 +244,8 @@ const routes = [
   {path: '/dice-cricket', component: DiceCricket, name: 'Dice Cricket'},
   {path: '/have-a-hexagon', component: HaveAHexagon, name: 'Have A Hexagon'}, 
   {path: '/walk-the-plank', component: WalkThePlank, name: 'Walk The Plank'},
-  {path: '/nine-and-over', component: NineAndOver, name: 'Nine And Over'} 
+  {path: '/nine-and-over', component: NineAndOver, name: 'Nine And Over'},
+  {path: '/whats-it-worth', component: WhatsItWorth, name: 'What\'s It Worth'}  
 ];
 
 const router = new VueRouter({
