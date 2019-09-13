@@ -33,7 +33,7 @@ export default {
 	watch: {
 		shapeData(value, oldValue) {
 			if(value !== oldValue) {
-				console.log('value');
+				// console.log('value');
 				this.hasStyle = [];
 				this.tilesUsed = 0;
 				this.$emit('setTilesUsed', this.tilesUsed);

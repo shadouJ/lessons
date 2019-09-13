@@ -65,8 +65,8 @@ export default {
 			let droppedEl = this.$refs.shapeEl.find((el) => {
 				return el.id == targetId;
 			});
-			console.log(droppedEl.type);
-			console.log(e.relatedTarget.getAttribute('data-type'));
+		//	console.log(droppedEl.type);
+		//	console.log(e.relatedTarget.getAttribute('data-type'));
 			if(!droppedEl.hasStyle && droppedEl.type === e.relatedTarget.getAttribute('data-type')) {
 				// 只有当你移动的三角形和要放置的三角形是同一种形状时，才允许。
 				this.tilesUsed += 1;
