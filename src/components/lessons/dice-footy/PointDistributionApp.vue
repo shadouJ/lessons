@@ -18,7 +18,7 @@
 					<span class="badge badge-danger" v-if="minPoints > 0">Min: {{ minPoints}}</span>
 					<span class="badge badge-success" v-if="maxPoints > 0">Max: {{ maxPoints }}</span>
 				</div>
-				<app-tally-graph :tallyTable="tallyTable" :trialNumber="trialNumber" :heightUnit="heightUnit"></app-tally-graph>
+				<app-tally-graph :tallyTable="distributionTable" :trialNumber="trialNumber" :heightUnit="heightUnit"></app-tally-graph>
 			</div>
 		</div>
 		<div class="app--action text-center">
@@ -64,7 +64,8 @@ export default {
 			timerInterval: null,
 			isAutoStart: false,
 			numberTried: 0,
-			tallyTable: []
+			tallyTable: [],
+			distributionTable: []
 		}
 	},
 	computed: {
@@ -88,17 +89,17 @@ export default {
 		},
 		heightUnit() {
 			if(this.trialNumber<=100) {
-				return 15;
-			} else if(this.trialNumber <=1000) {
 				return 10;
-			} else if(this.trialNumber <=5000) {
+			} else if(this.trialNumber <=1000) {
 				return 5;
+			} else if(this.trialNumber <=5000) {
+				return 1;
 			} else if(this.trialNumber <=10000) {
-				return 2;
+				return 0.3;
 			} else if(this.trialNumber <=50000) {
-				return 0.6;
+				return 0.1;
 			} else {
-				return 0.2;
+				return 0.05;
 			}
 		}
 	},
@@ -143,10 +144,15 @@ export default {
 		handleSetNextGame() {
 			if(!this.isStart) this.isStart = true;
 			let points = this.calculatePointsOneGame();
+			let pointsIn10 = Math.floor(points/10)*10;	// 将分数points向下转换成逢10的数 e.g. 56->50, 112->110
 			let index = this.tallyTable.findIndex((el) => {
 				return el.unit === points;
 			});
+			let indexInDis = this.distributionTable.findIndex((el) => {
+				return el.unit === pointsIn10;
+			})
 			this.tallyTable[index].tally++;
+			this.distributionTable[indexInDis].tally++;
 
 			this.numberTried++;
 			if(this.numberTried >= this.trialNumber) {
@@ -180,10 +186,20 @@ export default {
 					});
 				}
 			}
+		},
+		initDistributionTable() {
+			for(let i=0; i<=20; i++) {
+				this.distributionTable.push({
+					unit: i*10,
+					tally: 0,
+					mark: true
+				})
+			}
 		}
 	},
 	created() {
 		this.initTallyTable();
+		this.initDistributionTable();
 		this.timerInterval = getTimerInterval(this.trialNumber);
 	},
 	destroyed() {
