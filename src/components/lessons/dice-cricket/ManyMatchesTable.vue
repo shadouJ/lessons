@@ -25,10 +25,10 @@
 				<th>Median</th>
 				<td><span v-if="gamePlayedNumber > 0" class="text-success">{{ median }}</span></td>
 			</tr>
-			<tr>
+			<!-- <tr>
 				<th>Mean # overs</th>
 				<td><span v-if="gamePlayedNumber > 0"></span></td>
-			</tr>
+			</tr> -->
 			<tr>
 				<th>Ties</th>
 				<td><span v-if="gamePlayedNumber > 0">{{ ties }}</span></td>
