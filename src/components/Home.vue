@@ -47,7 +47,6 @@ export default {
         {name: 'Walk The Plank', link: '/walk-the-plank'},
         {name: 'Nine And Over', link: '/nine-and-over'},
         {name: 'What\'s It Worth', link: '/whats-it-worth'},
-        {name: 'Doctor Dart', link: '/doctor-dart'}
       ]
     }
   }, 
