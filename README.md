@@ -14,9 +14,8 @@ The Australian Association of Mathematics Teachers(AAMT) has a set of maths less
 ## Current Progress
 * 22 out of 80 lessons have been completed but have bad responsive design. http://maths300-dev.herokuapp.com/lessons/lessons.html
 
-* This project has two lessons with functional responsive design. https://lessons.maths300.com
-
-* 56 lessons are to be developed.
+* test env: https://test.lessons.maths300.com
+* production env: https://lessons.maths300.com
 
 ## Goal
 * Complete rest 56 lessons
