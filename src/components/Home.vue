@@ -46,7 +46,7 @@ export default {
         {name: 'Have A Hexagon', link: '/have-a-hexagon'},
         {name: 'Walk The Plank', link: '/walk-the-plank'},
         {name: 'Nine And Over', link: '/nine-and-over'},
-        {name: 'What\'s It Worth', link: '/whats-it-worth'}
+        {name: 'What\'s It Worth', link: '/whats-it-worth'},
       ]
     }
   }, 
