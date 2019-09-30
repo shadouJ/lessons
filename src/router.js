@@ -209,6 +209,16 @@ const WhatsItWorth = resolve => {
     resolve(require('./components/lessons/whats-it-worth/App.vue'))
   });
 }
+const DoctorDart = resolve => {
+    require.ensure('./components/lessons/doctor-dart/App.vue', () => {
+        resolve(require('./components/lessons/doctor-dart/App.vue'))
+    });
+}
+const DiceDifferences = resolve => {
+    require.ensure('./components/lessons/dice-differences/App.vue', () => {
+        resolve(require('./components/lessons/dice-differences/App.vue'))
+    });
+}
 
 Vue.use(VueRouter);
 
@@ -246,6 +256,8 @@ const routes = [
   {path: '/walk-the-plank', component: WalkThePlank, name: 'Walk The Plank'},
   {path: '/nine-and-over', component: NineAndOver, name: 'Nine And Over'},
   {path: '/whats-it-worth', component: WhatsItWorth, name: 'What\'s It Worth'},
+  {path: '/doctor-dart', component:DoctorDart,name: 'Doctor Dart'},
+  {path: '/dice-differences', component:DiceDifferences,name: 'Dice Differences'},
 ];
 
 const router = new VueRouter({
