@@ -15,6 +15,7 @@ export default {
   data: function() {
     return {    // Add a lesson object with name and link properties whenever a new lesson is created
       lessons: [  
+        {name: 'Garden Beds', link: '/garden-beds'},
         {name: 'Tackling Times Tables', link: '/times-tables'},
         {name: 'Trigonometry Walking', link: '/trigonometry'},
         {name:'Truth Tiles 1',link:'/truth-tiles-1'},

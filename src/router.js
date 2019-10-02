@@ -17,6 +17,13 @@ import Home from './components/Home.vue';
 // import IceCreamFlavours from './components/lessons/ice-cream-flavours/App.vue';
 // import ChancesWithCrosses from "./components/lessons/chances-with-crosses/App.vue"
 // import FaysNines from "./components/lessons/fays-nines/App.vue"
+
+const GardenBeds = resolve => {
+  require.ensure('./components/lessons/garden-beds/App.vue', () => {
+    resolve(require('./components/lessons/garden-beds/App.vue'))
+  });
+}
+
 const Trigonometry = resolve => {
   require.ensure('./components/lessons/trigonometry/App.vue', () => {
     resolve(require('./components/lessons/trigonometry/App.vue'))
@@ -224,6 +231,7 @@ Vue.use(VueRouter);
 
 const routes = [
   {path: '/', component: Home, name: 'home'},
+  {path: '/garden-beds', component: GardenBeds, name: 'Garden Beds'},
   {path: '/trigonometry', component: Trigonometry, name: 'Trigonometry Walking'},
   {path: '/times-tables', component: TimesTables, name: 'Tackling Times Tables'},
   {path:'/truth-tiles-1',component:Truth1,name:'Truth tiles 1'},
