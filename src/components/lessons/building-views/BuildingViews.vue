@@ -461,7 +461,11 @@ export default {
       e.target.classList.remove("app--number-selected");
       e.target.setAttribute("style", "display: none");
       if (this.arrXLeave !== null && this.arrYLeave !== null) {
+        // console.log("set null", this.arrXLeave, "  ", this.arrYLeave);
         this.answerBuildingArray[this.arrXLeave][this.arrYLeave] = null;
+        this.answerBuildingArray = [...this.answerBuildingArray];
+        this.arrXLeave = null;
+        this.arrYLeave = null;
       }
     }
   },
