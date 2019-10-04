@@ -130,13 +130,13 @@ export default {
     smallestBallon() {
       const ballon = new Ballon(this.unit, this.min);
       const ballonValue = ballon.getValue("V");
-      return Math.floor(ballonValue);
+      return ballonValue;
     },
     /** The biggest number displayed on Y axis  */
     biggestBallon() {
       const ballon = new Ballon(this.unit, this.max);
       const ballonValue = ballon.getValue("V");
-      return Math.ceil(ballonValue);
+      return ballonValue;
     }
   },
   watch: {
