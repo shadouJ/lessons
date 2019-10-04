@@ -1,7 +1,7 @@
 <template>
   <div>
     <div v-if="selectedOption===-1">
-      <app-title>2 Litre Ballon</app-title>
+      <app-title-static>2 Litre Ballon</app-title-static>
       <transition appear appear-class="options-appear" appear-active-class="options-appear-active">
         <app-options :options="options" @selectOption="selectedOption=$event"></app-options>
       </transition>
@@ -18,16 +18,13 @@
         <app-display-data v-if="selectedOption === 2"></app-display-data>
       </transition>
     </div>
-    <transition appear appear-class="options-appear" appear-active-class="options-appear-active">
-      <app-bottom-nav></app-bottom-nav>
-    </transition>
   </div>
 </template>
 
 <script>
-import Title from "../../layout/Title.vue";
+import TitleStatic from "../../layout/TitleStatic.vue";
 import TopNav from "../../layout/TopNav.vue";
-import BottomNav from "../../layout/BottomNav.vue";
+// import BottomNav from "../../layout/BottomNav.vue";
 import Options from "../../layout/Options.vue";
 import EnterData from "./EnterData.vue";
 import DisplayData from "./DisplayData.vue";
@@ -35,10 +32,10 @@ import "bootstrap/dist/css/bootstrap.min.css";
 
 export default {
   components: {
-    appTitle: Title,
+    appTitleStatic: TitleStatic,
     appTopNav: TopNav,
     appOptions: Options,
-    appBottomNav: BottomNav,
+    // appBottomNav: BottomNav,
     appEnterData: EnterData,
     appDisplayData: DisplayData
   },
@@ -55,49 +52,4 @@ export default {
 </script>
 
 <style>
-.container-fluid {
-  padding: 0;
-  margin-bottom: 8rem;
-}
-.lesson-appear {
-  opacity: 0;
-}
-.lesson-appear-active {
-  transition: all 0.5s;
-}
-.options-appear {
-  opacity: 0;
-}
-.options-appear-active {
-  transition: all 1s;
-  transition-delay: 0.7s;
-}
-.app--lesson-action {
-  display: flex;
-  justify-content: space-around;
-  padding: 1.5rem 1rem;
-}
-
-#app-canvas {
-  width: 100%;
-  border: 1px solid #eee;
-}
-@media only screen and (max-width: 768px) {
-  .display-4 {
-    font-size: 2.5rem;
-  }
-  .tt--left form {
-    width: 100%;
-  }
-}
-@media only screen and (max-width: 576px) {
-  .display-4 {
-    font-size: 2rem;
-  }
-}
-@media only screen and (max-width: 425px) {
-  .display-4 {
-    font-size: 1.8rem;
-  }
-}
 </style>

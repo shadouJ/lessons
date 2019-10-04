@@ -136,10 +136,22 @@ export default {
     biggestBallon() {
       const ballon = new Ballon(this.unit, this.max);
       const ballonValue = ballon.getValue("V");
-      return ballonValue;
+      return Math.ceil(ballonValue);
     }
   },
   watch: {
+    demoAutoOption(value) {
+      if (value == "0") {
+        clearInterval(this.timer);
+        this.timer = null;
+      }
+    },
+    isFinish(value) {
+      if (value) {
+        clearInterval(this.timer);
+        this.timer = null;
+      }
+    },
     isSet(value) {
       let data = this.chartData;
       if (value) {
@@ -147,53 +159,46 @@ export default {
         this.chart = new Chart(ctx, {
           type: "bubble",
           data: {
+            labels: [],
             datasets: [
               {
                 backgroundColor: "blue",
                 borderColor: "blue",
-                data
+                data,
+                fill: false,
+                pointRadius: 8,
+                showLine: false
               }
             ]
           },
           options: {
             animation: false,
+            responsive: true,
+            title: {
+              display: false
+            },
             legend: {
               display: false
             },
-            tooltips: {
-              callbacks: {
-                label: function(tooltipItem) {
-                  return tooltipItem.yLabel;
-                }
+            elements: {
+              point: {
+                pointStyel: "circle"
               }
             },
             scales: {
-              yAxes: [
-                {
-                  ticks: {
-                    beginAtZero: false,
-                    min: this.smallestBallon,
-                    max: this.biggestBallon,
-                    stepSize: (this.biggestBallon - this.smallestBallon) / 10
-                  },
-                  scaleLabel: {
-                    display: true,
-                    labelString: "V (L)"
-                  }
-                }
-              ],
               xAxes: [
                 {
                   ticks: {
-                    beginAtZero: false,
                     min: this.min,
-                    max: this.max,
-                    stepSize: (this.max - this.min) / 10
-                  },
-                  scaleLabel: {
-                    display: true,
-                    labelString:
-                      this.unit + (this.unit === "V" ? " (L)" : " (cm)")
+                    max: this.max
+                  }
+                }
+              ],
+              yAxes: [
+                {
+                  ticks: {
+                    min: this.smallestBallon,
+                    max: this.biggestBallon
                   }
                 }
               ]
@@ -247,7 +252,14 @@ export default {
       }
     },
 
-    toggleTimer() {},
+    toggleTimer() {
+      if (this.timer) {
+        clearInterval(this.timer);
+        this.timer = null;
+      } else {
+        this.timer = setInterval(this.handleDrawPoint, 500);
+      }
+    },
 
     handleReset() {
       this.unit = "D";
@@ -261,6 +273,7 @@ export default {
       this.step = null;
       this.demoAutoOption = "0";
       this.timer = null;
+      this.chart.destroy();
       this.chart = null;
     }
   }
