@@ -136,7 +136,25 @@ export default {
     biggestBallon() {
       const ballon = new Ballon(this.unit, this.max);
       const ballonValue = ballon.getValue("V");
-      return ballonValue;
+      if (ballonValue < 0.0045) {
+        return 0.0045;
+      } else if (ballonValue < 0.015) {
+        return 0.015;
+      } else if (ballonValue < 0.035) {
+        return 0.035;
+      } else if (ballonValue < 0.1) {
+        return 0.1;
+      } else if (ballonValue < 0.4) {
+        return 0.4;
+      } else if (ballonValue < 0.6) {
+        return 0.6;
+      } else if (ballonValue < 1) {
+        return 1;
+      } else if (ballonValue > 1) {
+        return Math.ceil(ballonValue);
+      } else {
+        return ballonValue;
+      }
     }
   },
   watch: {
