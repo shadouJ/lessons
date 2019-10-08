@@ -22,7 +22,7 @@
 						</form>
 					</div>
 					<div class="row">
-						<button type="button" class="btn btn-primary btn-lg btn-block" @click="reset" v-if="!isStarted">Start</button>
+						<button type="button" class="btn btn-lg btn-block btn-outline-success" @click="reset" v-if="!isStarted">Start</button>
 						<button type="button" class="btn btn-secondary btn-lg btn-block" @click="submitInput" :disabled="isSubmitted" v-else>Submit Guess</button>
 					</div>
 					<div class="row p-3 justify-content-center">
@@ -90,7 +90,10 @@ export default {
 			maxBedLength: 100,
 
 			//this value used by the timer, as to how fast the tiles should be added.
-			timeDelay: 50
+			timeDelay: 50,
+
+			//this id is used to kill the timer interval
+			intervalId: 0
 		}
 	},
 	computed: {
@@ -156,13 +159,13 @@ export default {
 			drawNextCanvas(canvas, this);
 
 			//timer to delay the addition of next tile, using intervals of timeDelay
-			const intervalId = setInterval(() => {
+			this.intervalId = setInterval(() => {
 				this.addTile();
 
 				//continue adding tiles until all tiles added
 				if (this.isFinished) {
 					//Clear the interval addition timer.
-					clearInterval(intervalId);
+					clearInterval(this.intervalId);
 				}
 			}, this.timeDelay);
 		},
@@ -175,6 +178,10 @@ export default {
 	created() {
 	},
 	mounted() {
+	},
+	beforeDestroy(){
+		//Clear the interval addition timer.
+		clearInterval(this.intervalId);
 	}
 }
 </script>
