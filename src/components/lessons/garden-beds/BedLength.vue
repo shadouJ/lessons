@@ -36,7 +36,7 @@
 						<button type="button" class="btn btn-primary btn-lg btn-block" @click="reset">Start</button>
 					</div>
 					<div class="row" v-else>
-						<button type="button" class="btn btn-outline-dark mr-3" @click="reset" :disabled="!isFinished">Reset</button>
+						<button type="button" class="btn btn-outline-dark mr-3" @click="reset" :disabled="false">Reset</button>
 						<button type="button" class="btn btn-outline-success btn-lg mr-3" @click="addTile" :disabled="isFinished">Add Tile</button>
 					</div>
 					<div class="row p-3 justify-content-center">
@@ -63,7 +63,7 @@
 					</table>
 				</div>
 			</div>
-			<div class="row justify-content-center">
+			<div class="row justify-content-center" id="canvas-container">
 				<canvas id="app-canvas"></canvas>
 			</div>
 		</div>
@@ -160,8 +160,13 @@ export default {
 </script>
 
 <style scoped>
+	#canvas-container {
+		height: 300px;
+	}
+
 	#app-canvas {
 		width: 100%;
+		height: 100%;
 		border: none;
 	}
 

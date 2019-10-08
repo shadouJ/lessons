@@ -49,7 +49,7 @@
 					</table>
 				</div>
 			</div>
-			<div class="row justify-content-center">
+			<div class="row justify-content-center" id="canvas-container">
 				<canvas id="app-canvas"></canvas>
 			</div>
 		</div>
@@ -180,6 +180,16 @@ export default {
 </script>
 
 <style scoped>
+	#canvas-container {
+		height: 300px;
+	}
+
+	#app-canvas {
+		width: 100%;
+		height: 100%;
+		border: none;
+	}
+
 	#app-canvas {
 		width: 100%;
 		border: none;

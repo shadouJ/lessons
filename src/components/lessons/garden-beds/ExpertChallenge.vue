@@ -49,7 +49,7 @@
 					</table>
 				</div>
 			</div>
-			<div class="row justify-content-center">
+			<div class="row justify-content-center" id="canvas-container">
 				<canvas id="app-canvas"></canvas>
 			</div>
 		</div>
@@ -87,7 +87,7 @@ export default {
 
 			//These values are used by random random generator to create the plant length
 			minBedLength: 1,
-			maxBedLength: 50,
+			maxBedLength: 100,
 
 			//this value used by the timer, as to how fast the tiles should be added.
 			timeDelay: 50
@@ -180,8 +180,13 @@ export default {
 </script>
 
 <style scoped>
+	#canvas-container {
+		height: 300px;
+	}
+
 	#app-canvas {
 		width: 100%;
+		height: 100%;
 		border: none;
 	}
 

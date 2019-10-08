@@ -50,7 +50,7 @@
 					</table>
 				</div>
 			</div>
-			<div class="row justify-content-center">
+			<div class="row justify-content-center" id="canvas-container">
 				<canvas id="app-canvas"></canvas>
 			</div>
 		</div>
@@ -81,7 +81,7 @@
 
 				//These values are used by random random generator to create the plant length
 				minBedLength: 1,
-				maxBedLength: 50
+				maxBedLength: 10
 			}
 		},
 		computed: {
@@ -119,6 +119,7 @@
 				this.numPlants = this.getRandomNum(this.minBedLength, this.maxBedLength);
 				//draw the canvas based on the numPlants
 				const canvas = document.querySelector('#app-canvas');
+
 				drawNextCanvas(canvas, this);
 			},
 
@@ -136,8 +137,13 @@
 </script>
 
 <style scoped>
+	#canvas-container {
+		height: 300px;
+	}
+
 	#app-canvas {
 		width: 100%;
+		height: 100%;
 		border: none;
 	}
 
