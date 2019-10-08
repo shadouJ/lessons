@@ -34,11 +34,11 @@
 					</div>
 					<div class="row justify-content-center p-1">
 						<div class="custom-control custom-radio custom-control-inline">
-							<input type="radio" class="custom-control-input" id="demo" name="inlineDefaultRadiosExample" value= "demo" v-model="mode">
+							<input type="radio" class="custom-control-input" id="demo" name="inlineDefaultRadiosExample" value= "demo" v-model="mode" :disabled="!showStart">
 							<label class="custom-control-label" for="demo">DEMO</label>
 						</div>
 						<div class="custom-control custom-radio custom-control-inline">
-							<input type="radio" class="custom-control-input" id="auto" name="inlineDefaultRadiosExample" value= "auto" v-model="mode">
+							<input type="radio" class="custom-control-input" id="auto" name="inlineDefaultRadiosExample" value= "auto" v-model="mode" :disabled="!showStart">
 							<label class="custom-control-label" for="auto">AUTO</label>
 						</div>
 					</div>
@@ -147,7 +147,7 @@ export default {
 		//This function adds another tile to the canvas, going around the plants.
 		addTile(){
 			const canvas = document.querySelector('#app-canvas');
-			addNextTile(canvas, this);
+			addNextTile("yellow", canvas, this);
 		},
 
 		//This function resets the plant to a new value and removes all the tiles from the canvas. 

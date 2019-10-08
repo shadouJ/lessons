@@ -101,7 +101,7 @@
 			//This function adds another tile to the canvas, going around the plants.
 			addTile(){
 				const canvas = document.querySelector('#app-canvas');
-				addNextTile(canvas, this);
+				addNextTile("yellow", canvas, this);
 			},
 
 			//This function resets the plant to a new value and removes all the tiles from the canvas. 

@@ -83,21 +83,8 @@ export const drawNextCanvas = (canvas, vueObjPtr) => {
 	drawPlants(canvas, vueObjPtr.plant, vueObjPtr.numPlants);
 }
 
-//this function draws a rectangle and its border
-const drawTile = (context, xPos, yPos, width, height) => {
-	xPos = parseInt(xPos) + 0.5;
-	yPos = parseInt(yPos) + 0.5;
-	//draw the border
-	context.strokeStyle='black';
-	context.strokeRect(xPos, yPos, width-2, height-2);
-
-	//fill rectangle
-	context.fillStyle = "#ffcc00";
-	context.fillRect(xPos, yPos, width-2, height-2);
-}
-
 //This function adds the next tile to the garden bed
-export const addNextTile = (canvas, vueObjPtr) => {
+export const addNextTile = (colour, canvas, vueObjPtr) => {
 	const context = canvas.getContext("2d");
 	//size of one brick (+2 accounts for edge tiles)
 	var width = Math.floor(canvas.width / (vueObjPtr.numPlants+2));
@@ -148,5 +135,32 @@ export const addNextTile = (canvas, vueObjPtr) => {
 	vueObjPtr.numTiles += 1;
 
 	//draw the tile along with its border
-	drawTile(context, xPos, yPos, width, height);
+	drawTile(colour, context, xPos, yPos, width, height);
+}
+
+//this function draws a rectangle and its border
+const drawTile = (colour, context, xPos, yPos, width, height) => {
+	xPos = parseInt(xPos) + 0.5;
+	yPos = parseInt(yPos) + 0.5;
+	//draw the border
+	context.strokeStyle='black';
+	context.strokeRect(xPos, yPos, width-2, height-2);
+
+	//fill rectangle
+	if (colour === ""){
+		context.fillStyle = "#ffcc00";
+	}
+	else {
+		context.fillStyle = colour;
+	}
+	context.fillRect(xPos, yPos, width-2, height-2);
+}
+
+export const scrollToRecent = () =>{
+	//keep the scroll to observe newly added values in table body
+	var element = document.getElementById("tableBody");
+	if (element != null){
+		//large value used to scroll to the bottom
+		element.scrollTop = 10000000;
+	}
 }
