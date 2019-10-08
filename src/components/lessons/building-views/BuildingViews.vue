@@ -12,7 +12,7 @@
                 id="front-view"
                 class="form-check-input"
                 v-model="viewDirection"
-                :disabled="!isStart"
+                :disabled="disableSetBuilding"
               >
               <label for="front-view" class="form-check-label">Front View</label>
             </div>
@@ -24,7 +24,7 @@
                 id="back-view"
                 class="form-check-input"
                 v-model="viewDirection"
-                :disabled="!isStart"
+                :disabled="disableSetBuilding"
               >
               <label for="back-view" class="form-check-label">Back View</label>
             </div>
@@ -36,7 +36,7 @@
                 id="left-view"
                 class="form-check-input"
                 v-model="viewDirection"
-                :disabled="!isStart"
+                :disabled="disableSetBuilding"
               >
               <label for="left-view" class="form-check-label">Left View</label>
             </div>
@@ -48,7 +48,7 @@
                 id="right-view"
                 class="form-check-input"
                 v-model="viewDirection"
-                :disabled="!isStart"
+                :disabled="disableSetBuilding"
               >
               <label for="right-view" class="form-check-label">Right View</label>
             </div>
@@ -60,7 +60,7 @@
                 class="form-check-input"
                 id="show-compare"
                 v-model="showCompare"
-                :disabled="!isStart"
+                :disabled="disableSetBuilding"
               >
               <label for="show-compare" class="form-check-label">Compare</label>
             </div>
@@ -72,7 +72,7 @@
                 id="x-ray"
                 v-model="hasXRay"
                 name="hasXRay"
-                :disabled="!isStart"
+                :disabled="disableSetBuilding"
               >
               <label for="x-ray" class="form-check-label">X-ray</label>
             </div>
@@ -82,6 +82,7 @@
         <div class="row">
           <div class="col-12 col-sm-6">
             <app-building-table
+              v-if="!disableSetBuilding"
               :buildingArray="buildingArray"
               :viewDirection="viewDirection"
               :hasXRay="hasXRay"
@@ -166,7 +167,7 @@
               :value="3"
               v-model="gridSize"
               :disabled="isStart"
-              @click="()=>{this.showCheck = false;}"
+              @click="()=>{this.showCheck = false; this.disableSetBuilding = true;}"
             >
             <label for="grid-size-3" class="form-check-label mr-2">3 x 3</label>
             <input
@@ -177,7 +178,7 @@
               :value="4"
               v-model="gridSize"
               :disabled="isStart"
-              @click="()=>{this.showCheck = false;}"
+              @click="()=>{this.showCheck = false; this.disableSetBuilding = true;}"
             >
             <label for="grid-size-4" class="form-check-label mr-2">4 x 4</label>
             <input
@@ -188,7 +189,7 @@
               :value="5"
               v-model="gridSize"
               :disabled="isStart"
-              @click="()=>{this.showCheck = false;}"
+              @click="()=>{this.showCheck = false; this.disableSetBuilding = true;}"
             >
             <label for="grid-size-5" class="form-check-label mr-2">5 x 5</label>
           </div>
@@ -199,7 +200,7 @@
               id="check-input"
               v-model="includeOpenSpace"
               :disabled="isStart"
-              @click="()=>{this.showCheck = false;}"
+              @click="()=>{this.showCheck = false; this.disableSetBuilding = true;}"
             >
             <label for="check-input" class="form-check-label">Include open space in design</label>
           </div>
@@ -230,7 +231,7 @@ export default {
       gridSize: 3,
       includeOpenSpace: false,
       isStart: false, // if a game is started
-      isChecked: false,
+      disableSetBuilding: true, //  if a game is checked
       buildingArray: null, // The array to reflect buildings
       answerBuildingArray: null, // The building array answered by user
       checkBuildingArray: null, // The building array checked by computer
@@ -262,6 +263,7 @@ export default {
   methods: {
     handleStartBuilding() {
       this.isStart = true;
+      this.disableSetBuilding = false;
       this.showAnswer = this.showCheck = this.showCompare = false;
       this.createBuilding();
 
