@@ -32,16 +32,26 @@
 							</div>
 						</form>
 					</div>
-					<div class="row" v-if="showStart">
-						<button type="button" class="btn btn-primary btn-lg btn-block" @click="reset">Start</button>
+					<div class="row justify-content-center p-1">
+						<div class="custom-control custom-radio custom-control-inline">
+							<input type="radio" class="custom-control-input" id="demo" name="inlineDefaultRadiosExample" value= "demo" v-model="mode" :disabled="!showStart">
+							<label class="custom-control-label" for="demo">DEMO</label>
+						</div>
+						<div class="custom-control custom-radio custom-control-inline">
+							<input type="radio" class="custom-control-input" id="auto" name="inlineDefaultRadiosExample" value= "auto" v-model="mode" :disabled="!showStart">
+							<label class="custom-control-label" for="auto">AUTO</label>
+						</div>
+					</div>
+					<div class="row justify-content-center" v-if="showStart">
+						<p v-bind:class="{'alert mr-3':true, 'alert-info':(!showInputError), 'alert-danger':(showInputError)}">Please enter an whole number between {{minBedLength}} to {{maxBedLength}}.</p>
+						<button type="button" class="btn btn-lg btn-block btn-outline-success" @click="start">Start</button>
 					</div>
 					<div class="row" v-else>
 						<button type="button" class="btn btn-outline-dark mr-3" @click="reset" :disabled="!isFinished">Reset</button>
-						<button type="button" class="btn btn-outline-success btn-lg mr-3" @click="addTile" :disabled="isFinished">Add Tile</button>
+						<button type="button" class="btn btn-outline-success btn-lg mr-3" @click="addTile" :disabled="isFinished||isAuto">Add Tile</button>
 					</div>
 					<div class="row p-3 justify-content-center">
 						<p class="alert alert-info mr-3" v-if="isFinished">Garden bed built, type <b>new</b> bed length and click <b>Reset</b> to make another.</p>
-						<p class="alert alert-danger mr-3" v-if="showInputError">Please enter an whole number between {{minBedLength}} to {{maxBedLength}}.</p>
 					</div>
 				</div>
 				<div class="col-6">
@@ -63,7 +73,7 @@
 					</table>
 				</div>
 			</div>
-			<div class="row justify-content-center">
+			<div class="row justify-content-center" id="canvas-container">
 				<canvas id="app-canvas"></canvas>
 			</div>
 		</div>
@@ -103,7 +113,13 @@ export default {
 			numPlantsInput: 0,
 
 			minBedLength: 1,
-			maxBedLength: 50
+			maxBedLength: 50,
+
+			//this variable is used for for auto or demo mode
+			mode: 'demo',
+			//this id is used to kill the timer interval
+			intervalId: 0,
+			timeDelay: 300
 		}
 	},
 	computed: {
@@ -117,51 +133,91 @@ export default {
 			else{
 				return false;
 			}
+		},
+		isAuto: function(){
+			if (this.mode == "auto"){
+				return true;
+			}
+			else {
+				return false;
+			}
 		}
 	},
 	methods: {
 		//This function adds another tile to the canvas, going around the plants.
 		addTile(){
 			const canvas = document.querySelector('#app-canvas');
-			addNextTile(canvas, this);
+			addNextTile("yellow", canvas, this);
 		},
 
 		//This function resets the plant to a new value and removes all the tiles from the canvas. 
-		reset(){
+		start(){
 			const input = parseInt(this.numPlantsInput);
 			if ((input >= this.minBedLength) && (input <= this.maxBedLength)){
 				//remove the Start button and input error msg on correct input
-				this.showInputError = false;
 				this.showStart = false;
-				//store the value in the table
-				if ((this.numTiles != 0) && (this.isFinished)){
-					this.tableEntries.push({numPlants: this.numPlants, numTiles: this.numTiles});
-					this.key += 1;
-				}
-				//reset the variables
-				this.numTiles = 0;
-				this.edgeCounter = 0;
 				//number of plants obtained from user
 				this.numPlants = input;
 				//draw the canvas based on the numPlants
 				const canvas = document.querySelector('#app-canvas');
 				drawNextCanvas(canvas, this);
+
+				if (this.isAuto){
+					//disable the button
+
+					//timer to delay the addition of next tile, using intervals of timeDelay
+					this.intervalId = setInterval(() => {
+						this.addTile();
+
+						//continue adding tiles until all tiles added
+						if (this.isFinished) {
+							//Clear the interval addition timer.
+							clearInterval(this.intervalId);
+						}
+					}, this.timeDelay);
+				}
+				//else demo mode, adds tiles using addTile button
 			}
 			else {
 				this.showInputError = true;
 			}
+		},
+		reset(){
+			this.showInputError = false;
+			this.showStart = true;
+			//store the value in the table
+			if ((this.numTiles != 0) && (this.isFinished)){
+				this.tableEntries.push({numPlants: this.numPlants, numTiles: this.numTiles});
+				this.key += 1;
+			}
+			//reset the variables
+			this.numTiles = 0;
+			this.edgeCounter = 0;
+
+			//clear the canvas
+			const canvas = document.querySelector('#app-canvas');
+			canvas.width = canvas.width;
 		}
 	},
 	created() {
 	},
 	mounted() {
+	},
+	beforeDestroy(){
+		//Clear the interval addition timer.
+		clearInterval(this.intervalId);
 	}
 }
 </script>
 
 <style scoped>
+	#canvas-container {
+		height: 300px;
+	}
+
 	#app-canvas {
 		width: 100%;
+		height: 100%;
 		border: none;
 	}
 

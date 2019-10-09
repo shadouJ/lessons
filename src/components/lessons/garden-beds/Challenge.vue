@@ -21,9 +21,12 @@
 							</div>
 						</form>
 					</div>
-					<div class="row">
-						<button type="button" class="btn btn-primary btn-lg btn-block" @click="reset" v-if="!isStarted">Start</button>
-						<button type="button" class="btn btn-secondary btn-lg btn-block" @click="submitInput" :disabled="isSubmitted" v-else>Submit Guess</button>
+					<div class="row" v-if="showStart">
+						<button type="button" class="btn btn-lg btn-block btn-outline-success" @click="start">Start</button>
+					</div>
+					<div class="row" v-else>
+						<button type="button" class="btn btn-outline-dark mr-3" @click="reset" :disabled="!isFinished">Reset</button>
+						<button type="button" class="btn btn-outline-success btn-lg mr-3" @click="submitInput" :disabled="isSubmitted">Submit Guess</button>
 					</div>
 					<div class="row p-3 justify-content-center">
 						<p v-bind:class="{'alert mr-3':true, 'alert-success':(isCorrect), 'alert-danger':(!isCorrect)}" v-if="isFinished"><b>{{guessRes}}</b></p>
@@ -38,18 +41,20 @@
 								<th scope="col"># Tiles</th>
 							</tr>
 						</thead>
-						<div>
-							<tbody>
-								<tr v-for="entry in tableEntries" :key="entry.key">
-									<th scope="row">{{entry.numPlants}}</th>
-									<td>{{entry.numTiles}}</td>
-								</tr>
-							</tbody>
-						</div>
+						<tbody id="tableBody">
+							<tr v-for="entry in tableEntries" :key="entry.key">
+								<th scope="row">{{entry.numPlants}}</th>
+								<td>{{entry.numTiles}}</td>
+							</tr>
+							<tr v-bind:class="{'text-primary':(isCorrect), 'text-danger':(!isCorrect)}">
+								<th scope="row">{{numPlants}}</th>
+								<td>{{numTiles}}</td>
+							</tr>
+						</tbody>
 					</table>
 				</div>
 			</div>
-			<div class="row justify-content-center">
+			<div class="row justify-content-center" id="canvas-container">
 				<canvas id="app-canvas"></canvas>
 			</div>
 		</div>
@@ -61,7 +66,8 @@
 import { 
 	// getRandomNum
 	addNextTile,
-	drawNextCanvas
+	drawNextCanvas,
+	scrollToRecent
 } from './utils';
 import plant from "@/assets/plant.png";
 
@@ -75,7 +81,7 @@ export default {
 			//user input, and flags to show/hide buttons
 			numTilesInput: 0,
 			isSubmitted: false,
-			isStarted: false,
+			showStart: true,
 
 			//flag used for reset button
 			isDisabled: true,
@@ -87,10 +93,14 @@ export default {
 
 			//These values are used by random random generator to create the plant length
 			minBedLength: 1,
-			maxBedLength: 10,
+			maxBedLength: 20,
 
 			//this value used by the timer, as to how fast the tiles should be added.
-			timeDelay: 300
+			timeDelay: 300,
+
+			//this id is used to kill the timer interval
+			intervalId: 0,
+			intervalId2: 0
 		}
 	},
 	computed: {
@@ -99,13 +109,7 @@ export default {
 		},
 		isFinished: function(){
 			if (this.numTiles === this.expectedNumTiles){
-				//update the variables when finished
-				this.isStarted = false;
-				this.isSubmitted = false;
-
-				//store the value in the table
-				this.tableEntries.push({numPlants: this.numPlants, numTiles: this.numTiles});
-				this.key += 1;
+				this.isSubmitted = true;
 				return true;
 			}
 			else{
@@ -132,39 +136,73 @@ export default {
 			}
 		}
 	},
+	watch: {
+		isCorrect: function() {
+			if (this.isCorrect == true){
+				//timer to delay the addition of next tile, using intervals of timeDelay
+				this.intervalId2 = setInterval(() => {
+					this.addTile("cyan");
+
+					//continue adding tiles until all tiles added
+					if ((this.isFinished)) {
+						//Clear the interval addition timer.
+						clearInterval(this.intervalId2);
+					}
+				}, this.timeDelay/2);
+			}
+		}
+	},
 	methods: {
 		submitInput(){
 			this.isSubmitted = true;
 		},
 		//This function adds another tile to the canvas, going around the plants.
-		addTile(){
+		addTile(colour){
 			const canvas = document.querySelector('#app-canvas');
-			addNextTile(canvas, this);
+			addNextTile(colour, canvas, this);
 		},
 
 		//This function resets the plant to a new value and removes all the tiles from the canvas. 
-		reset(){
+		start(){
+			scrollToRecent();
 			//reset the variables
-			this.numTiles = 0;
-			this.edgeCounter = 0;
-			this.isStarted = true;
+			this.showStart = false;
 			//create random number of plants between 1 and 50
-			//NOTE: for testing purposes set the inputs to desired number of plants
 			this.numPlants = this.getRandomNum(this.minBedLength, this.maxBedLength);
 			//draw the canvas based on the numPlants
 			const canvas = document.querySelector('#app-canvas');
 			drawNextCanvas(canvas, this);
 
 			//timer to delay the addition of next tile, using intervals of timeDelay
-			const intervalId = setInterval(() => {
-				this.addTile();
+			this.intervalId = setInterval(() => {
+				this.addTile("yellow");
 
-				//continue adding tiles until all tiles added
-				if (this.isFinished) {
+				//continue adding tiles until all tiles added or correct input is entered
+				if ((this.isFinished)||(this.isCorrect)) {
 					//Clear the interval addition timer.
-					clearInterval(intervalId);
+					clearInterval(this.intervalId);
 				}
 			}, this.timeDelay);
+		},
+		reset(){
+			//store the value in the table
+			if ((this.numTiles != 0) && (this.isFinished)){
+				this.tableEntries.push({numPlants: this.numPlants, numTiles: this.numTiles});
+				this.key += 1;
+			}
+			//update the variables when finished
+			this.showStart = true;
+			this.isSubmitted = false;
+
+			//reset the variables
+			this.numTiles = 0;
+			this.numPlants = 0;
+			this.numTilesInput = 0;
+			this.edgeCounter = 0;
+
+			//clear the canvas
+			const canvas = document.querySelector('#app-canvas');
+			canvas.width = canvas.width;
 		},
 
 		//This function returns a random number between the given min and max
@@ -175,11 +213,25 @@ export default {
 	created() {
 	},
 	mounted() {
+	},
+	beforeDestroy(){
+		//Clear the interval addition timer.
+		clearInterval(this.intervalId);
 	}
 }
 </script>
 
 <style scoped>
+	#canvas-container {
+		height: 300px;
+	}
+
+	#app-canvas {
+		width: 100%;
+		height: 100%;
+		border: none;
+	}
+
 	#app-canvas {
 		width: 100%;
 		border: none;
