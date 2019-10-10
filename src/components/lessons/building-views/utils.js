@@ -201,6 +201,7 @@ export const makeViewArrayX = arr => {
  * ]
  */
 const markHidden = arr => {
+  console.log(arr);
   const arrLength = arr.length;
   const newArr = new Array(arrLength);
   for (let i = 0; i < arrLength; i++) {
@@ -214,7 +215,7 @@ const markHidden = arr => {
         newArr[i][j] = { number: arr[i][j], hidden: true };
       }
     }
-    newArr[i] = filterDuplicateElement(newArr[i]); // Remove duplicate element
+    // newArr[i] = filterDuplicateElement(newArr[i]); // Remove duplicate element
   }
   return newArr;
 };
