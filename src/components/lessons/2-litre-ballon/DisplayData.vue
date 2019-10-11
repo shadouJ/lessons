@@ -1,6 +1,6 @@
 <template>
   <div class="container mt-3 mb-5">
-    <h3 class="text-center text-success mb-4">Gathering and displaying ballon data</h3>
+    <h3 class="text-center text-success mb-4">Gathering and displaying balloon data</h3>
     <div class="row">
       <div class="col-md-6">
         <div class="form-group">

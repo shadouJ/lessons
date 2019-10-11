@@ -1,14 +1,14 @@
 <template>
   <div>
     <div v-if="selectedOption===-1">
-      <app-title-static>2 Litre Ballon</app-title-static>
+      <app-title-static>2 Litre Balloon</app-title-static>
       <transition appear appear-class="options-appear" appear-active-class="options-appear-active">
         <app-options :options="options" @selectOption="selectedOption=$event"></app-options>
       </transition>
     </div>
     <div class="container-fluid" v-else>
       <transition appear appear-class="lesson-appear" appear-active-class="lesson-appear-active">
-        <app-top-nav @backToMenu="selectedOption = $event">2 Litre Ballon</app-top-nav>
+        <app-top-nav @backToMenu="selectedOption = $event">2 Litre Balloon</app-top-nav>
       </transition>
 
       <transition appear appear-class="lesson-appear" appear-active-class="lesson-appear-active">
@@ -43,7 +43,7 @@ export default {
     return {
       options: [
         { id: 1, title: "Enter Diameter, Radius, Circumference or Volume" },
-        { id: 2, title: "Gathering and displaying ballon data" }
+        { id: 2, title: "Gathering and displaying balloon data" }
       ],
       selectedOption: -1
     };

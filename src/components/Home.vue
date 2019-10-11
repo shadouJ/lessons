@@ -49,7 +49,7 @@ export default {
         { name: "What's It Worth", link: "/whats-it-worth" },
         { name: "Doctor Dart", link: "/doctor-dart" },
         { name: "Dice Differences", link: "/dice-differences" },
-        { name: "2 Litre Ballon", link: "/ballon" }
+        { name: "2 Litre Balloon", link: "/ballon" }
       ]
     };
   },
