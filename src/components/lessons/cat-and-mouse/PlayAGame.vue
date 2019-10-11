@@ -64,10 +64,10 @@
         style="position: absolute;"
       ></app-dice>
     </div>
-    <div class="text-center mb-1">
+    <div class="text-center mt-5 mb-1">
       <div>
         <span
-          v-if="result !== null"
+          :style="{ visibility: result !== null ? 'visible' : 'hidden'}"
           class="badge badge-danger"
         >{{ result === 0 ? "Cat eats mouse" : "Mouse eats cheese" }}</span>
       </div>
@@ -216,14 +216,29 @@ export default {
       }
     },
     handlePlay() {
-      this.handlePlayOnce();
-      if (this.result) {
-        // this.isStart = false;
-        this.isFinish = false;
-        // this.result = null;
-        // this.timer = null;
+      if (!this.isStart) {
+        this.isStart = true;
+      }
+
+      if (this.result !== null) {
+        this.total++;
+        if (this.result === 0) {
+          // Cat wins
+          this.catWins++;
+        } else {
+          // Mouse wins
+          this.mouseWins++;
+        }
+        this.result = null;
         this.stepArr = [];
         this.game = new Game(this.gameboardIndex, this.rule);
+        return;
+      }
+
+      if (this.rollOrMove === 0) {
+        this.rollDice();
+      } else {
+        this.moveMouse();
       }
     },
     handleToggleTimer() {
@@ -231,7 +246,7 @@ export default {
         clearInterval(this.timer);
         this.timer = null;
       } else {
-        this.timer = setInterval(this.handlePlayOnce, 600);
+        this.timer = setInterval(this.handlePlay, 1000);
       }
     },
     handleReset() {
