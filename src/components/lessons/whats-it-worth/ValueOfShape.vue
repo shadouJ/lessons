@@ -153,7 +153,11 @@
           <input type="number" name="myAnswer" v-model.number="myAnswer">
         </span>
       </p>
-      <div class="alert alert-danger" v-if="step===4 || step===5">{{checkMessage}}</div>
+      <div
+        class="alert"
+        :class="checkMessage ==='Correct!' ? 'alert-success' : 'alert-danger'"
+        v-if="step===4 || step===5"
+      >{{checkMessage}}</div>
       <button
         class="btn btn-outline-success"
         v-if="step===3 || step===4"
@@ -273,7 +277,7 @@ export default {
             this.checkMessage = "Your answer is too small. Try again.";
           } else {
             this.step = 5; // Answer is correct
-            this.checkMessage = "correct!";
+            this.checkMessage = "Correct!";
           }
         }
       } else {
