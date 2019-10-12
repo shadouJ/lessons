@@ -179,14 +179,16 @@ export const makeViewArray = arr => {
  *  Filter a N*N two-dimentional array so that it can reflect a building(when X-ray is ticked)
  */
 export const makeViewArrayX = arr => {
-  const newArr = markHidden(arr);
-  for (let i = 0; i < newArr.length; i++) {
-    newArr[i].sort((a, b) => {
+  const returnArr = markHidden(arr);
+  // console.log("before", returnArr);
+  for (let i = 0; i < returnArr.length; i++) {
+    returnArr[i].sort((a, b) => {
       return b.number - a.number;
     });
-    newArr[i] = fillArrayX(newArr[i]);
+    returnArr[i] = fillArrayX(returnArr[i]);
   }
-  return newArr;
+  // console.log("after", returnArr);
+  return returnArr;
 };
 
 /** Based on the array, figure out which numbers are hidden and convert the array
@@ -199,24 +201,45 @@ export const makeViewArrayX = arr => {
  *  [{number: 9, hidden: false}, { number: 2, hidden: true}, {number: 1, hidden: true}],
  *  [{number: 3, hidden: false}, { number: 5, hidden: false}, {number: 4, hidden: true}]
  * ]
+ * 对每个元素增加solid字段
  */
 const markHidden = arr => {
   console.log(arr);
   const arrLength = arr.length;
-  const newArr = new Array(arrLength);
+  const newArr = [];
   for (let i = 0; i < arrLength; i++) {
-    let max = 0;
+    let maxInRow = arr[i][0]; // 保存一行中最大的数字
+    let maxInRowIndex = 0; //  保存一行中最大数字的index
+    let hasMultipleHigh = false; // 一行中是否有多个最大值
+    // e.g. [9, 3, 2, 5] => false, [8, 8, 3, 5] => true
     newArr[i] = [];
     for (let j = 0; j < arrLength; j++) {
-      if (arr[i][j] > max) {
-        max = arr[i][j];
-        newArr[i][j] = { number: arr[i][j], hidden: false };
+      if (arr[i][j] >= maxInRow) {
+        maxInRow = arr[i][j];
+        maxInRowIndex = j;
+        newArr[i][j] = { number: arr[i][j], hidden: false, solid: false };
       } else {
-        newArr[i][j] = { number: arr[i][j], hidden: true };
+        newArr[i][j] = { number: arr[i][j], hidden: true, solid: false };
+      }
+    }
+    console.log(maxInRowIndex);
+    for (let j = 0; j < arrLength; j++) {
+      // 判断是否有多个最大值
+      if (arr[i][j] === maxInRow && j !== maxInRowIndex) {
+        hasMultipleHigh = true;
+      }
+    }
+    if (hasMultipleHigh) {
+      // 如果有多个最大值，则将这些最大值的solid 标记为true
+      for (let j = 0; j < arrLength; j++) {
+        if (arr[i][j] === maxInRow) {
+          newArr[i][j].solid = true;
+        }
       }
     }
     // newArr[i] = filterDuplicateElement(newArr[i]); // Remove duplicate element
   }
+  console.log(newArr);
   return newArr;
 };
 
@@ -265,15 +288,31 @@ const fillArrayX = arr => {
   // console.log(arr[0].number);
 
   const newArr = new Array(arr[0].number);
+  const first = arr[0]; // first是arr中第一个也是number最大的一个元素
+  let setSolid; // Boolean
+  if (first.solid) {
+    setSolid = true;
+  } else {
+    setSolid = false;
+  }
+
   let k = arr[0].number;
   for (let i = 0; i < newArr.length; i++) {
     let index = arr.findIndex(el => {
       return el.number === k;
     });
     if (index === -1) {
-      newArr[i] = null;
+      console.log(setSolid);
+      newArr[i] = {
+        number: null,
+        hidden: false,
+        solid: setSolid ? true : false
+      }; /** JUST A PLACEHOLDER, TO CHANGE */
     } else {
       newArr[i] = arr[index];
+      if (setSolid && index > 0) {
+        setSolid = false;
+      }
     }
     k--;
   }

@@ -3,6 +3,7 @@
     v-if="number!== undefined && !hasCheck"
     class="app--number-block app--number-draggable hidden"
     :class="'app--number-block' + number"
+    :data-solid="solid"
     @mouseover="handleShowHidden"
     @mouseleave="handleHide"
   >
@@ -18,7 +19,7 @@
 
 <script>
 export default {
-  props: ["number", "hasCheck", "hidden", "hasXRay"],
+  props: ["number", "hasCheck", "hidden", "solid", "hasXRay"],
   data: function() {
     return {
       showHidden: false
@@ -27,7 +28,9 @@ export default {
   methods: {
     handleShowHidden() {
       // console.log("show hidden");
-      if (this.hasXRay) {
+      const isSolid = this.$el.getAttribute("data-solid");
+      // console.log(this.$el.getAttribute("data-solid"));
+      if (this.hasXRay && !isSolid) {
         this.$el.classList.remove("hidden");
         this.$el.classList.add("hover-effect");
       }

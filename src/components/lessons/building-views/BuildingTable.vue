@@ -13,12 +13,13 @@
   <div v-else>
     <div class="app--building-table">
       <div class="m-1" v-for="(oneBuilding, arrKey) in viewArrayX" :key="arrKey">
-        <!-- one building -->
+        <!-- one building with x ray -->
         <div v-if="oneBuilding.length===0" style="width: 40px;"></div>
         <div v-for="(el, buildingKey) in oneBuilding" :key="buildingKey">
           <app-number-block
             :number="el ? el.number : null"
             :hidden="el ? el.hidden : null"
+            :solid="el ? el.solid : null"
             :hasXRay="hasXRay"
           ></app-number-block>
         </div>
