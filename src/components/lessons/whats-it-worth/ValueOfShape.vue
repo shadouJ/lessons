@@ -294,7 +294,7 @@ export default {
             this.checkMessage = "Your answer is too small. Try again.";
           } else {
             this.step = 5;
-            this.checkMessage = "correct!";
+            this.checkMessage = "Correct!";
           }
         }
       }
