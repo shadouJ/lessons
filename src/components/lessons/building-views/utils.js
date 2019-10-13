@@ -284,17 +284,17 @@ const fillArray = arr => {
 
 /** Fill array, same functions as the above but it is for view array with x-ray */
 const fillArrayX = arr => {
-  // console.log(arr);
+  console.log(arr);
   // console.log(arr[0].number);
 
   const newArr = new Array(arr[0].number);
   const first = arr[0]; // first是arr中第一个也是number最大的一个元素
-  let setSolid; // Boolean
-  if (first.solid) {
-    setSolid = true;
-  } else {
-    setSolid = false;
-  }
+  let setSolid = false; // Boolean
+  // if (first.solid) {
+  //   setSolid = true;
+  // } else {
+  //   setSolid = false;
+  // }
 
   let k = arr[0].number;
   for (let i = 0; i < newArr.length; i++) {
@@ -302,17 +302,23 @@ const fillArrayX = arr => {
       return el.number === k;
     });
     if (index === -1) {
+      // fill with null number
       console.log(setSolid);
       newArr[i] = {
         number: null,
         hidden: false,
         solid: setSolid ? true : false
-      }; /** JUST A PLACEHOLDER, TO CHANGE */
+      };
     } else {
       newArr[i] = arr[index];
-      if (setSolid && index > 0) {
+      if (arr[index].solid) {
+        setSolid = true;
+      } else {
         setSolid = false;
       }
+      // if (setSolid && index > 0) {
+      //   setSolid = false;
+      // }
     }
     k--;
   }
