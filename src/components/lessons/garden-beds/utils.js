@@ -48,10 +48,20 @@ const drawPlants = (canvas, plantSrc, numPlants) => {
 
 	const context = canvas.getContext("2d");
 	var width = Math.floor(canvas.width / (numPlants+2));
-	var height = Math.floor(canvas.height / 3 );
+	var height = width;
+	var startOffset = 0;
+
+	//check to make sure height is not large
+	if (3*height > canvas.height){
+		height = Math.floor(canvas.height / 3);
+		width = height;
+
+		//set the offset to center the drawings
+		startOffset = Math.floor((canvas.width - width*(numPlants+2))/2);
+	}
 
 	//var used by start location of tiles on canvas.
-	var xPos = 0;
+	var xPos = startOffset;
 	var yPos = height;
 
 	for (var i=0 ; i<numPlants; i++) {
@@ -86,15 +96,27 @@ export const drawNextCanvas = (canvas, vueObjPtr) => {
 //This function adds the next tile to the garden bed
 export const addNextTile = (colour, canvas, vueObjPtr) => {
 	const context = canvas.getContext("2d");
+	var numPlants = vueObjPtr.numPlants;
 	//size of one brick (+2 accounts for edge tiles)
-	var width = Math.floor(canvas.width / (vueObjPtr.numPlants+2));
-	var height = Math.floor(canvas.height / 3 );
+	var width = Math.floor(canvas.width / (numPlants+2));
+	var height = width;
+	var startOffset = 0;
+
+	//check to make sure height is not large
+	if (3*height > canvas.height){
+		height = Math.floor(canvas.height / 3);
+		width = height;
+
+		//set the offset to center the drawings
+		startOffset = Math.floor((canvas.width - width*(numPlants+2))/2);
+	}
+
 	//var used by start location of tiles on canvas.
 	var xPos = 0;
 	var yPos = 0;
 
 	//check for adding at the top/bottom edges
-	if (vueObjPtr.numTiles < 2*vueObjPtr.numPlants){
+	if (vueObjPtr.numTiles < 2*numPlants){
 		if (vueObjPtr.numTiles%2 == 0){
 			//fillRect(x,y,width,height)
 			xPos = width+(vueObjPtr.numTiles/2)*width;
@@ -106,7 +128,7 @@ export const addNextTile = (colour, canvas, vueObjPtr) => {
 		}
 	}
 	//Check for adding to left/right edges
-	else if (vueObjPtr.numTiles < 2*vueObjPtr.numPlants+3){
+	else if (vueObjPtr.numTiles < 2*numPlants+3){
 		xPos = 0;
 		//check for drawing the border correctly
 		if (vueObjPtr.edgeCounter==0)
@@ -120,7 +142,7 @@ export const addNextTile = (colour, canvas, vueObjPtr) => {
 		}
 	}
 	else {
-		xPos = (vueObjPtr.numPlants+1)*width;
+		xPos = (numPlants+1)*width;
 		if (vueObjPtr.edgeCounter==0)
 			yPos = 0;
 		else
@@ -133,6 +155,9 @@ export const addNextTile = (colour, canvas, vueObjPtr) => {
 	}
 	//increment counter
 	vueObjPtr.numTiles += 1;
+
+	//draw center
+	xPos = xPos + startOffset;
 
 	//draw the tile along with its border
 	drawTile(colour, context, xPos, yPos, width, height);

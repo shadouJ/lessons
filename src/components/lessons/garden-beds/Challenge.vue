@@ -3,7 +3,7 @@
 		<h2 class="text-success text-center">Challenge</h2>
 		<div class="container mt-4 mb-5">
 			<div class="row">
-				<div class="col-6">
+				<div class="app--action mt-3 col-6">
 					<div class="row">
 						<h4>Row of <strong>{{numPlants}}</strong> Plants</h4>
 					</div>
@@ -21,10 +21,9 @@
 							</div>
 						</form>
 					</div>
-					<div class="row" v-if="showStart">
-						<button type="button" class="btn btn-lg btn-block btn-outline-success" @click="start">Start</button>
-					</div>
-					<div class="row" v-else>
+
+					<button v-if="showStart" id="startButton" type="button" class="btn btn-outline-success" @click="start">Tap here to start</button>
+					<div class="row" v-if="!showStart">
 						<button type="button" class="btn btn-outline-dark mr-3" @click="reset" :disabled="!isFinished">Reset</button>
 						<button type="button" class="btn btn-outline-success btn-lg mr-3" @click="submitInput" :disabled="isSubmitted">Submit Guess</button>
 					</div>
@@ -222,6 +221,15 @@ export default {
 </script>
 
 <style scoped>
+	.app--action {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+	}
+	#startButton {
+		width: 60%;
+	}
+
 	#canvas-container {
 		height: 300px;
 	}
