@@ -179,16 +179,69 @@ export const makeViewArray = arr => {
  *  Filter a N*N two-dimentional array so that it can reflect a building(when X-ray is ticked)
  */
 export const makeViewArrayX = arr => {
-  const returnArr = markHidden(arr);
-  // console.log("before", returnArr);
+  const returnArr = markHidden(filterHiddenX(arr));
+  console.log("before", returnArr);
   for (let i = 0; i < returnArr.length; i++) {
     returnArr[i].sort((a, b) => {
       return b.number - a.number;
     });
     returnArr[i] = fillArrayX(returnArr[i]);
   }
-  // console.log("after", returnArr);
+  console.log("after", returnArr);
   return returnArr;
+};
+
+const filterHiddenX = arr => {
+  // 将即使X-ray也不能看到的数字设为0
+  const newArr = [];
+  for (let i = 0; i < arr.length; i++) {
+    // let row = [...arr[i]]; // 将当前行的数组保存一个副本，便于操作
+    // // console.log(row);
+    // let maxInRow = row[0]; // 保存一行中最大的数字
+    // let maxInRowIndex = 0; // 保存一行中最大数字的index
+    // for (let j = 1; j < row.length; j++) {
+    //   // 获取一行中的最大值及最大值所在的index
+    //   if (row[j] > maxInRow) {
+    //     maxInRow = row[j];
+    //     maxInRowIndex = j;
+    //   }
+    // }
+    // row[maxInRowIndex] = 0; // 将最大元素置为0；
+    // let nextMaxInRow = row[0]; // 保存一行中第二大的数字
+    // let nextMaxInRowIndex = 0; // 保存一行中次大数的index
+    // // 重复以上操作 ，因为最大数字在数组中已经被置为0，则现在找出来的最大值其实就是原数组的次大值
+    // // 如果最大值有多个 则次大值和最大值相等。
+    // for (let j = 1; j < row.length; j++) {
+    //   if (row[j] > nextMaxInRow) {
+    //     nextMaxInRow = row[j];
+    //     nextMaxInRowIndex = j;
+    //   }
+    // }
+    // console.log(maxInRow, nextMaxInRow);
+    newArr[i] = [];
+    newArr[i][0] = arr[i][0];
+    for (let j = 1; j < arr.length; j++) {
+      // 如果当前数字小于前面两个或以上数字，则将该元素所在位置设为0.
+      let k = 0;
+      let lessThan = 0;
+      while (arr[i][j - 1 - k] && j - 1 - k >= 0) {
+        if (arr[i][j] < arr[i][j - 1 - k]) {
+          lessThan++;
+        }
+        k++;
+      }
+      newArr[i][j] = lessThan >= 2 ? 0 : arr[i][j];
+    }
+  }
+  return newArr;
+};
+
+const markHiddenX = arr => {
+  const newArr = [];
+  for (let i = 0; i < arr.length; i++) {
+    newArr[i] = [];
+  }
+  return newArr;
 };
 
 /** Based on the array, figure out which numbers are hidden and convert the array
