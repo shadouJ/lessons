@@ -1,5 +1,5 @@
 <template>
-  <div v-if="!hasXRay">
+  <div v-if="!hasXRay" class="app--building-table-box">
     <div class="app--building-table">
       <div class="m-1" v-for="(oneBuilding, arrKey) in viewArray" :key="arrKey">
         <!-- one building -->
@@ -10,7 +10,7 @@
       </div>
     </div>
   </div>
-  <div v-else>
+  <div v-else class="app--building-table-box">
     <div class="app--building-table">
       <div class="m-1" v-for="(oneBuilding, arrKey) in viewArrayX" :key="arrKey">
         <!-- one building with x ray -->
@@ -108,6 +108,9 @@ export default {
 </script>
 
 <style scoped>
+.app--building-table-box {
+  height: 100%;
+}
 .app--building-table {
   display: flex;
   align-items: flex-end;
