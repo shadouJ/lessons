@@ -295,38 +295,56 @@ const markHidden = arr => {
   return newArr;
 };
 
+const markSolidInRow = arr => {
+  const arrLength = arr.length;
+  let maxInRow = arr[0].number; // 保存一行中最大的数字
+  let maxInRowIndex = 0; //  保存一行中最大数字的index
+  let hasMultipleHigh = false; // 一行中是否有多个最大值
+  let indexBegin = 0;
+  let indexEnd = 1;
+  for (let j = 0; j < arrLength; j++) {
+    // 找到一行中的最大值。
+    if (arr[j].number >= maxInRow) {
+      maxInRow = arr[j].number;
+      maxInRowIndex = j;
+    }
+  }
+  // console.log(maxInRow, maxInRowIndex);
+  for (let j = 0; j < arrLength; j++) {
+    // 判断一行中是否有多个最大值
+    if (arr[j].number == maxInRow && j < maxInRowIndex) {
+      maxInRowIndex = j;
+      hasMultipleHigh = true;
+    }
+  }
+  console.log(maxInRowIndex);
+  // console.log(hasMultipleHigh);
+  if (hasMultipleHigh) {
+    // arr[0].solid = true;
+    // 如果有多个最大值，则将这些最大值的solid属性设为true
+    for (let j = 0; j < arrLength; j++) {
+      if (arr[j].number === maxInRow) {
+        arr[j].solid = true;
+      }
+    }
+  }
+  return arr;
+};
+
 const markSolid = arr => {
   const arrLength = arr.length;
   // const newArr = [];
   for (let i = 0; i < arrLength; i++) {
-    let maxInRow = arr[i][0].number; // 保存一行中最大的数字
-    let maxInRowIndex = 0; //  保存一行中最大数字的index
-    let hasMultipleHigh = false; // 一行中是否有多个最大值
-    // newArr[i] = [];
-    for (let j = 0; j < arrLength; j++) {
-      // 找到一行中的最大值。
-      if (arr[i][j].number >= maxInRow) {
-        maxInRow = arr[i][j].number;
-        maxInRowIndex = j;
-      }
-    }
-    console.log(maxInRow, maxInRowIndex);
-    for (let j = 0; j < arrLength; j++) {
-      // 判断一行中是否有多个最大值
-      if (arr[i][j].number == maxInRow && j < maxInRowIndex) {
-        maxInRowIndex = j;
-        hasMultipleHigh = true;
-      }
-    }
-    console.log(hasMultipleHigh);
-    if (hasMultipleHigh) {
-      // 如果有多个最大值，则将这些最大值的solid属性设为true
-      for (let j = 0; j < arrLength; j++) {
-        if (arr[i][j].number === maxInRow) {
-          arr[i][j].solid = true;
-        }
-      }
-    }
+    // let maxInRow = arr[i][0].number; // 保存一行中最大的数字
+    // let maxInRowIndex = 0; //  保存一行中最大数字的index
+    // for (let j = arrLength - 1; j >= 0; j--) {
+    //   if (arr[i][j].number >= maxInRow) {
+    //     maxInRow = arr[i][j].number;
+    //     maxInRowIndex = j;
+    //   }
+    // }
+    // console.log(maxInRow, maxInRowIndex);
+    markSolidInRow(arr[i]);
   }
   return arr;
 };
