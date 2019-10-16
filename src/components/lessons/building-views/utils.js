@@ -297,37 +297,40 @@ const markHidden = arr => {
 
 const markSolidInRow = arr => {
   const arrLength = arr.length;
-  let maxInRow = arr[0].number; // 保存一行中最大的数字
-  let maxInRowIndex = 0; //  保存一行中最大数字的index
-  let hasMultipleHigh = false; // 一行中是否有多个最大值
-  let indexBegin = 0;
+  // let indexBegin = 0;
   let indexEnd = 1;
-  for (let j = 0; j < arrLength; j++) {
-    // 找到一行中的最大值。
-    if (arr[j].number >= maxInRow) {
-      maxInRow = arr[j].number;
-      maxInRowIndex = j;
-    }
-  }
-  // console.log(maxInRow, maxInRowIndex);
-  for (let j = 0; j < arrLength; j++) {
-    // 判断一行中是否有多个最大值
-    if (arr[j].number == maxInRow && j < maxInRowIndex) {
-      maxInRowIndex = j;
-      hasMultipleHigh = true;
-    }
-  }
-  console.log(maxInRowIndex);
-  // console.log(hasMultipleHigh);
-  if (hasMultipleHigh) {
-    // arr[0].solid = true;
-    // 如果有多个最大值，则将这些最大值的solid属性设为true
-    for (let j = 0; j < arrLength; j++) {
-      if (arr[j].number === maxInRow) {
-        arr[j].solid = true;
+  while (indexEnd <= arrLength) {
+    let maxInRow = arr[0].number; // 保存一行中最大的数字
+    let maxInRowIndex = 0; //  保存一行中最大数字的index
+    let hasMultipleHigh = false; // 一行中是否有多个最大值
+    for (let j = 0; j < indexEnd; j++) {
+      // 找到一行中的最大值。
+      if (arr[j].number >= maxInRow) {
+        maxInRow = arr[j].number;
+        maxInRowIndex = j;
       }
     }
+    // console.log(maxInRow, maxInRowIndex);
+    for (let j = 0; j < indexEnd; j++) {
+      // 判断一行中是否有多个最大值
+      if (arr[j].number == maxInRow && j < maxInRowIndex) {
+        maxInRowIndex = j;
+        hasMultipleHigh = true;
+      }
+    }
+    // console.log(hasMultipleHigh);
+    if (hasMultipleHigh) {
+      // arr[0].solid = true;
+      // 如果有多个最大值，则将这些最大值的solid属性设为true
+      for (let j = 0; j < indexEnd; j++) {
+        if (arr[j].number === maxInRow) {
+          arr[j].solid = true;
+        }
+      }
+    }
+    indexEnd++;
   }
+
   return arr;
 };
 
