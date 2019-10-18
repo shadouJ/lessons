@@ -94,3 +94,38 @@ npm run serve
 ```
 npm run build
 ```
+
+### Deployment
+```
+# create a branch from master branch
+# note the naming convention(timestamp ddMMYYYY) below
+git checkout release_18102019
+
+# make changes to /src/components/Home.vue
+add lessons to lessons array, see example below:
+{ name: "Counter Escape", link: "/counter-escape" },
+{ name: "Crazy Animals", link: "/crazy-animals" },
+{ name: "Problem Dice", link: "/problem-dice" },
+{ name: "Cat and mouse", link: "/cat-and-mouse" }
+
+# test after changes in your local env
+# expected results: only lessons listed in Home.vue will be displayed on the homepage.
+npm install && npm run serve
+
+# commit && push changes to repo
+git add .
+git commit -m "add lessons to release"
+git push -u origin release_18102019
+
+# now you will be able to see a new branch on Github repo https://github.com/maths300/lessons/branches
+# if all good, you will be moving forward to server side to deploy it.
+
+# on server side
+cd /var/www/lessons.maths300.com
+# swith to the branch you created before
+git checkout release_18102019
+npm install && npm run build
+
+# visit https://lessons.maths300.com/
+# verify the changes are reflected on the home page.
+```
