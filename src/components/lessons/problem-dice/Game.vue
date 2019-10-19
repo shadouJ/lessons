@@ -10,8 +10,7 @@
     </div>
     <div class="app--dice-diff mt-5 mb-3">
       <div class="app--dice-diff-label font-weight-bold text-primary">
-        Dice diff
-        <span class="app--hide-wording">erence</span>:
+        Dice diff<span class="app--hide-wording">erence</span>:
       </div>
       <div class="app--dice-diff-data">
         <div
