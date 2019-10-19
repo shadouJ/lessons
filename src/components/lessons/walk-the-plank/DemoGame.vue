@@ -16,7 +16,7 @@
           class="badge badge-danger"
           v-if="result===-1"
           style="position: absolute; bottom: -50%; left: 0;"
-        >Shark has gobbbled you up</div>
+        >Shark has gobbled you up</div>
       </div>
       <div
         v-for="i in plankLength"
