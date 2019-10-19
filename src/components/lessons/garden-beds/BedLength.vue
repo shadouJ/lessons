@@ -10,7 +10,7 @@
 					<div class="row">
 						<form>
 							<div class="form-group row">
-								<label for="numPlantsInput" class="col-sm-9 col-form-label">Current number of <b>plants</b>:</label>
+								<label for="numPlantsInput" class="col-sm-9 col-form-label">Number of <b>plants</b>:</label>
 								<div class="col-sm-3">
 									<input type="number" 
 										v-model="numPlantsInput"
@@ -21,7 +21,7 @@
 								</div>
 							</div>
 							<div class="form-group row">
-								<label for="numTilesInput" class="col-sm-9 col-form-label">Current number of <b>tiles</b>:</label>
+								<label for="numTilesInput" class="col-sm-9 col-form-label">Number of <b>tiles</b>:</label>
 								<div class="col-sm-3">
 									<input type="number" 
 										v-model="numTiles"
@@ -32,23 +32,23 @@
 							</div>
 						</form>
 					</div>
-					<div class="row justify-content-center p-1">
-						<div class="custom-control custom-radio custom-control-inline">
-							<input type="radio" class="custom-control-input" id="demo" name="inlineDefaultRadiosExample" value= "demo" v-model="mode" :disabled="!showStart">
-							<label class="custom-control-label" for="demo">DEMO</label>
+					<div class="app--action mt-3">
+						<div v-if="showStart">
+							<p v-bind:class="{'alert mr-3':true, 'alert-info':(!showInputError), 'alert-danger':(showInputError)}">Please enter an whole number between {{minBedLength}} to {{maxBedLength}}.</p>
 						</div>
-						<div class="custom-control custom-radio custom-control-inline">
-							<input type="radio" class="custom-control-input" id="auto" name="inlineDefaultRadiosExample" value= "auto" v-model="mode" :disabled="!showStart">
-							<label class="custom-control-label" for="auto">AUTO</label>
+						<button v-if="showStart" id="startButton" type="button" class="btn btn-outline-success" @click="start">Tap here to start</button>
+						<div v-if="!showStart">
+							<button type="button" class="btn btn-outline-dark mr-3" @click="reset" :disabled="!isFinished">Reset</button>
+							<button type="button" class="btn btn-outline-success btn-lg mr-3" @click="addTile" :disabled="isFinished||isAuto">Add Tile</button>
 						</div>
-					</div>
-					<div class="row justify-content-center" v-if="showStart">
-						<p v-bind:class="{'alert mr-3':true, 'alert-info':(!showInputError), 'alert-danger':(showInputError)}">Please enter an whole number between {{minBedLength}} to {{maxBedLength}}.</p>
-						<button type="button" class="btn btn-lg btn-block btn-outline-success" @click="start">Start</button>
-					</div>
-					<div class="row" v-else>
-						<button type="button" class="btn btn-outline-dark mr-3" @click="reset" :disabled="!isFinished">Reset</button>
-						<button type="button" class="btn btn-outline-success btn-lg mr-3" @click="addTile" :disabled="isFinished||isAuto">Add Tile</button>
+						<div class="app--demo-auto-option mt-2">
+							<div class="form-check form-check-inline">
+								<input type="radio" class="form-check-input" id="demo" name="demoOption" value= "demo" v-model="mode">
+								<label class="form-check-label" for="demo">Demo</label>
+								<input type="radio" class="ml-2 form-check-input" id="auto" name="autoOption" value= "auto" v-model="mode">
+								<label class="form-check-label" for="auto">Auto</label>
+							</div>
+						</div>
 					</div>
 					<div class="row p-3 justify-content-center">
 						<p class="alert alert-info mr-3" v-if="isFinished">Garden bed built, type <b>new</b> bed length and click <b>Reset</b> to make another.</p>
@@ -143,6 +143,28 @@ export default {
 			}
 		}
 	},
+	watch: {
+		isAuto: function(){
+			if (!this.showStart){
+				if (this.isAuto){
+					//timer to delay the addition of next tile, using intervals of timeDelay
+					this.intervalId = setInterval(() => {
+						this.addTile();
+
+						//continue adding tiles until all tiles added
+						if (this.isFinished) {
+							//Clear the interval addition timer.
+							clearInterval(this.intervalId);
+						}
+					}, this.timeDelay);
+				}
+				//else demo mode, adds tiles using addTile button
+				else {
+					clearInterval(this.intervalId);
+				}
+			}
+		}
+	},
 	methods: {
 		//This function adds another tile to the canvas, going around the plants.
 		addTile(){
@@ -163,8 +185,6 @@ export default {
 				drawNextCanvas(canvas, this);
 
 				if (this.isAuto){
-					//disable the button
-
 					//timer to delay the addition of next tile, using intervals of timeDelay
 					this.intervalId = setInterval(() => {
 						this.addTile();
@@ -192,6 +212,7 @@ export default {
 			}
 			//reset the variables
 			this.numTiles = 0;
+			this.numPlantsInput = 0;
 			this.edgeCounter = 0;
 
 			//clear the canvas
@@ -211,6 +232,20 @@ export default {
 </script>
 
 <style scoped>
+	.app--action {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+	}
+
+	#startButton {
+		width: 60%;
+	}
+
+	.app--demo-auto-option input,	.app--demo-auto-option label  {
+		cursor: pointer;
+	}
+
 	#canvas-container {
 		height: 300px;
 	}
