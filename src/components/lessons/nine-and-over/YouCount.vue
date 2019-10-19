@@ -65,6 +65,8 @@ import PlugboardInput from './PlugboardInput.vue';
 import Calculator from './Calculator.vue';
 import SpellingBoard from './SpellingBoard.vue';
 import CountForm from './CountForm.vue';
+import correctChoiceSound from '@/assets/correct-choice.wav';
+
 export default {
 	components: {
 		appPlugboard: Plugboard,
@@ -78,7 +80,8 @@ export default {
 			totalDigit: null,
 			countingSet: null,
 			isFinish: false,
-			appStartingNumber: null
+			appStartingNumber: null,
+			correctChoiceSound: null
 		}
 	},
 	computed: {
@@ -99,6 +102,7 @@ export default {
 			const { direction, countingBy, startingNumber } = this.countingSet;
 			if(startingNumber + direction*countingBy === $event) {
 				this.countingSet.startingNumber = $event;
+				this.correctChoiceSound.play();
 				if ( $event === this.maxNumber || 
 				    $event === 0 ||
 						$event + direction*countingBy > this.maxNumber || 
@@ -112,6 +116,9 @@ export default {
 			this.countingSet = null;
 			this.isFinish = false;
 		}
+	},
+	mounted() {
+		this.correctChoiceSound = new Audio(correctChoiceSound);
 	}
 }
 </script>
