@@ -12,11 +12,16 @@
         Shark
         <app-arrow-left v-if="direction<0 && position===-1*plankLength-1"></app-arrow-left>
         <app-arrow-right v-if="direction>0 && position===-1*plankLength-1"></app-arrow-right>
-        <div
-          class="badge badge-danger"
-          v-if="result===-1"
-          style="position: absolute; bottom: -50%; left: 0;"
-        >Shark has gobbled you up</div>
+
+        <div v-if="result===-1" style="position: absolute; bottom: -50%; left: 0;">
+          <span class="badge badge-danger">Shark has gobbled you up</span>
+        </div>
+        <img
+          :src="sharkSrc"
+          alt="shark"
+          :style="{height: sharkImageHeight +'px', width: 'auto'}"
+          style="position: absolute; bottom: -140%;"
+        >
       </div>
       <div
         v-for="i in plankLength"
@@ -96,6 +101,7 @@ import GameTable from "./GameTable.vue";
 import ArrowLeft from "./ArrowLeft.vue";
 import ArrowRight from "./ArrowRight.vue";
 import Plank from "./Plank";
+import sharkSrc from "@/assets/shark.png";
 
 export default {
   components: {
@@ -105,6 +111,8 @@ export default {
   },
   data: function() {
     return {
+      sharkImageHeight: 0,
+      sharkSrc,
       plankLength: 5,
       turns: 0,
       totalTurns: 0,
@@ -132,6 +140,27 @@ export default {
         return 0;
       }
       return Number((this.totalTurns / (this.numberOfGames - 1)).toFixed(2));
+    }
+  },
+  watch: {
+    result(value) {
+      if (value === -1) {
+        let growTimer = setInterval(() => {
+          this.sharkImageHeight++;
+
+          if (this.sharkImageHeight >= 50) {
+            let shrinkTimer = setInterval(() => {
+              if (this.sharkImageHeight < 0) {
+                clearInterval(shrinkTimer);
+                clearInterval(growTimer);
+              }
+              this.sharkImageHeight--;
+            }, 40);
+          }
+        }, 20);
+      } else {
+        this.sharkImageHeight = 0;
+      }
     }
   },
   methods: {
