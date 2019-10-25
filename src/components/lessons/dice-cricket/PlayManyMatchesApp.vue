@@ -10,6 +10,7 @@
         <app-many-matches-table
           :gamePlayedNumber="gamePlayedNumber"
           :gameData="gameData"
+          :overCounts="overCounts"
           :ties="ties"
         ></app-many-matches-table>
       </div>
@@ -136,7 +137,8 @@ export default {
       // wicket: 0,
       maxWicket: 10,
       ties: 0,
-      graphData: []
+      graphData: [],
+      overCounts: 0 // overCounts / 6 should be over
       // score: 0
     };
   },
@@ -187,6 +189,7 @@ export default {
       // console.log(diceNumber);
       while (wicket <= this.maxWicket) {
         let diceNumber = throwDiceOnce();
+        this.overCounts += 1;
         if (diceNumber == this.wicketTaker) {
           wicket++;
         } else {
@@ -251,6 +254,7 @@ export default {
       this.gameData = [];
       this.gamePlayedNumber = 0;
       this.ties = 0;
+      this.overCounts = 0;
       for (let i = 0; i < 50; i++) {
         // Initiazlie graphData with an array of 50 items and each item has value 0
         this.graphData[i] = 0;

@@ -24,6 +24,7 @@
       <div
         v-if="showStartMessage"
         class="app--prompt alert alert-primary"
+        style="margin-bottom: 80px;"
       >Coin has been tossed. Team {{ whoseTurn === 0 ? 'A' : 'B' }} to bowl first over</div>
       <div
         v-if="result"
