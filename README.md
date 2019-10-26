@@ -99,6 +99,7 @@ npm run build
 ```
 # create a branch from master branch
 # note the naming convention(timestamp ddMMYYYY) below
+git branch release_18102019
 git checkout release_18102019
 
 # make changes to /src/components/Home.vue
@@ -122,6 +123,8 @@ git push -u origin release_18102019
 
 # on server side
 cd /var/www/lessons.maths300.com
+# update source code
+git pull
 # swith to the branch you created before
 git checkout release_18102019
 npm install && npm run build
