@@ -94,15 +94,25 @@ export default {
 			minBedLength: 1,
 			maxBedLength: 100,
 
-			//this value used by the timer, as to how fast the tiles should be added.
-			timeDelay: 50,
-
 			//this id is used to kill the timer interval
 			intervalId: 0,
 			intervalId2: 0
 		}
 	},
 	computed: {
+		//this value used by the timer, as to how fast the tiles should be added.
+		timeDelay: function(){
+			//allow 10, 15 and 17sec for all the tiles to be placed when numplants is in the range [0,40], [40, 80], [80, 100]
+			if (this.numPlants < 40){
+				return (10*1000)/this.expectedNumTiles;
+			}
+			else if (this.numPlants >= 80){
+				return (17*1000)/this.expectedNumTiles;
+			}
+			else {
+				return (15*1000)/this.expectedNumTiles;
+			}
+		},
 		expectedNumTiles: function(){
 			return this.numPlants*2+6;
 		},

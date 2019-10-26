@@ -118,11 +118,15 @@ export default {
 			//this variable is used for for auto or demo mode
 			mode: 'demo',
 			//this id is used to kill the timer interval
-			intervalId: 0,
-			timeDelay: 300
+			intervalId: 0
 		}
 	},
 	computed: {
+		//this value used by the timer, as to how fast the tiles should be added.
+		timeDelay: function(){
+			//allow 10sec for all the tiles to be placed
+			return (10*1000)/this.expectedNumTiles;
+		},
 		expectedNumTiles: function(){
 			return this.numPlants*2+6;
 		},

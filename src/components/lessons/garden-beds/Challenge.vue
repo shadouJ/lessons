@@ -94,15 +94,18 @@ export default {
 			minBedLength: 1,
 			maxBedLength: 20,
 
-			//this value used by the timer, as to how fast the tiles should be added.
-			timeDelay: 300,
-
 			//this id is used to kill the timer interval
 			intervalId: 0,
 			intervalId2: 0
 		}
 	},
 	computed: {
+		//this value used by the timer, as to how fast the tiles should be added.
+		timeDelay: function(){
+			//allow 10sec for all the tiles to be placed
+			return (10*1000)/this.expectedNumTiles;
+		},
+
 		expectedNumTiles: function(){
 			return this.numPlants*2+6;
 		},
