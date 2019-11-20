@@ -230,6 +230,11 @@ const Ballon = resolve => {
     resolve(require("./components/lessons/2-litre-ballon/App.vue"));
   });
 };
+const NumberCharts = resolve => {
+  require.ensure("./components/lessons/number-charts/App.vue", () => {
+    resolve(require("./components/lessons/number-charts/App.vue"));
+  });
+};
 
 Vue.use(VueRouter);
 
@@ -314,7 +319,8 @@ const routes = [
     component: DiceDifferences,
     name: "Dice Differences"
   },
-  { path: "/ballon", component: Ballon, name: "2 Litre Ballon" }
+  { path: "/ballon", component: Ballon, name: "2 Litre Ballon" },
+  { path: "/number-charts", component: NumberCharts, name: "Number charts" },
 ];
 
 const router = new VueRouter({
