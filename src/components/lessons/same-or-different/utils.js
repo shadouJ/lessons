@@ -4,7 +4,6 @@ export const getRandomNumber = (min, max) => {
 }
 
 //Function is used to remove the blur and make the rectangles crisp. Since using CSS width=100%, need to readjust the canvas height and width correspondingly
-
 const removeBlur = (canvas) => {
 	//create a style object that returns width and height of th canvas
 	let style = {
@@ -21,155 +20,106 @@ const removeBlur = (canvas) => {
 	canvas.setAttribute('height', style.height() * dpi);
 }
 
-//this function draws a rectangle and its border
-const drawPlant = (context, xPos, yPos, width, height) => {
-	//remove the blur
-	xPos = parseInt(xPos) + 0.5;
-	yPos = parseInt(yPos) + 0.5;
-
-	//draw the border
-	context.strokeStyle='black';
-	context.strokeRect(xPos, yPos, width-2, height-2);
-
-	//fill rectangle
-	context.fillStyle = "#095702";
-	context.fillRect(xPos, yPos, width-2, height-2);
-}
-
-
-//This function draws the plants based on the inputs and picture provided
-const drawPlants = (canvas, plantSrc, numPlants) => {
+//This function draws the canvas based on the num red and blue blocks
+export const drawNextCanvas = (canvas, vueObjPtr) => {
+	//The following line resets the canvas (i.e. erase its contents and reset all the properties)
+	// eslint-disable-next-line
 	//check if canvas exists
 	if (!canvas || !canvas.getContext){
 		return null;
 	}
+	canvas.width = canvas.width;
+
+	//initialise all colours to red
+	for (var i=0; i<vueObjPtr.numRedBlocks+vueObjPtr.numBlueBlocks; i++){
+		vueObjPtr.blocks.push({colour: 'red', xPos: 0, yPos: 0});
+		vueObjPtr.key += 1;
+	}
+	//create random numbers for the array to set the colour to blue until num blue blocks reached.
+	var temp = 0;
+	while (temp < vueObjPtr.numBlueBlocks){
+		var randNum = getRandomNumber(0, vueObjPtr.blocks.length);
+		if (vueObjPtr.blocks[randNum].colour === 'red'){
+			vueObjPtr.blocks[randNum].colour = 'blue';
+			temp += 1;
+		}
+	}
+
+	//draw the blocks randomly
+	drawBlocks(canvas, vueObjPtr);
+}
+
+//This function draws the plants based on the inputs and picture provided
+const drawBlocks = (canvas, vueObjPtr) => {
+	var numRed = vueObjPtr.numRedBlocks;
+	var numBlue = vueObjPtr.numBlueBlocks;
+
 	//remove blur by adjusting the canvas size
 	removeBlur(canvas);
 
 	const context = canvas.getContext("2d");
-	var width = Math.floor(canvas.width / (numPlants+2));
-	var height = width;
-	var startOffset = 0;
+	var width = 0;
 
-	//check to make sure height is not large
-	if (3*height > canvas.height){
-		height = Math.floor(canvas.height / 3);
-		width = height;
-
-		//set the offset to center the drawings
-		startOffset = Math.floor((canvas.width - width*(numPlants+2))/2);
+	//determine width of the blocks, i.e. as total number of blocks increase, the size of block decreases at intervals defined below
+	//0-20
+	if ((numRed+numBlue) <= 20){
+		width = Math.floor((canvas.width) / (7));
+	} 
+	//21-70
+	else if (((numRed+numBlue) > 20) && ((numRed+numBlue) <= 72)){
+		width = Math.floor((canvas.width) / (12));	
+	}
+	//71-100
+	else if (((numRed+numBlue) > 71) && ((numRed+numBlue) <= 100)){
+		width = Math.floor((canvas.width) / (14));	
+	}
+	//101-200
+	else{
+		width = Math.floor((canvas.width) / (20));	
 	}
 
-	//var used by start location of tiles on canvas.
-	var xPos = startOffset;
-	var yPos = height;
+	var height = width;
+	vueObjPtr.width = width;
 
-	for (var i=0 ; i<numPlants; i++) {
+	//check to make sure height is not large
+
+	//var used by start location of tiles on canvas.
+	var xPos = width/2;
+	var yPos = canvas.height-height;
+
+	var colour = 'red';
+
+	for (var i=0 ; i<(numRed+numBlue); i++) {
+		//get the block
+		//store the location of the block
+		vueObjPtr.blocks[i].xPos = xPos;
+		vueObjPtr.blocks[i].yPos = yPos;
+		drawBlock(vueObjPtr.blocks[i].colour, context, xPos, yPos, width, height);
+
 		xPos = xPos + width;
 
-		drawPlant(context, xPos, yPos, width, height)
-	}
-	//This section can be uncommented and replace the above for loop to draw pictures instead if choose to use it.
-	// Create new plant image and load them onto canvas
-	// var plant = new Image();
-	// plant.src = plantSrc;
-	// plant.onload = function(){
-	// 	//context.drawImage(img,x,y,width,height), coordinates {x,y}
-	// 	//Note: the -1 used for the limit accounts for integer division causing a 6th plant to be drawn when numPlants = 5.
-	// 	for (var i=0; i<numPlants; i++) {
-	// 		xPos = xPos + width;
-	// 		context.drawImage(plant, xPos, height, width, height);
-	// 	}
-	// };
-}
-
-//This function draws the canvas based on the numPlants
-export const drawNextCanvas = (canvas, vueObjPtr) => {
-	//The following line resets the canvas (i.e. erase its contents and reset all the properties)
-	// eslint-disable-next-line
-	canvas.width = canvas.width;
-
-	//draw the plants in the center
-	drawPlants(canvas, vueObjPtr.plant, vueObjPtr.numPlants);
-}
-
-//This function adds the next tile to the garden bed
-export const addNextTile = (colour, canvas, vueObjPtr) => {
-	const context = canvas.getContext("2d");
-	var numPlants = vueObjPtr.numPlants;
-	//size of one brick (+2 accounts for edge tiles)
-	var width = Math.floor(canvas.width / (numPlants+2));
-	var height = width;
-	var startOffset = 0;
-
-	//check to make sure height is not large
-	if (3*height > canvas.height){
-		height = Math.floor(canvas.height / 3);
-		width = height;
-
-		//set the offset to center the drawings
-		startOffset = Math.floor((canvas.width - width*(numPlants+2))/2);
-	}
-
-	//var used by start location of tiles on canvas.
-	var xPos = 0;
-	var yPos = 0;
-
-	//check for adding at the top/bottom edges
-	if (vueObjPtr.numTiles < 2*numPlants){
-		if (vueObjPtr.numTiles%2 == 0){
-			//fillRect(x,y,width,height)
-			xPos = width+(vueObjPtr.numTiles/2)*width;
-			yPos = 0;
-		}
-		else {
-			xPos = width+(Math.floor(vueObjPtr.numTiles/2))*width;
-			yPos = 2*height-1;
+		//check to draw on next line
+		if (xPos >= canvas.width - width){
+			xPos = width/2;
+			yPos -= height;
 		}
 	}
-	//Check for adding to left/right edges
-	else if (vueObjPtr.numTiles < 2*numPlants+3){
-		xPos = 0;
-		//check for drawing the border correctly
-		if (vueObjPtr.edgeCounter==0)
-			yPos = 0;
-		else
-			yPos = height*vueObjPtr.edgeCounter;
-		//update edge counter for next cycle
-		vueObjPtr.edgeCounter +=1;
-		if (vueObjPtr.edgeCounter == 3){
-			vueObjPtr.edgeCounter = 0;
-		}
-	}
-	else {
-		xPos = (numPlants+1)*width;
-		if (vueObjPtr.edgeCounter==0)
-			yPos = 0;
-		else
-			yPos = height*vueObjPtr.edgeCounter;
-		//update edge counter for next cycle
-		vueObjPtr.edgeCounter +=1;
-		if (vueObjPtr.edgeCounter == 3){
-			vueObjPtr.edgeCounter = 0;
-		}
-	}
-	//increment counter
-	vueObjPtr.numTiles += 1;
-
-	//draw center
-	xPos = xPos + startOffset;
-
-	//draw the tile along with its border
-	drawTile(colour, context, xPos, yPos, width, height);
 }
 
 //this function draws a rectangle and its border
-const drawTile = (colour, context, xPos, yPos, width, height) => {
+const drawBlock = (colour, context, xPos, yPos, width, height) => {
+	// console.log("xPos=" + xPos + ", yPos=" + yPos, + ", width=" + width);
 	xPos = parseInt(xPos) + 0.5;
 	yPos = parseInt(yPos) + 0.5;
+
 	//draw the border
-	context.strokeStyle='black';
-	context.strokeRect(xPos, yPos, width-2, height-2);
+	if (colour === "#F5F85B"){
+		context.strokeStyle="#F5F85B";
+	}
+	else {
+		context.strokeStyle='black';
+	}
+	context.strokeRect(xPos, yPos, width-4, height-4);
 
 	//fill rectangle
 	if (colour === ""){
@@ -178,14 +128,24 @@ const drawTile = (colour, context, xPos, yPos, width, height) => {
 	else {
 		context.fillStyle = colour;
 	}
-	context.fillRect(xPos, yPos, width-2, height-2);
+	context.fillRect(xPos, yPos, width-4, height-4);
 }
 
-export const scrollToRecent = () =>{
-	//keep the scroll to observe newly added values in table body
-	var element = document.getElementById("tableBody");
-	if (element != null){
-		//large value used to scroll to the bottom
-		element.scrollTop = 10000000;
+//This function takes the next block from the bag randomly
+export const drawNextBlock = (canvas, vueObjPtr) => {
+	if (vueObjPtr.blocks.length <= 0){
+		return null;
 	}
+	//get the random index to take from the set of blocks
+	var randNum = getRandomNumber(0, vueObjPtr.blocks.length);
+	var colour = "#F5F85B";
+	var b = vueObjPtr.blocks[randNum];
+
+	//draw the tile along with its border
+	const context = canvas.getContext("2d");
+	drawBlock(colour, context, b.xPos, b.yPos, vueObjPtr.width, vueObjPtr.width);
+
+	//remove the block from the blocks array into taken array
+	vueObjPtr.takenBlocks.push(b);
+	vueObjPtr.blocks.splice(randNum,1);
 }

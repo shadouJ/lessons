@@ -2,44 +2,74 @@
 	<div>
 		<h2 class="text-success text-center">Play a game</h2>
 		<div class="container mt-4 mb-5">
-			<div class="row">
+			<div v-if="showInputs" class="row justify-content-center">
+				<form>
+					<div class="form-group row">
+						<label for="numPlantsInput" class="col-sm-9 col-form-label" style="color: red">Enter number of red blocks:</label>
+						<div class="col-sm-3">
+							<input type="number" 
+								v-model="numRedBlocks"
+								class="form-control"
+								min="1"
+								max="100" 
+								id="numRedBlocks">
+						</div>
+					</div>
+					<div class="form-group row">
+						<label for="numTilesInput" class="col-sm-9 col-form-label" style="color: blue">Enter number of blue blocks:</label>
+						<div class="col-sm-3">
+							<input type="number" 
+								v-model="numBlueBlocks"
+								class="form-control"
+								min="1"
+								max="100" 
+								id="numBlueBlocks">
+						</div>
+					</div>
+					<p v-bind:class="{'alert mr-3':true, 'alert-info':(!showInputError), 'alert-danger':(showInputError)}">Please enter an whole number between {{minBlockInput}} to {{maxBlockInput}}.</p>
+					<button type="button" class="btn btn-outline-success" @click="checkInputs" style="width: 30%">OK</button>
+				</form>
+			</div>
+			<div v-else class="row">
 				<div class="col-6">
 					<div class="row">
-						<h4>Row of <strong>{{numPlants}}</strong> Plants</h4>
+						<h4>Bag contains <strong style="color:red">{{numRedBlocks}}</strong> and <strong style="color:blue">{{numBlueBlocks}}</strong></h4>
+						<h5>Player A wins if the colours are the same.</h5>
+						<h5>Player B wins if the colours are different.</h5>
+					</div>
+
+					<div class="row">
+						<h5 class="statLabel col-3"></h5>
+						<h5 class="statLabel col-2">Same (A)</h5>
+						<h5 class="statLabel col-2">Different (B)</h5>
+						<h5 class="statLabel col-2">Total</h5>
 					</div>
 					<div class="row">
-						<form>
-							<div class="form-group row">
-								<label for="numPlantsInput" class="col-sm-9 col-form-label">Number of <b>plants</b>:</label>
-								<div class="col-sm-3">
-									<input type="number" 
-										v-model="numPlantsInput"
-										class="form-control"
-										min="1"
-										max="50" 
-										id="numPlantsInput">
-								</div>
-							</div>
-							<div class="form-group row">
-								<label for="numTilesInput" class="col-sm-9 col-form-label">Number of <b>tiles</b>:</label>
-								<div class="col-sm-3">
-									<input type="number" 
-										v-model="numTiles"
-										class="form-control"
-										:disabled="isDisabled" 
-										id="numTilesInput">
-								</div>
-							</div>
-						</form>
+						<h5 class="statLabel col-3">Number of wins:</h5>
+						<h4 class="stat col-2">{{numSame}}</h4>
+						<h4 class="stat col-2">{{numDiff}}</h4>
+						<h4 class="stat col-2">{{numTotal}}</h4>
 					</div>
+					<div class="row">
+						<h4 class="statLabel col-3"></h4>
+						<h4 class="stat col-2">{{statSame}}</h4>
+						<h4 class="stat col-2">{{statDiff}}</h4>
+						<h4 class="stat col-2"></h4>
+					</div>
+					<div class="row">
+						<h4 class="col-10">First draw (A)</h4>
+						<div class="col-2"></div>
+					</div>
+					<div class="row">
+						<h4 class="col-10">Second draw (B)</h4>
+						<div class="col-2"></div>
+					</div>
+
 					<div class="app--action mt-3">
-						<div v-if="showStart">
-							<p v-bind:class="{'alert mr-3':true, 'alert-info':(!showInputError), 'alert-danger':(showInputError)}">Please enter an whole number between {{minBedLength}} to {{maxBedLength}}.</p>
-						</div>
-						<button v-if="showStart" id="startButton" type="button" class="btn btn-outline-success" @click="start">Tap here to start</button>
+						<button v-if="showStart" id="startButton" type="button" class="btn btn-outline-success" @click="start">Tap here to begin</button>
 						<div v-if="!showStart">
-							<button type="button" class="btn btn-outline-dark mr-3" @click="reset" :disabled="!isFinished">Reset</button>
-							<button type="button" class="btn btn-outline-success btn-lg mr-3" @click="addTile" :disabled="isFinished||isAuto">Add Tile</button>
+							<button type="button" class="btn btn-outline-dark mr-3" @click="reset" v-if="isFinished">Reset</button>
+							<button type="button" class="btn btn-outline-success btn-lg mr-3" @click="drawBlock" v-else :disabled="isAuto">Tap here for Player {{player}} to draw a block at random</button>
 						</div>
 						<div class="app--demo-auto-option mt-2">
 							<div class="form-check form-check-inline">
@@ -50,32 +80,14 @@
 							</div>
 						</div>
 					</div>
-					<div class="row p-3 justify-content-center">
-						<p class="alert alert-info mr-3" v-if="isFinished">Garden bed built, type <b>new</b> bed length and click <b>Reset</b> to make another.</p>
-					</div>
 				</div>
 				<div class="col-6">
-					<table class="table fixed-header table-hover">
-						<thead class="thead-light">
-							<tr>
-								<th scope="col"># Plants</th>
-								<th scope="col"># Tiles</th>
-							</tr>
-						</thead>
-						<div>
-							<tbody>
-								<tr v-for="entry in tableEntries" :key="entry.key">
-									<th scope="row">{{entry.numPlants}}</th>
-									<td>{{entry.numTiles}}</td>
-								</tr>
-							</tbody>
-						</div>
-					</table>
+					<div class="row justify-content-center" id="canvas-container">
+						<canvas id="app-canvas"></canvas>
+					</div>
 				</div>
 			</div>
-			<div class="row justify-content-center" id="canvas-container">
-				<canvas id="app-canvas"></canvas>
-			</div>
+			
 		</div>
 	</div>
 </template>
@@ -83,55 +95,56 @@
 <script>
 /* eslint-disable */
 import { 
-	addNextTile,
+	drawNextBlock,
 	drawNextCanvas
 } from './utils';
-import plant from "@/assets/plant.png";
 
 export default {
 	data: function() {
 		return {
-			//Used by the plant picture
-			plant: plant,
-
-			numPlants: 0,
-			numTiles: 0,
-			edgeCounter: 0,
-
 			//flag used for reset button
 			isDisabled: true,
 
-			//variables used for showing start button and input error msg
+			//player turn
+			player: 'A',
+			turn: 0,
+
+			//variables used for getting input from user and input error msg
+			showInputs: true,
 			showInputError: false,
 			showStart: true,
 
-			//array used for storing past garden beds
-			tableEntries: [],
+			//array used for storing the blocks
+			blocks: [],
+			takenBlocks: [],
 			key: 1,
+			width: 0,
 
 			//input obtained from user
-			numPlantsInput: 0,
+			numRedBlocks: 0,
+			numBlueBlocks: 0,
 
-			minBedLength: 1,
-			maxBedLength: 50,
+			minBlockInput: 1,
+			maxBlockInput: 100,
 
 			//this variable is used for for auto or demo mode
 			mode: 'demo',
 			//this id is used to kill the timer interval
-			intervalId: 0
+			intervalId: 0,
+
+			//variables used for storing the statistics
+			numSame: 0,
+			numDiff: 0
 		}
 	},
 	computed: {
 		//this value used by the timer, as to how fast the tiles should be added.
 		timeDelay: function(){
-			//allow 10sec for all the tiles to be placed
-			return (10*1000)/this.expectedNumTiles;
-		},
-		expectedNumTiles: function(){
-			return this.numPlants*2+6;
+			//draw one block from the bag every 0.5s
+			return (500);
 		},
 		isFinished: function(){
-			if (this.numTiles === this.expectedNumTiles){
+			if (this.turn === 2){
 				return true;
 			}
 			else{
@@ -145,6 +158,22 @@ export default {
 			else {
 				return false;
 			}
+		},
+		//calculate the total and statistics for each player for each
+		numTotal: function(){
+			return this.numSame+this.numDiff;
+		},
+		statSame: function(){
+			if (this.numTotal == 0)
+				return 0 + '%';
+			var res = parseFloat(((this.numSame/this.numTotal)*100).toFixed(2));
+			return res + '%';
+		},
+		statDiff: function(){
+			if (this.numTotal == 0)
+				return 0 + '%';
+			var res = parseFloat(((this.numDiff/this.numTotal)*100).toFixed(2));
+			return  res + '%';
 		}
 	},
 	watch: {
@@ -153,7 +182,7 @@ export default {
 				if (this.isAuto){
 					//timer to delay the addition of next tile, using intervals of timeDelay
 					this.intervalId = setInterval(() => {
-						this.addTile();
+						this.drawBlock();
 
 						//continue adding tiles until all tiles added
 						if (this.isFinished) {
@@ -162,64 +191,85 @@ export default {
 						}
 					}, this.timeDelay);
 				}
-				//else demo mode, adds tiles using addTile button
+				//else demo mode, adds tiles using drawBlock button
 				else {
 					clearInterval(this.intervalId);
 				}
 			}
+		},
+		isFinished: function(){
+			if (this.isFinished === true){
+				//update the stats when finished the round
+				if (this.takenBlocks[0].colour === this.takenBlocks[1].colour)
+					this.numSame += 1;
+				else
+					this.numDiff += 1;
+			}
 		}
 	},
 	methods: {
-		//This function adds another tile to the canvas, going around the plants.
-		addTile(){
-			const canvas = document.querySelector('#app-canvas');
-			addNextTile("yellow", canvas, this);
-		},
+		//this function changes the interface from inputs.
+		checkInputs(){
+			const inputRed = parseInt(this.numRedBlocks);
+			const inputBlue = parseInt(this.numBlueBlocks);
+			if ((inputRed >= this.minBlockInput) && (inputRed <= this.maxBlockInput) && (inputBlue >= this.minBlockInput) && (inputBlue <= this.maxBlockInput)){
+				//input obtained from user
+				this.numRedBlocks = inputRed;
+				this.numBlueBlocks = inputBlue;
 
-		//This function resets the plant to a new value and removes all the tiles from the canvas. 
-		start(){
-			const input = parseInt(this.numPlantsInput);
-			if ((input >= this.minBedLength) && (input <= this.maxBedLength)){
-				//remove the Start button and input error msg on correct input
-				this.showStart = false;
-				//number of plants obtained from user
-				this.numPlants = input;
-				//draw the canvas based on the numPlants
-				const canvas = document.querySelector('#app-canvas');
-				drawNextCanvas(canvas, this);
-
-				if (this.isAuto){
-					//timer to delay the addition of next tile, using intervals of timeDelay
-					this.intervalId = setInterval(() => {
-						this.addTile();
-
-						//continue adding tiles until all tiles added
-						if (this.isFinished) {
-							//Clear the interval addition timer.
-							clearInterval(this.intervalId);
-						}
-					}, this.timeDelay);
-				}
-				//else demo mode, adds tiles using addTile button
+				this.showInputs = false;
 			}
 			else {
 				this.showInputError = true;
 			}
 		},
+
+		//This function draws a block from the canvas.
+		drawBlock(){
+			const canvas = document.querySelector('#app-canvas');
+			drawNextBlock(canvas, this);
+
+			//update player and turn
+			if (this.player === 'A')
+				this.player = 'B';
+			else
+				this.player = 'A';
+			this.turn += 1;
+		},
+
+		//This function resets the plant to a new value and removes all the tiles from the canvas. 
+		start(){
+			//remove the Start button and input error msg on correct input
+			this.showStart = false;
+
+			const canvas = document.querySelector('#app-canvas');
+			drawNextCanvas(canvas, this);
+
+			if (this.isAuto){
+				//timer to delay the addition of next tile, using intervals of timeDelay
+				this.intervalId = setInterval(() => {
+					this.drawBlock();
+
+					//continue adding tiles until all tiles added
+					if (this.isFinished) {
+						//Clear the interval addition timer.
+						clearInterval(this.intervalId);
+					}
+				}, this.timeDelay);
+			}
+			//else demo mode, adds tiles using drawBlock button
+		},
 		reset(){
-			this.showInputError = false;
 			this.showStart = true;
 			//store the value in the table
-			if ((this.numTiles != 0) && (this.isFinished)){
-				this.tableEntries.push({numPlants: this.numPlants, numTiles: this.numTiles});
-				this.key += 1;
-			}
-			//reset the variables
-			this.numTiles = 0;
-			this.numPlantsInput = 0;
-			this.edgeCounter = 0;
 
-			//clear the canvas
+			//reset the variables
+			this.player = 'A';
+			this.turn = 0;
+			this.blocks.splice(0, this.blocks.length);
+			this.takenBlocks.splice(0, this.takenBlocks.length);
+
+			//draw the canvas based on the user inputs
 			const canvas = document.querySelector('#app-canvas');
 			canvas.width = canvas.width;
 		}
@@ -236,6 +286,21 @@ export default {
 </script>
 
 <style scoped>
+	.statLabel {
+		color: darkred;
+		text-align: center;
+	}
+	.stat {
+		color: blue;
+		border: 1px solid grey;
+		text-align: center;
+		height: 60px;
+		margin-right: 2px;
+	}
+
+	h5 {
+		color: green;
+	}
 	.app--action {
 		display: flex;
 		flex-direction: column;
@@ -251,13 +316,14 @@ export default {
 	}
 
 	#canvas-container {
-		height: 300px;
+		height: 500px;
 	}
 
 	#app-canvas {
 		width: 100%;
 		height: 100%;
-		border: none;
+		border:1px solid #000000;
+		background-color: #F5F85B;
 	}
 
 	/*Keep height and header fixed and overflow using scroll*/
