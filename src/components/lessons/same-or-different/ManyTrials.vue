@@ -65,8 +65,7 @@
 import { 
 	// getRandomNum
 	addNextTile,
-	drawNextCanvas,
-	scrollToRecent
+	drawNextCanvas
 } from './utils';
 import plant from "@/assets/plant.png";
 

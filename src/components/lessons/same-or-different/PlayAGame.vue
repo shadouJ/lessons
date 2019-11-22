@@ -26,7 +26,7 @@
 								id="numBlueBlocks">
 						</div>
 					</div>
-					<p v-bind:class="{'alert mr-3':true, 'alert-info':(!showInputError), 'alert-danger':(showInputError)}">Please enter an whole number between {{minBlockInput}} to {{maxBlockInput}}.</p>
+					<p v-bind:class="{'alert mr-3':true, 'alert-info':(!showInputError), 'alert-danger':(showInputError)}">Please enter a whole number between {{minBlockInput}} to {{maxBlockInput}}.</p>
 					<button type="button" class="btn btn-outline-success" @click="checkInputs" style="width: 30%">OK</button>
 				</form>
 			</div>
@@ -38,38 +38,41 @@
 						<h5>Player B wins if the colours are different.</h5>
 					</div>
 
-					<div class="row">
-						<h5 class="statLabel col-3"></h5>
-						<h5 class="statLabel col-2">Same (A)</h5>
-						<h5 class="statLabel col-2">Different (B)</h5>
-						<h5 class="statLabel col-2">Total</h5>
+					<div class="row pt-3">
+						<table>
+							<tr>
+								<td><h5 class="statLabel"></h5></td>
+								<td><h5 class="statLabel">Same (A)</h5></td>
+								<td><h5 class="statLabel">Different (B)</h5></td>
+								<td><h5 class="statLabel">Total</h5></td>
+							</tr>
+							<tr>
+								<td><h5 class="statLabel">Number of wins:</h5></td>
+								<td><h4 class="stat">{{numSame}}</h4></td>
+								<td><h4 class="stat">{{numDiff}}</h4></td>
+								<td><h4 class="stat">{{numTotal}}</h4></td>
+							</tr>
+							<tr>
+								<td><h4 class="statLabel"></h4></td>
+								<td><h4 class="stat">{{statSame}}</h4></td>
+								<td><h4 class="stat">{{statDiff}}</h4></td>
+							</tr>
+						</table>
 					</div>
-					<div class="row">
-						<h5 class="statLabel col-3">Number of wins:</h5>
-						<h4 class="stat col-2">{{numSame}}</h4>
-						<h4 class="stat col-2">{{numDiff}}</h4>
-						<h4 class="stat col-2">{{numTotal}}</h4>
+					<div class="row pt-5">
+						<h4 class="drawText text-right col-10">First draw (A)</h4>
+						<div id="blockA"></div>
 					</div>
-					<div class="row">
-						<h4 class="statLabel col-3"></h4>
-						<h4 class="stat col-2">{{statSame}}</h4>
-						<h4 class="stat col-2">{{statDiff}}</h4>
-						<h4 class="stat col-2"></h4>
-					</div>
-					<div class="row">
-						<h4 class="col-10">First draw (A)</h4>
-						<div class="col-2"></div>
-					</div>
-					<div class="row">
-						<h4 class="col-10">Second draw (B)</h4>
-						<div class="col-2"></div>
+					<div class="row pt-2">
+						<h4 class="drawText text-right col-10">Second draw (B)</h4>
+						<div id="blockB"></div>
 					</div>
 
-					<div class="app--action mt-3">
+					<div class="app--action mt-4">
 						<button v-if="showStart" id="startButton" type="button" class="btn btn-outline-success" @click="start">Tap here to begin</button>
 						<div v-if="!showStart">
 							<button type="button" class="btn btn-outline-dark mr-3" @click="reset" v-if="isFinished">Reset</button>
-							<button type="button" class="btn btn-outline-success btn-lg mr-3" @click="drawBlock" v-else :disabled="isAuto">Tap here for Player {{player}} to draw a block at random</button>
+							<button type="button" class="btn btn-outline-success mr-3" @click="drawBlock" v-else :disabled="isAuto">Tap here for Player {{player}} to draw a block at random</button>
 						</div>
 						<div class="app--demo-auto-option mt-2">
 							<div class="form-check form-check-inline">
@@ -230,10 +233,22 @@ export default {
 			drawNextBlock(canvas, this);
 
 			//update player and turn
-			if (this.player === 'A')
+			if (this.player === 'A'){
+				//update the players block
+				const b = document.getElementById('blockA');
+				b.style.background = this.takenBlocks[0].colour;
+				b.style.border = 'black solid 1px';
+
 				this.player = 'B';
-			else
+			}
+			else{
+				//update the players block
+				const b = document.getElementById('blockB');
+				b.style.background = this.takenBlocks[1].colour;
+				b.style.border = 'black solid 1px';
+
 				this.player = 'A';
+			}
 			this.turn += 1;
 		},
 
@@ -272,6 +287,14 @@ export default {
 			//draw the canvas based on the user inputs
 			const canvas = document.querySelector('#app-canvas');
 			canvas.width = canvas.width;
+
+			//remove the player blocks
+			const b1 = document.getElementById('blockA');
+			b1.style.background = "transparent";
+			b1.style.border = 'none';
+			const b2 = document.getElementById('blockB');
+			b2.style.background = "transparent";
+			b2.style.border = 'none';
 		}
 	},
 	created() {
@@ -286,16 +309,28 @@ export default {
 </script>
 
 <style scoped>
+	.drawText{
+		line-height: 40px
+	}
+	#blockA, #blockB {
+		height: 50px;
+		width: 50px;
+	}
 	.statLabel {
 		color: darkred;
 		text-align: center;
 	}
 	.stat {
 		color: blue;
-		border: 1px solid grey;
 		text-align: center;
-		height: 60px;
+		height: 40px;
 		margin-right: 2px;
+		border: #7f8c8d 1px solid;
+		border-radius: 0.4vw ;
+	}
+	td {
+		width: 150px;
+		height: 40px;
 	}
 
 	h5 {

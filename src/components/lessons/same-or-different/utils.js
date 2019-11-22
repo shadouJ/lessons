@@ -24,11 +24,11 @@ const removeBlur = (canvas) => {
 export const drawNextCanvas = (canvas, vueObjPtr) => {
 	//The following line resets the canvas (i.e. erase its contents and reset all the properties)
 	// eslint-disable-next-line
+	canvas.width = canvas.width;
 	//check if canvas exists
 	if (!canvas || !canvas.getContext){
 		return null;
 	}
-	canvas.width = canvas.width;
 
 	//initialise all colours to red
 	for (var i=0; i<vueObjPtr.numRedBlocks+vueObjPtr.numBlueBlocks; i++){
@@ -86,8 +86,6 @@ const drawBlocks = (canvas, vueObjPtr) => {
 	//var used by start location of tiles on canvas.
 	var xPos = width/2;
 	var yPos = canvas.height-height;
-
-	var colour = 'red';
 
 	for (var i=0 ; i<(numRed+numBlue); i++) {
 		//get the block
