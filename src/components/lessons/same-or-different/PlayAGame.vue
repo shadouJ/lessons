@@ -71,8 +71,14 @@
 					<div class="app--action mt-4">
 						<button v-if="showStart" id="startButton" type="button" class="btn btn-outline-success" @click="start">Tap here to begin</button>
 						<div v-if="!showStart">
-							<button type="button" class="btn btn-outline-dark mr-3" @click="reset" v-if="isFinished">Reset</button>
-							<button type="button" class="btn btn-outline-success mr-3" @click="drawBlock" v-else :disabled="isAuto">Tap here for Player {{player}} to draw a block at random</button>
+							<div v-if="!isAuto">
+								<button type="button" class="btn btn-outline-dark mr-3" @click="reset" v-if="isFinished">Reset</button>
+								<button type="button" class="btn btn-outline-success mr-3" @click="drawBlock" v-if="!isFinished">Tap here for Player {{player}} to draw a block at random</button>
+							</div>
+							<div v-if="isAuto">
+								<button type="button" class="btn btn-outline-success mr-3" @click="showPause=!showPause" v-if="showPause">Tap here to pause</button>
+								<button type="button" class="btn btn-outline-success mr-3" @click="showPause=!showPause" v-if="!showPause">Tap here to resume</button>
+							</div>
 						</div>
 						<div class="app--demo-auto-option mt-2">
 							<div class="form-check form-check-inline">
@@ -134,6 +140,12 @@ export default {
 			mode: 'demo',
 			//this id is used to kill the timer interval
 			intervalId: 0,
+			//this value used by the timer, as to how fast the tiles should be added.
+			//draw one block from the bag every 1s
+			timeDelay: 1000,
+
+			//used for auto mode buttons
+			showPause: false,
 
 			//variables used for storing the statistics
 			numSame: 0,
@@ -141,11 +153,7 @@ export default {
 		}
 	},
 	computed: {
-		//this value used by the timer, as to how fast the tiles should be added.
-		timeDelay: function(){
-			//draw one block from the bag every 0.5s
-			return (500);
-		},
+		
 		isFinished: function(){
 			if (this.turn === 2){
 				return true;
@@ -181,24 +189,18 @@ export default {
 	},
 	watch: {
 		isAuto: function(){
-			if (!this.showStart){
-				if (this.isAuto){
-					//timer to delay the addition of next tile, using intervals of timeDelay
-					this.intervalId = setInterval(() => {
-						this.drawBlock();
-
-						//continue adding tiles until all tiles added
-						if (this.isFinished) {
-							//Clear the interval addition timer.
-							clearInterval(this.intervalId);
-						}
-					}, this.timeDelay);
-				}
-				//else demo mode, adds tiles using drawBlock button
-				else {
-					clearInterval(this.intervalId);
-				}
+			if (this.isAuto)
+				this.showPause = true;
+			else{
+				this.showPause = false;
+				clearInterval(this.intervalId);
 			}
+		},
+		showPause: function(){
+			if (!this.showPause)
+				clearInterval(this.intervalId);
+			else
+				this.autoMode();
 		},
 		isFinished: function(){
 			if (this.isFinished === true){
@@ -211,6 +213,30 @@ export default {
 		}
 	},
 	methods: {
+		//function used to run the auto mode
+		autoMode(){
+			if (this.isAuto && !this.showStart){
+				//check if running and show Pause button is true
+				if (this.showPause == true){
+					//timer to delay the addition of next tile, using intervals of timeDelay
+					this.intervalId = setInterval(() => {
+						//continue until 2 blocks taken
+						if (this.isFinished){
+							//Clear the interval addition timer.
+							this.reset();
+							
+							//draw new canvas
+							const canvas = document.querySelector('#app-canvas');
+							drawNextCanvas(canvas, this);
+						}
+						else{
+							this.drawBlock();
+						}
+					}, this.timeDelay);
+				}
+			}
+		},
+
 		//this function changes the interface from inputs.
 		checkInputs(){
 			const inputRed = parseInt(this.numRedBlocks);
@@ -260,23 +286,14 @@ export default {
 			const canvas = document.querySelector('#app-canvas');
 			drawNextCanvas(canvas, this);
 
-			if (this.isAuto){
-				//timer to delay the addition of next tile, using intervals of timeDelay
-				this.intervalId = setInterval(() => {
-					this.drawBlock();
-
-					//continue adding tiles until all tiles added
-					if (this.isFinished) {
-						//Clear the interval addition timer.
-						clearInterval(this.intervalId);
-					}
-				}, this.timeDelay);
-			}
+			if (this.isAuto)
+				this.autoMode();
 			//else demo mode, adds tiles using drawBlock button
 		},
 		reset(){
-			this.showStart = true;
-			//store the value in the table
+			//if demo mode show start button
+			if (!this.isAuto)
+				this.showStart = true;
 
 			//reset the variables
 			this.player = 'A';
