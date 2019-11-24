@@ -339,18 +339,4 @@ export default {
 		border:1px solid #000000;
 		background-color: #F5F85B;
 	}
-
-	/*Keep height and header fixed and overflow using scroll*/
-	.fixed-header tbody {
-		display: block;
-		overflow: auto;
-		height: 150px;
-		border: #e9ecef 1px solid;
-	}
-	.fixed-header thead tr {
-		display: block;
-	}
-	.fixed-header th, .fixed-header td {
-		width: 270px;
-	}
 </style>
