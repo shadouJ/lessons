@@ -4,8 +4,10 @@
 		<div class="container mt-4 mb-5">
 			<div v-if="showInputs" class="row justify-content-center">
 				<form>
-					<div class="form-group row">
-						<label for="numPlantsInput" class="col-sm-9 col-form-label" style="color: red">Enter number of red blocks:</label>
+					<div class="app--enter-number form-group row mt-3">
+						<label for="numPlantsInput" class="col-sm-9 col-form-label" style="color: red">
+							Enter number of red blocks(1-{{maxBlockInput}}):
+						</label>
 						<div class="col-sm-3">
 							<input type="number" 
 								v-model="numRedBlocks"
@@ -15,8 +17,10 @@
 								id="numRedBlocks">
 						</div>
 					</div>
-					<div class="form-group row">
-						<label for="numTilesInput" class="col-sm-9 col-form-label" style="color: blue">Enter number of blue blocks:</label>
+					<div class="app--enter-number form-group row mt-3">
+						<label for="numTilesInput" class="col-sm-9 col-form-label" style="color: blue">
+							Enter number of blue blocks(1-{{maxBlockInput}}):
+						</label>
 						<div class="col-sm-3">
 							<input type="number" 
 								v-model="numBlueBlocks"
@@ -26,8 +30,13 @@
 								id="numBlueBlocks">
 						</div>
 					</div>
-					<p v-bind:class="{'alert mr-3':true, 'alert-info':(!showInputError), 'alert-danger':(showInputError)}">Please enter a whole number between {{minBlockInput}} to {{maxBlockInput}}.</p>
-					<button type="button" class="btn btn-outline-success" @click="checkInputs" style="width: 30%">OK</button>
+					<p v-if="showInputError" class="alert mt-3 alert-danger">Please enter a whole number between {{minBlockInput}} to {{maxBlockInput}} for number of blocks and {{minBlockInput}} to {{maxTrialInput}} for number of trials.</p>
+					<div class="form-action col-6 offset-sm-9 offset-4 mt-3">
+						<button 
+							class="btn btn-outline-success btn-lg"
+							@click="checkInputs"
+						>OK</button>
+					</div>
 				</form>
 			</div>
 			<div v-else class="row">
@@ -72,7 +81,7 @@
 						<button v-if="showStart" id="startButton" type="button" class="btn btn-outline-success" @click="start">Tap here to begin</button>
 						<div v-if="!showStart">
 							<div v-if="!isAuto">
-								<button type="button" class="btn btn-outline-dark mr-3" @click="reset" v-if="isFinished">Reset</button>
+								<button type="button" class="btn btn-outline-dark mr-3" @click="reset" v-if="isFinished">Tap here to reset</button>
 								<button type="button" class="btn btn-outline-success mr-3" @click="drawBlock" v-if="!isFinished">Tap here for Player {{player}} to draw a block at random</button>
 							</div>
 							<div v-if="isAuto">
@@ -111,9 +120,6 @@ import {
 export default {
 	data: function() {
 		return {
-			//flag used for reset button
-			isDisabled: true,
-
 			//player turn
 			player: 'A',
 			turn: 0,
@@ -130,8 +136,8 @@ export default {
 			width: 0,
 
 			//input obtained from user
-			numRedBlocks: 0,
-			numBlueBlocks: 0,
+			numRedBlocks: 1,
+			numBlueBlocks: 1,
 
 			minBlockInput: 1,
 			maxBlockInput: 100,
@@ -326,6 +332,10 @@ export default {
 </script>
 
 <style scoped>
+	.app--enter-number {
+		max-width: 700px;
+		margin: 0 auto;
+	}
 	.drawText{
 		line-height: 40px
 	}

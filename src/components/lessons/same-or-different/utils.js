@@ -139,11 +139,32 @@ export const drawNextBlock = (canvas, vueObjPtr) => {
 	var colour = "#F5F85B";
 	var b = vueObjPtr.blocks[randNum];
 
-	//draw the tile along with its border
+	//remove the tile along with its border from the canvas
 	const context = canvas.getContext("2d");
 	drawBlock(colour, context, b.xPos, b.yPos, vueObjPtr.width, vueObjPtr.width);
 
 	//remove the block from the blocks array into taken array
 	vueObjPtr.takenBlocks.push(b);
 	vueObjPtr.blocks.splice(randNum,1);
+}
+
+//This function takes the two next blocks from the bag randomly without deleting them from the original array
+export const drawNextTwoBlocks = (vueObjPtr) => {
+	if (vueObjPtr.blocks.length <= 0){
+		return null;
+	}
+	//get the random index to take from the set of blocks
+	var randNum = getRandomNumber(0, vueObjPtr.blocks.length);
+
+	//create another random index to take, which is not the same as previous
+	var randNum2 = getRandomNumber(0, vueObjPtr.blocks.length);
+	while (randNum == randNum2)
+		randNum2 = getRandomNumber(0, vueObjPtr.blocks.length);
+
+	//put the blocks into taken array
+	vueObjPtr.takenBlocks.push(vueObjPtr.blocks[randNum]);
+	vueObjPtr.takenBlocks.push(vueObjPtr.blocks[randNum2]);
+
+	//update the turn
+	vueObjPtr.turn += 2;
 }
