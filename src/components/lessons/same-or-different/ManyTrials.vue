@@ -220,6 +220,10 @@ export default {
 			this.numSame = 0;
 
 			this.showPause = false;
+
+			this.blocks.splice(0, this.blocks.length);
+			const canvas = document.querySelector('#app-canvas');
+			drawNextCanvas(canvas, this);
 		},
 		//function used to run the auto mode
 		autoMode(){
@@ -255,7 +259,7 @@ export default {
 
 		//This function resets the plant to a new value and removes all the tiles from the canvas. 
 		start(){
-			if (this.numTotal == 0){
+			if (this.blocks.length == 0){
 				const canvas = document.querySelector('#app-canvas');
 				drawNextCanvas(canvas, this);
 			}
