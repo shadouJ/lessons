@@ -241,6 +241,16 @@ const NumberCharts = resolve => {
     resolve(require("./components/lessons/number-charts/App.vue"));
   });
 };
+const RectangleFraction = resolve => {
+  require.ensure("./components/lessons/rectangle-fraction/App.vue", () => {
+    resolve(require("./components/lessons/rectangle-fraction/App.vue"));
+  });
+};
+const GameShow = resolve => {
+  require.ensure("./components/lessons/game-show/App.vue", () => {
+    resolve(require("./components/lessons/game-show/App.vue"));
+  });
+};
 
 Vue.use(VueRouter);
 
@@ -329,6 +339,8 @@ const routes = [
   },
   { path: "/ballon", component: Ballon, name: "2 Litre Ballon" },
   { path: "/number-charts", component: NumberCharts, name: "Number charts" },
+  { path: "/rectangle-fraction", component: RectangleFraction, name: "Rectangle Fraction" },
+  { path: "/game-show", component: GameShow, name: "Game Show" },
 ];
 
 const router = new VueRouter({
