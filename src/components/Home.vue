@@ -52,6 +52,8 @@ export default {
         { name: "Dice Differences", link: "/dice-differences" },
         { name: "2 Litre Balloon", link: "/ballon" },
         {name: "Number charts", link: "/number-charts" },
+        { name: "Rectangle Fraction", link: "/rectangle-fraction" },
+        { name: "Game Show", link: "/game-show" },
       ]
     };
   },
