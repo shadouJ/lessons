@@ -18,6 +18,12 @@ import Home from "./components/Home.vue";
 // import ChancesWithCrosses from "./components/lessons/chances-with-crosses/App.vue"
 // import FaysNines from "./components/lessons/fays-nines/App.vue"
 
+const Radioactivity = resolve => {
+  require.ensure("./components/lessons/radioactivity/App.vue", () => {
+    resolve(require("./components/lessons/radioactivity/App.vue"));
+  });
+};
+
 const GardenBeds = resolve => {
   require.ensure("./components/lessons/garden-beds/App.vue", () => {
     resolve(require("./components/lessons/garden-beds/App.vue"));
@@ -235,6 +241,7 @@ Vue.use(VueRouter);
 
 const routes = [
   { path: "/", component: Home, name: "home" },
+  { path: "/radioactivity", component: Radioactivity, name: "Radioactivity" },
   { path: "/garden-beds", component: GardenBeds, name: "Garden Beds" },
   {
     path: "/trigonometry",
