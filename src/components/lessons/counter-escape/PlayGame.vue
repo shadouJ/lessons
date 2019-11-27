@@ -153,13 +153,13 @@ export default {
 		},
 		timerInterval() {
 			if(this.numberOfGames <= 100) {
-				return 300
+				return 50
 			} else if(this.numberOfGames <= 1000) {
-				return 100
+				return 10
 			} else if(this.numberOfGames <= 5000) {
-				return 80
+				return 5
 			} else {
-				return 50;
+				return 1;
 			}
 		}
 	},

@@ -115,13 +115,13 @@ export default {
   computed: {
     timerInterval() {
       if (this.trialNumber <= 100) {
-        return 300;
-      } else if (this.trialNumber <= 1000) {
-        return 100;
-      } else if (this.trialNumber <= 5000) {
-        return 80;
-      } else {
         return 50;
+      } else if (this.trialNumber <= 1000) {
+        return 10;
+      } else if (this.trialNumber <= 5000) {
+        return 5;
+      } else {
+        return 1;
       }
     },
     soFar() {

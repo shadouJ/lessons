@@ -203,13 +203,13 @@ export default {
 		},
 		unit() {
 			if(this.trialNumber<=100) {
-				return 15;
-			} else if(this.trialNumber <=1000) {
 				return 10;
+			} else if(this.trialNumber <=1000) {
+				return 5;
 			} else if(this.trialNumber <=5000) {
-				return 3;
-			} else if(this.trialNumber <=10000) {
 				return 1;
+			} else if(this.trialNumber <=10000) {
+				return 0.5;
 			} else if(this.trialNumber <=50000) {
 				return 0.4;
 			} else {

@@ -94,13 +94,13 @@ export default {
 		timerInterval() {
 			let { trialNumber } = this.gameSetting;
 			if(trialNumber <= 100) {
-				return 150
-			} else if(trialNumber <= 1000) {
 				return 50
+			} else if(trialNumber <= 1000) {
+				return 10
 			} else if(trialNumber <= 5000) {
-				return 30
+				return 5
 			} else {
-				return 10;
+				return 1;
 			}
 		}, 
 		heightUnit() {

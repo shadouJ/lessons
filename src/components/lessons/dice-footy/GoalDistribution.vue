@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import EnterTrialsNumber from './EnterTrialsNumber.vue';
+import EnterTrialsNumber from '../../common/EnterTrialsNumber.vue';
 import GoalDistributionApp from './GoalDistributionApp.vue';
 export default {
 	components: {

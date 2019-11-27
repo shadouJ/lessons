@@ -128,7 +128,7 @@ export default {
 			} else if(this.trialNumber <=5000) {
 				return 5;
 			} else if(this.trialNumber <=10000) {
-				return 2;
+				return 1;
 			} else if(this.trialNumber <=50000) {
 				return 0.6;
 			} else {
