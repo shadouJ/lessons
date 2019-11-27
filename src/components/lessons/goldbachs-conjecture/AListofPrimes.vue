@@ -1,6 +1,6 @@
 <template>
     <div class="container mt-3 mb-5">
-        <h3 class="text-center text-success mb-4">Enter your number</h3>
+        <h3 class="text-center text-success mb-4">Display a list of primes</h3>
 
         <div style="display: flex; flex-direction: row">
             <div>
