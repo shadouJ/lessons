@@ -94,7 +94,7 @@ export const drawGraph = (canvas, vueObjPtr) => {
 
 	//draw x axis
 	context.moveTo(vueObjPtr.startXOffset-20,axisArea);
-	context.lineTo(canvas.width-vueObjPtr.startXOffset , axisArea);
+	context.lineTo(canvas.width-vueObjPtr.startXOffset+width , axisArea);
 	context.stroke();
 
 	//draw the initial atoms
@@ -171,7 +171,7 @@ export const generateRandomValues = (canvasAtoms, canvasGraph, vueObjPtr) => {
 			clearInterval(vueObjPtr.graphIntervalId);
 			vueObjPtr.disableButton = false;
 		}
-	}, 20);
+	}, vueObjPtr.graphDelay);
 }
 
 //this function shuffles the input array of atoms
@@ -221,9 +221,9 @@ export const decayedAtoms = (canvasAtoms, canvasGraph, vueObjPtr, highlight) => 
 	//this means stage 2
 	if (highlight){
 		var decayed = [];
-		for (var j=0; j<atoms.length; j++){
-			if(atoms[j].randNum === vueObjPtr.diceRoll){
-				decayed.push(atoms[j]);
+		for (var k=0; k<atoms.length; k++){
+			if(atoms[k].randNum === vueObjPtr.diceRoll){
+				decayed.push(atoms[k]);
 			}
 		}
 		vueObjPtr.numDecayed = decayed.length;
@@ -250,7 +250,7 @@ export const decayedAtoms = (canvasAtoms, canvasGraph, vueObjPtr, highlight) => 
 					//Clear the interval addition timer.
 					clearInterval(vueObjPtr.graphIntervalId);
 				}
-			}, 20);
+			}, vueObjPtr.graphDelay);
 		}
 		else {
 			vueObjPtr.disableButton = false;

@@ -9,16 +9,25 @@
 				<canvas id="app-canvas-graph"></canvas>
 			</div>
 			<div class="row p-3 m-auto">
-				<div class="col-2"></div>
-				<div class="col-3 app--action">
+				<div class="col-sm-2"></div>
+				<div class="col-sm-3 app--action">
 					<p class="alert alert-danger" v-if="stage==3">There are {{numDecayed}} {{diceRollText}}</p>
 					<p class="alert alert-danger" v-else>There are {{atomLeft}} atoms</p>
 				</div>
-				<div class="col-3 app--action">
+				<div class="col-sm-3 app--action">
 					<button v-if="showStart" id="startButton" type="button" class="btn btn-outline-success" @click="start">Tap here to start</button>
 					<div v-if="!showStart">
-						<button type="button" class="btn btn-outline-dark" @click="reset" v-if="isFinished">Tap here to reset</button>
-						<button type="button" class="btn btn-outline-success" @click="nextStage" v-else :disabled="disableButton">Tap here to throw dice</button>
+						<div v-if="!isFinished">
+							<div v-if="isAuto">
+								<button type="button" class="btn btn-outline-success mr-3" @click="showPause=!showPause" v-if="showPause">Tap here to pause</button>
+								<button type="button" class="btn btn-outline-success mr-3" @click="showPause=!showPause" v-if="!showPause">Tap here to resume</button>
+							</div>
+							<div v-else>
+								<button type="button" class="btn btn-outline-success" @click="nextStage" :disabled="disableButton" v-if="stage==1">Tap here to throw dice</button>
+								<button type="button" class="btn btn-outline-success" @click="nextStage" :disabled="disableButton" v-else>Tap here to continue</button>
+							</div>
+						</div>
+						<div v-else><button type="button" class="btn btn-outline-dark" @click="reset" v-if="isFinished">Tap here to reset</button></div>
 					</div>
 					<div class="form-check form-check-inline">
 						<input type="radio" class="form-check-input" id="demo" name="demoOption" value= "demo" v-model="mode">
@@ -27,7 +36,7 @@
 						<label class="form-check-label" for="auto">Auto</label>
 					</div>
 				</div>
-				<div class="app--demo-auto-option col-2 app--action">
+				<div class="app--demo-auto-option col-sm-2 app--action" v-if="stage==2 || stage==3">
 					<app-dice :number="diceRoll" ></app-dice>
 				</div>
 				<div class="col-2"></div>
@@ -74,10 +83,15 @@ export default {
 
 			//this variable is used for for auto or demo mode
 			mode: 'demo',
+
+			//used for auto mode buttons
+			showPause: false,
 			//this id is used to kill the timer interval
 			intervalId: 0,
+			timeDelay: 100,
+			//used for the graph drawing
 			graphIntervalId: 0,
-			timeDelay: 100
+			graphDelay: 10
 		}
 	},
 	computed: {
@@ -119,28 +133,43 @@ export default {
 	},
 	watch: {
 		isAuto: function(){
-			if (!this.showStart){
-				if (this.isAuto){
-					//timer to delay the addition of next tile, using intervals of timeDelay
-					this.intervalId = setInterval(() => {
-						this.addTile();
-
-						//continue adding tiles until all tiles added
-						if (this.isFinished) {
-							//Clear the interval addition timer.
-							clearInterval(this.intervalId);
-						}
-					}, this.timeDelay);
-				}
-				//else demo mode, adds tiles using addTile button
-				else {
-					clearInterval(this.intervalId);
-				}
+			if (this.isAuto)
+				this.showPause = false;
+			else{
+				this.showPause = false;
+				clearInterval(this.intervalId);
 			}
+		},
+		showPause: function(){
+			if (!this.showPause)
+				clearInterval(this.intervalId);
+			else
+				this.autoMode();
 		}
 	},
 	methods: {
-		//this method 
+		//function used to run the auto mode
+		autoMode(){
+			if (this.isAuto && !this.showStart){
+				//check if running and show Pause button is true
+				if (this.showPause == true){
+					//timer to delay the execution of next stage
+					this.intervalId = setInterval(() => {
+						//continue until 2 blocks taken
+						if (this.isFinished){
+							//Clear the interval addition timer.
+							clearInterval(this.intervalId);
+						}
+						else{
+							if (!this.disableButton)
+								this.nextStage();
+						}
+					}, this.timeDelay);
+				}
+			}
+		},
+
+		//this method runs the function based on current stage of the decay process
 		nextStage(){
 			const canvasAtoms = document.querySelector('#app-canvas-atoms');
 			const canvasGraph = document.querySelector('#app-canvas-graph');
@@ -184,44 +213,35 @@ export default {
 
 			this.stage += 1;
 
-			if (this.isAuto){
-				//timer to delay the addition of next tile, using intervals of timeDelay
-				this.intervalId = setInterval(() => {
-					this.addTile();
-
-					//continue adding tiles until all tiles added
-					if (this.isFinished) {
-						//Clear the interval addition timer.
-						clearInterval(this.intervalId);
-					}
-				}, this.timeDelay);
-			}
-			//else demo mode, adds tiles using addTile button
+			if (this.isAuto)
+				this.autoMode();
+			//else demo mode
 		},
 		reset(){
 			this.showStart = true;
+			this.currentYear = 0;
 			
 			//reset the variables
 			this.atoms.splice(0,this.atoms.length);
 
 			//reset the canvas
+			this.initialiseCanvases();
+		},
+		initialiseCanvases(){
+			//reset the canvas
 			const canvas1 = document.querySelector('#app-canvas-atoms');
-			canvas1.width = canvas.width;
+			canvas1.width = canvas1.width;
+			drawGrid(canvas1, this);
+
 			const canvas2 = document.querySelector('#app-canvas-graph');
 			canvas2.width = canvas2.width;
+			drawGraph(canvas2, this);
 		}
 	},
 	created() {
 	},
 	mounted() {
-		//reset the canvas
-		const canvas1 = document.querySelector('#app-canvas-atoms');
-		canvas1.width = canvas1.width;
-		drawGrid(canvas1, this);
-
-		const canvas2 = document.querySelector('#app-canvas-graph');
-		canvas2.width = canvas2.width;
-		drawGraph(canvas2, this);
+		this.initialiseCanvases();
 	},
 	beforeDestroy(){
 		//Clear the interval addition timer.
