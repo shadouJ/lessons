@@ -63,7 +63,7 @@
       </div>
 <!--      <div style="width: 10%"></div>-->
       <div class="col-md-6">
-        <div class="table-wrapper-scroll-y" v-if="isSet" id="tableDiv">
+        <div class="table-wrapper-scroll-y" v-if="isSet" id="scroller">
           <table id="mainTable" v-if="isSet" class="table table-bordered table-striped" style="text-align: center">
             <thead>
               <tr>
@@ -102,6 +102,12 @@ export default {
     };
   },
   mounted: function() {},
+  updated: function() {
+    this.$nextTick(function() {
+      var div = document.getElementById('scroller');
+      div.scrollTop = div.scrollHeight;
+    })
+  },
   methods: {
     okClicked() {
       this.index = [];
@@ -110,7 +116,7 @@ export default {
       }
       if (
         this.enterNum === "" ||
-        parseInt(this.enterNum) % 2 != 0 ||
+        parseInt(this.enterNum) % 2 !== 0 ||
         parseInt(this.enterNum) <= 2
       ) {
         document.getElementById("error").innerHTML =
@@ -132,12 +138,9 @@ export default {
         this.index[this.display[i]] = [true, this.displayNum[i]];
       }
       this.isSet = true;
-      if (this.pairs.length >= 15) {
-        var objDiv = document.getElementById("tableDiv");
-        objDiv.scrollTop = objDiv.scrollHeight;
-      }
       document.getElementById("error").innerHTML =
               "Please enter a number to begin";
+      this.enterNum= "";
     },
       reset(){
           this.enterNum= "";

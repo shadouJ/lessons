@@ -1,7 +1,7 @@
 
 export const getPrimes = (n) => {
 	var sieve = [],
-		i, j, primes = [];
+		primes = [];
 	for (let i = 2; i <= n; ++i) {
 		if (!sieve[i]) {
 			primes.push(i);
