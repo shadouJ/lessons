@@ -252,11 +252,21 @@ const GameShow = resolve => {
   });
 };
 
+const Addo = resolve => {
+  require.ensure("./components/lessons/addo/App.vue", () => {
+    resolve(require("./components/lessons/addo/App.vue"));
+  });
+};
+
 Vue.use(VueRouter);
 
 const routes = [
   { path: "/", component: Home, name: "home" },
-  { path: "/same-or-different", component: SameOrDifferent, name: "Same or Different" },
+  {
+    path: "/same-or-different",
+    component: SameOrDifferent,
+    name: "Same or Different"
+  },
   { path: "/garden-beds", component: GardenBeds, name: "Garden Beds" },
 
   {
@@ -339,8 +349,13 @@ const routes = [
   },
   { path: "/ballon", component: Ballon, name: "2 Litre Ballon" },
   { path: "/number-charts", component: NumberCharts, name: "Number charts" },
-  { path: "/rectangle-fraction", component: RectangleFraction, name: "Rectangle Fraction" },
+  {
+    path: "/rectangle-fraction",
+    component: RectangleFraction,
+    name: "Rectangle Fraction"
+  },
   { path: "/game-show", component: GameShow, name: "Game Show" },
+  { path: "/addo", component: Addo, name: "Addo" }
 ];
 
 const router = new VueRouter({
