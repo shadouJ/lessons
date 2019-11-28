@@ -4,7 +4,6 @@ export const getRandomNumber = (min, max) => {
 }
 
 //Function is used to remove the blur and make the rectangles crisp. Since using CSS width=100%, need to readjust the canvas height and width correspondingly
-
 const removeBlur = (canvas) => {
 	//create a style object that returns width and height of th canvas
 	let style = {
@@ -271,4 +270,39 @@ export const decayedAtoms = (canvasAtoms, canvasGraph, vueObjPtr, highlight) => 
 		}
 		vueObjPtr.disableButton = false;
 	}
+}
+
+//the following methods are used for the Many Trials module
+export const drawInitialGraph = (canvas, vueObjPtr) => {
+	//check if canvas exists
+	if (!canvas || !canvas.getContext){
+		return null;
+	}
+	//remove blur by adjusting the canvas size
+	removeBlur(canvas);
+
+	const context = canvas.getContext("2d");
+	const width = vueObjPtr.width;
+	const axisArea = canvas.height-50;
+
+	//draw the y axis
+	context.strokeStyle = 'blue';
+	context.moveTo(vueObjPtr.startXOffset-20,1);
+	context.lineTo(vueObjPtr.startXOffset-20,axisArea);
+	context.stroke();
+
+	//draw x axis
+	context.moveTo(vueObjPtr.startXOffset-20,axisArea);
+	context.lineTo(canvas.width-vueObjPtr.startXOffset+width , axisArea);
+	context.stroke();
+
+	//draw the initial atoms
+	const xPos = vueObjPtr.startXOffset;
+	const yPos = axisArea - vueObjPtr.atomLeft*2;
+	drawRect('cyan', context, xPos, yPos, width, vueObjPtr.atomLeft*2);
+
+	//draw the initial x axis labels
+	xLabel(canvas, vueObjPtr, vueObjPtr.atomLeft);
+	vueObjPtr.currentYear += 1;
+	xLabel(canvas, vueObjPtr, "0");
 }
