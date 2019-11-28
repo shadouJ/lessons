@@ -96,6 +96,7 @@ import DemoAutoOption from "../../common/DemoAutoOption.vue";
 import Gameboard from "./Gameboard.vue";
 import mouse from "@/assets/cat-and-mouse/mouse.jpg";
 import Game from "./game/Game";
+import { calculateTimerInterval } from "../../common/utils";
 
 export default {
   components: {
@@ -133,16 +134,7 @@ export default {
       return Number(((this.catWins / this.total) * 100).toFixed(2));
     },
     timerInterval() {
-      if (!this.trialNumber) return 600;
-      if (this.trialNumber <= 100) {
-        return 50;
-      } else if (this.trialNumber <= 1000) {
-        return 10;
-      } else if (this.trialNumber <= 5000) {
-        return 5;
-      } else {
-        return 1;
-      }
+      return calculateTimerInterval(this.trialNumber);
     }
   },
   watch: {

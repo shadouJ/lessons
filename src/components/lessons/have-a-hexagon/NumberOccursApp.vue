@@ -53,6 +53,8 @@
 <script>
 import DemoAutoOption from "../../common/DemoAutoOption";
 import { throwDiceOnce } from "./utils";
+import { calculateTimerInterval } from "../../common/utils";
+
 export default {
   components: {
     appDemoAutoOption: DemoAutoOption
@@ -70,15 +72,7 @@ export default {
   },
   computed: {
     timerInterval() {
-      if (this.trialNumber <= 100) {
-        return 50;
-      } else if (this.trialNumber <= 1000) {
-        return 10;
-      } else if (this.trialNumber <= 5000) {
-        return 5;
-      } else {
-        return 1;
-      }
+      return calculateTimerInterval(this.trialNumber);
     },
     widthUnit() {
       if (this.trialNumber <= 100) {

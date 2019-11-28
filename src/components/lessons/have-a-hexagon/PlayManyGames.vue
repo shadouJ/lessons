@@ -145,6 +145,7 @@
 import Hexagon from "./Hexagon.vue";
 import DemoAutoOption from "../../common/DemoAutoOption.vue";
 import { throwDiceOnce } from "./utils";
+import { calculateTimerInterval } from "../../common/utils";
 
 export default {
   components: {
@@ -263,15 +264,7 @@ export default {
   },
   computed: {
     timerInterval() {
-      if (this.trialNumber <= 100) {
-        return 50;
-      } else if (this.trialNumber <= 1000) {
-        return 10;
-      } else if (this.trialNumber <= 5000) {
-        return 5;
-      } else {
-        return 1;
-      }
+      return calculateTimerInterval(this.trialNumber);
     },
     isValidTrialNumber() {
       if (

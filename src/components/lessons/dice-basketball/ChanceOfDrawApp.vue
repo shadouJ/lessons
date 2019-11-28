@@ -128,6 +128,7 @@
 import ChangeRule from './ChangeRule.vue';
 import DemoAutoOption from './DemoAutoOption.vue';
 import { throwDiceOnce, throwDiceThree } from './utils';
+import { calculateTimerInterval } from '../../common/utils';
 export default {
 	props: ['trialNumber'],
 	components: {
@@ -191,15 +192,7 @@ export default {
 			return maxDiff;
 		},
 		timerInterval() {
-			if(this.trialNumber <= 1000) {
-				return 50;
-			} else if(this.trialNumber <= 5000) {
-				return 10;
-			} else if(this.trialNumber <= 10000){
-				return 0.5;
-			} else {
-				return 0.1;
-			}
+			return calculateTimerInterval(this.trialNumber);
 		},
 		unit() {
 			if(this.trialNumber<=100) {
