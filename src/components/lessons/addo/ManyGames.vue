@@ -1,18 +1,19 @@
 <template>
-  <div class="container">
-    <app-play-game v-if="trialNumber" :numberOfGames="trialNumber" :gameRule="gameRule"></app-play-game>
+  <div class="container mt-3 mb-5">
+    <h3 class="text-center text-success mb-4">Comparing grids: many games</h3>
+    <app-many-games-app v-if="trialNumber" :strategies="strategies" :trialNumber="trialNumber"></app-many-games-app>
     <app-enter-trials-number v-else @acceptTrialNumber="trialNumber=$event"></app-enter-trials-number>
   </div>
 </template>
 
 <script>
 import EnterTrialsNumber from "../../common/EnterTrialsNumber.vue";
-import PlayGame from "./PlayGame.vue";
+import ManyGamesApp from "./ManyGamesApp.vue";
 export default {
-  props: ["gameRule"],
+  props: ["strategies"],
   components: {
     appEnterTrialsNumber: EnterTrialsNumber,
-    appPlayGame: PlayGame
+    appManyGamesApp: ManyGamesApp
   },
   data: function() {
     return {

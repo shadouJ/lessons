@@ -108,6 +108,8 @@ import RuleBox from './RuleBox.vue';
 import DemoAutoOption from './DemoAutoOption.vue';
 import Dice from './Dice.vue';
 import { sortArray, throwDice } from './utils';
+import { calculateTimerInterval } from "../../common/utils";
+
 export default {
 	components: {
 		appCounter: Counter,
@@ -152,15 +154,7 @@ export default {
 			return sortArray(this.arrangement);
 		},
 		timerInterval() {
-			if(this.numberOfGames <= 100) {
-				return 300
-			} else if(this.numberOfGames <= 1000) {
-				return 100
-			} else if(this.numberOfGames <= 5000) {
-				return 80
-			} else {
-				return 50;
-			}
+			return calculateTimerInterval(this.numberOfGames);
 		}
 	},
 	watch: {

@@ -80,6 +80,7 @@ import {
   getAnimalsPart,
   throwDiceOnce
 } from "./utils";
+import { calculateTimerInterval } from "../../common/utils";
 
 import duckBody from "@/assets/duck-body.jpg";
 import duckHead from "@/assets/duck-head.jpg";
@@ -114,15 +115,7 @@ export default {
   },
   computed: {
     timerInterval() {
-      if (this.trialNumber <= 100) {
-        return 300;
-      } else if (this.trialNumber <= 1000) {
-        return 100;
-      } else if (this.trialNumber <= 5000) {
-        return 80;
-      } else {
-        return 50;
-      }
+      return calculateTimerInterval(this.trialNumber);
     },
     soFar() {
       if (this.matched > 0) {
