@@ -54,6 +54,7 @@ export default {
         { name: "Number charts", link: "/number-charts" },
         { name: "Rectangle Fraction", link: "/rectangle-fraction" },
         { name: "Game Show", link: "/game-show" },
+        { name: "Goldbach's Conjecture", link: "/goldbachs-conjecture" },
         { name: "Addo", link: "/addo" }
       ]
     };
