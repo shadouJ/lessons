@@ -43,7 +43,7 @@
 <script>
 import _ from "lodash";
 import { BLANK_STRATEGY } from "./utils/settings";
-import { checkDuplicateStrategy } from "../../../../../lessons/src/components/lessons/addo/utils/utils";
+import { checkDuplicateStrategy } from "./utils/utils";
 export default {
   props: ["strategies", "newStrategy", "duplicateNumber"],
   data: function() {
