@@ -55,7 +55,8 @@ export default {
         { name: "Rectangle Fraction", link: "/rectangle-fraction" },
         { name: "Game Show", link: "/game-show" },
         { name: "Goldbach's Conjecture", link: "/goldbachs-conjecture" },
-        { name: "Addo", link: "/addo" }
+        { name: "Addo", link: "/addo" },
+        { name: "Multo", link: "/multo" }
       ]
     };
   },
