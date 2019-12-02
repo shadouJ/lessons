@@ -51,11 +51,12 @@ export default {
         { name: "Doctor Dart", link: "/doctor-dart" },
         { name: "Dice Differences", link: "/dice-differences" },
         { name: "2 Litre Balloon", link: "/ballon" },
-        { name: "Number charts", link: "/number-charts" },
+        { name: "Number Charts", link: "/number-charts" },
         { name: "Rectangle Fraction", link: "/rectangle-fraction" },
         { name: "Game Show", link: "/game-show" },
         { name: "Goldbach's Conjecture", link: "/goldbachs-conjecture" },
-        { name: "Addo", link: "/addo" }
+        { name: "Addo", link: "/addo" },
+        { name: "Algebra Charts", link: "/algebra-charts" },
       ]
     };
   },

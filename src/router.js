@@ -256,10 +256,14 @@ const GoldbachsConjecture = resolve => {
     resolve(require("./components/lessons/goldbachs-conjecture/App.vue"));
   });
 };
-
 const Addo = resolve => {
   require.ensure("./components/lessons/addo/App.vue", () => {
     resolve(require("./components/lessons/addo/App.vue"));
+  });
+};
+const AlgebraCharts = resolve => {
+  require.ensure("./components/lessons/algebra-charts/App.vue", () => {
+    resolve(require("./components/lessons/algebra-charts/App.vue"));
   });
 };
 
@@ -353,7 +357,7 @@ const routes = [
     name: "Dice Differences"
   },
   { path: "/ballon", component: Ballon, name: "2 Litre Ballon" },
-  { path: "/number-charts", component: NumberCharts, name: "Number charts" },
+  { path: "/number-charts", component: NumberCharts, name: "Number Charts" },
   {
     path: "/rectangle-fraction",
     component: RectangleFraction,
@@ -361,7 +365,8 @@ const routes = [
   },
   { path: "/game-show", component: GameShow, name: "Game Show" },
   { path: "/goldbachs-conjecture", component: GoldbachsConjecture, name: "Goldbach's Conjecture" },
-  { path: "/addo", component: Addo, name: "Addo" }
+  { path: "/addo", component: Addo, name: "Addo" },
+  { path: "/algebra-charts", component: AlgebraCharts, name: "Algebra Charts" },
 ];
 
 const router = new VueRouter({
