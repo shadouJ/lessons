@@ -67,9 +67,8 @@
 /* eslint-disable */
 import Dice from './Dice.vue';
 import { 
-	drawGrid,
-	drawGraph,
-	generateRandomValues,
+	drawInitialGraph,
+	rerollAtoms,
 	getRandomNumber,
 	decayedAtoms
 } from './utils';
@@ -87,8 +86,8 @@ export default {
 			disableButton: false,
 
 			//variable used by the canvas
-			width: 0,
-			startXOffset: 0,
+			width: 20,
+			startXOffset: 100,
 
 			//array used for storing all the atoms
 			atoms: [],
@@ -132,22 +131,6 @@ export default {
 		},
 		atomLeft: function(){
 			return this.atoms.length;
-		},
-		diceRollText: function(){
-			if (this.diceRoll === 1)
-				return 'ones';
-			else if (this.diceRoll === 2)
-				return 'twos';
-			else if (this.diceRoll === 3)
-				return 'threes';
-			else if (this.diceRoll === 4)
-				return 'fours';
-			else if (this.diceRoll === 5)
-				return 'fives';
-			else if (this.diceRoll === 6)
-				return 'sixes';
-			else
-				return 'N/A';
 		},
 		percentLeft: function(){
 			if (this.trialInputs.numAtoms == 0)
@@ -208,7 +191,7 @@ export default {
 			//stage 0 for generating rand number for atoms
 			if (this.stage == 0){
 				//generate the random values for the atoms
-				generateRandomValues(canvasAtoms, canvasGraph, this);
+				rerollAtoms(canvasGraph, this);
 			}
 			//stage 1 for generating the dice roll
 			else if (this.stage == 1){
@@ -236,11 +219,6 @@ export default {
 		start(){
 			//remove the Start button
 			this.showStart = false;
-			
-			//generate the random values for the atoms
-			const canvasAtoms = null;
-			const canvasGraph = document.querySelector('#app-canvas-graph');
-			generateRandomValues(canvasAtoms, canvasGraph, this);
 
 			this.stage += 1;
 
@@ -259,6 +237,7 @@ export default {
 			this.initialiseCanvases();
 		},
 		initialiseCanvases(){
+
 			//reset the canvas
 			const canvas = document.querySelector('#app-canvas-graph');
 			canvas.width = canvas.width;
@@ -268,7 +247,7 @@ export default {
 	created() {
 	},
 	mounted() {
-		// this.initialiseCanvases();
+		this.initialiseCanvases();
 		console.log(this.trialInputs);
 	},
 	beforeDestroy(){

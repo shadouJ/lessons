@@ -273,7 +273,6 @@ export const decayedAtoms = (canvasAtoms, canvasGraph, vueObjPtr, highlight) => 
 }
 
 //the following methods are used for the Many Trials module
-//Work on NEXT HERE!
 export const drawInitialGraph = (canvas, vueObjPtr) => {
 	//check if canvas exists
 	if (!canvas || !canvas.getContext){
@@ -282,28 +281,76 @@ export const drawInitialGraph = (canvas, vueObjPtr) => {
 	//remove blur by adjusting the canvas size
 	removeBlur(canvas);
 
-	const context = canvas.getContext("2d");
-	const width = vueObjPtr.width;
-	const axisArea = canvas.height-50;
-
-	//draw the y axis
-	context.strokeStyle = 'blue';
-	context.moveTo(vueObjPtr.startXOffset-20,1);
-	context.lineTo(vueObjPtr.startXOffset-20,axisArea);
-	context.stroke();
-
-	//draw x axis
-	context.moveTo(vueObjPtr.startXOffset-20,axisArea);
-	context.lineTo(canvas.width-vueObjPtr.startXOffset+width , axisArea);
-	context.stroke();
+	initialiseAtoms(vueObjPtr);
 
 	//draw the initial atoms
-	const xPos = vueObjPtr.startXOffset;
-	const yPos = axisArea - vueObjPtr.atomLeft*2;
-	drawRect('cyan', context, xPos, yPos, width, vueObjPtr.atomLeft*2);
+	drawAtomLeft(canvas, vueObjPtr);
 
-	//draw the initial x axis labels
-	xLabel(canvas, vueObjPtr, vueObjPtr.atomLeft);
-	vueObjPtr.currentYear += 1;
-	xLabel(canvas, vueObjPtr, "0");
+	//draw the 4 y-axis labels
+	drawYLabels(canvas, vueObjPtr);
+}
+
+//this function draws the input number of atoms scaled to the cavas heigh (i.e. percentage of the canvas height is the percentage of atom left undecayed)
+const drawAtomLeft = (canvas, vueObjPtr) => {
+	const context = canvas.getContext("2d");
+	const width = vueObjPtr.width;
+
+	//determine x and y coordinates to start the rectangle
+	const xPos = vueObjPtr.startXOffset + vueObjPtr.currentYear*width;
+
+	//determine the percentage of atoms left
+	console.log(vueObjPtr.atomLeft);
+	var percentAtomLeft = vueObjPtr.atomLeft/(vueObjPtr.trialInputs.numAtoms);
+	console.log("%AtomLeft = " + percentAtomLeft);
+	const yPos = canvas.height - canvas.height*percentAtomLeft;
+	const height = canvas.height*percentAtomLeft;
+
+	drawRect('red', context, xPos, yPos, width, height);
+}
+
+//this helper function draws the y axis labels
+const drawYLabels = (canvas, vueObjPtr) => {
+	const context = canvas.getContext("2d");
+	//initialise the writing variables
+	const fontSize = 25;
+	context.font = fontSize + "px arial";
+	context.fillStyle = "darkred";
+	context.textAlign = "center";
+
+	//get the width and y increment values based on the canvas height.
+	const width = vueObjPtr.startXOffset;
+	const ySpacer = canvas.height/4;
+	const yIncrements = vueObjPtr.trialInputs.numAtoms/4;
+
+	//draw the text for 5 different levels/numbers of atoms
+	const xPosText = width/2;
+	var yPosText = fontSize;
+	context.fillText(vueObjPtr.trialInputs.numAtoms, xPosText, yPosText, width);
+
+	yPosText = ySpacer;
+	context.fillText(vueObjPtr.trialInputs.numAtoms - yIncrements, xPosText, yPosText, width);
+
+	yPosText = 2*ySpacer;
+	context.fillText(vueObjPtr.trialInputs.numAtoms - 2*yIncrements, xPosText, yPosText, width);
+
+	yPosText = 3*ySpacer;
+	context.fillText(vueObjPtr.trialInputs.numAtoms - 3*yIncrements, xPosText, yPosText, width);
+
+	yPosText = canvas.height - fontSize;
+	context.fillText(0, xPosText, yPosText, width);
+}
+
+//this function initialise random values for each of the atoms
+const initialiseAtoms = (vueObjPtr) => {
+	for (var i=0; i<vueObjPtr.trialInputs.numAtoms; i++){
+		var randNum = getRandomNumber(0,vueObjPtr.trialInputs.probDecay);
+		vueObjPtr.atoms.push(randNum);
+	}
+}
+
+export const rerollAtoms = (vueObjPtr) => {
+	for (var i=0; i<vueObjPtr.atomLeft; i++){
+		var randNum = getRandomNumber(0,vueObjPtr.trialInputs.probDecay);
+		vueObjPtr.atoms[i] = randNum;
+	}
 }
