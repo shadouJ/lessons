@@ -82,7 +82,8 @@ export default {
       foundCellNumbers: 0,
       addition1: null,
       addition2: null,
-      displayArray: []
+      displayArray: [],
+      foundCombinations: []
     };
   },
   watch: {
@@ -136,7 +137,16 @@ export default {
       }
     },
 
-    handleBegin() {
+    /** Check if the cell clicked is clicked before */
+    checkCombinationFound(number1, number2) {
+      return this.foundCombinations.find(combination => {
+        return (
+          combination.addition1 === number1 && combination.addition2 === number2
+        );
+      });
+    },
+
+    newQuestion() {
       this.testAddition = this.generateAddition();
       if (this.testAddition === null) {
         this.gameStatus = 3;
@@ -159,16 +169,29 @@ export default {
       // console.log(this.addition1);
       // console.log(this.addition2);
       if (this.addition1 + this.addition2 === this.testAddition) {
+        if (this.checkCombinationFound(this.addition1, this.addition2)) {
+          return;
+        }
+
         this.displayArray[this.addition1][this.addition2] = true;
         this.displayArray = [...this.displayArray];
         this.foundCellNumbers++;
+        this.foundCombinations.push({
+          addition1: this.addition1,
+          addition2: this.addition2
+        });
       }
+    },
+
+    handleBegin() {
+      this.newQuestion();
+      this.foundCombinations = [];
     },
 
     handleNextQuestion() {
       this.gameStatus = 1;
       this.foundCellNumbers = 0;
-      this.handleBegin();
+      this.newQuestion();
     }
   },
   created() {
