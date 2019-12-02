@@ -273,6 +273,7 @@ export const decayedAtoms = (canvasAtoms, canvasGraph, vueObjPtr, highlight) => 
 }
 
 //the following methods are used for the Many Trials module
+//Work on NEXT HERE!
 export const drawInitialGraph = (canvas, vueObjPtr) => {
 	//check if canvas exists
 	if (!canvas || !canvas.getContext){
