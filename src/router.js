@@ -251,6 +251,11 @@ const GameShow = resolve => {
     resolve(require("./components/lessons/game-show/App.vue"));
   });
 };
+const GoldbachsConjecture = resolve => {
+  require.ensure("./components/lessons/goldbachs-conjecture/App.vue", () => {
+    resolve(require("./components/lessons/goldbachs-conjecture/App.vue"));
+  });
+};
 
 const Addo = resolve => {
   require.ensure("./components/lessons/addo/App.vue", () => {
@@ -355,6 +360,7 @@ const routes = [
     name: "Rectangle Fraction"
   },
   { path: "/game-show", component: GameShow, name: "Game Show" },
+  { path: "/goldbachs-conjecture", component: GoldbachsConjecture, name: "Goldbach's Conjecture" },
   { path: "/addo", component: Addo, name: "Addo" }
 ];
 
