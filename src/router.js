@@ -261,10 +261,20 @@ const BirthMonthParadox = resolve => {
     resolve(require("./components/lessons/birth-month-paradox/App.vue"));
   });
 };
-
 const Addo = resolve => {
   require.ensure("./components/lessons/addo/App.vue", () => {
     resolve(require("./components/lessons/addo/App.vue"));
+  });
+};
+const AlgebraCharts = resolve => {
+  require.ensure("./components/lessons/algebra-charts/App.vue", () => {
+    resolve(require("./components/lessons/algebra-charts/App.vue"));
+  });
+};
+
+const Multo = resolve => {
+  require.ensure("./components/lessons/multo/App.vue", () => {
+    resolve(require("./components/lessons/multo/App.vue"));
   });
 };
 
@@ -358,7 +368,7 @@ const routes = [
     name: "Dice Differences"
   },
   { path: "/ballon", component: Ballon, name: "2 Litre Ballon" },
-  { path: "/number-charts", component: NumberCharts, name: "Number charts" },
+  { path: "/number-charts", component: NumberCharts, name: "Number Charts" },
   {
     path: "/rectangle-fraction",
     component: RectangleFraction,
@@ -368,6 +378,15 @@ const routes = [
   { path: "/goldbachs-conjecture", component: GoldbachsConjecture, name: "Goldbach's Conjecture" },
   { path: "/addo", component: Addo, name: "Addo" },
   { path: "/birth-month-paradox", component: BirthMonthParadox, name: "Birth Month Paradox" },
+
+  { path: "/algebra-charts", component: AlgebraCharts, name: "Algebra Charts" },
+  {
+    path: "/goldbachs-conjecture",
+    component: GoldbachsConjecture,
+    name: "Goldbach's Conjecture"
+  },
+  { path: "/addo", component: Addo, name: "Addo" },
+  { path: "/multo", component: Multo, name: "Multo" }
 ];
 
 const router = new VueRouter({
