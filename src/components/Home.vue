@@ -56,6 +56,7 @@ export default {
         { name: "Game Show", link: "/game-show" },
         { name: "Goldbach's Conjecture", link: "/goldbachs-conjecture" },
         { name: "Addo", link: "/addo" },
+        { name: "Birth Month Paradox", link: "/birth-month-paradox" },
         { name: "Algebra Charts", link: "/algebra-charts" },
         { name: "Multo", link: "/multo" }
       ]
