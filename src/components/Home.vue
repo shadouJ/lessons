@@ -57,6 +57,7 @@ export default {
         { name: "Goldbach's Conjecture", link: "/goldbachs-conjecture" },
         { name: "Addo", link: "/addo" },
         { name: "Algebra Charts", link: "/algebra-charts" },
+        { name: "Multo", link: "/multo" }
       ]
     };
   },

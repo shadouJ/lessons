@@ -267,6 +267,12 @@ const AlgebraCharts = resolve => {
   });
 };
 
+const Multo = resolve => {
+  require.ensure("./components/lessons/multo/App.vue", () => {
+    resolve(require("./components/lessons/multo/App.vue"));
+  });
+};
+
 Vue.use(VueRouter);
 
 const routes = [
@@ -367,6 +373,13 @@ const routes = [
   { path: "/goldbachs-conjecture", component: GoldbachsConjecture, name: "Goldbach's Conjecture" },
   { path: "/addo", component: Addo, name: "Addo" },
   { path: "/algebra-charts", component: AlgebraCharts, name: "Algebra Charts" },
+  {
+    path: "/goldbachs-conjecture",
+    component: GoldbachsConjecture,
+    name: "Goldbach's Conjecture"
+  },
+  { path: "/addo", component: Addo, name: "Addo" },
+  { path: "/multo", component: Multo, name: "Multo" }
 ];
 
 const router = new VueRouter({
