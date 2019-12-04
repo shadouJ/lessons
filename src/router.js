@@ -278,6 +278,12 @@ const Multo = resolve => {
   });
 };
 
+const BobsButton = resolve => {
+  require.ensure("./components/lessons/bobs-button/App.vue", () => {
+    resolve(require("./components/lessons/bobs-button/App.vue"));
+  });
+};
+
 Vue.use(VueRouter);
 
 const routes = [
@@ -375,9 +381,17 @@ const routes = [
     name: "Rectangle Fraction"
   },
   { path: "/game-show", component: GameShow, name: "Game Show" },
-  { path: "/goldbachs-conjecture", component: GoldbachsConjecture, name: "Goldbach's Conjecture" },
+  {
+    path: "/goldbachs-conjecture",
+    component: GoldbachsConjecture,
+    name: "Goldbach's Conjecture"
+  },
   { path: "/addo", component: Addo, name: "Addo" },
-  { path: "/birth-month-paradox", component: BirthMonthParadox, name: "Birth Month Paradox" },
+  {
+    path: "/birth-month-paradox",
+    component: BirthMonthParadox,
+    name: "Birth Month Paradox"
+  },
 
   { path: "/algebra-charts", component: AlgebraCharts, name: "Algebra Charts" },
   {
@@ -386,7 +400,8 @@ const routes = [
     name: "Goldbach's Conjecture"
   },
   { path: "/addo", component: Addo, name: "Addo" },
-  { path: "/multo", component: Multo, name: "Multo" }
+  { path: "/multo", component: Multo, name: "Multo" },
+  { path: "/bobs-button", component: BobsButton, name: "Bobs Button" }
 ];
 
 const router = new VueRouter({
