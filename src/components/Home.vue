@@ -59,7 +59,8 @@ export default {
         { name: "Birth Month Paradox", link: "/birth-month-paradox" },
         { name: "Algebra Charts", link: "/algebra-charts" },
         { name: "Multo", link: "/multo" },
-        { name: "Bobs Button", link: "/bobs-button" }
+        { name: "Bobs Button", link: "/bobs-button" },
+        { name: "Duelling Dice", link: "/duelling-dice" },
       ]
     };
   },

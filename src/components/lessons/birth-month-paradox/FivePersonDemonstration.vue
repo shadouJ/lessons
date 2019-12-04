@@ -109,6 +109,7 @@
                 finished: false,
                 timer: null,
                 isStart: false,
+                isAutoStart: false,
                 demoAutoOption: "1",
                 trial: 1,
             };
@@ -133,7 +134,7 @@
         },
         methods: {
             startGameAuto() {
-
+                this.isAutoStart = true;
                 if (this.timer) {
                     clearInterval(this.timer);
                     this.timer = null;
@@ -171,6 +172,7 @@
                 this.finished= false;
                 this.timer= null;
                 this.isStart= false;
+                this.isAutoStart = false;
                 this.displayTrial= 0;
                 for (let i = 0; i < 11; i++) {
                     document.getElementById('tblResult').rows[i+1].cells[0].innerHTML = "";
