@@ -61,6 +61,7 @@ export default {
         { name: "Multo", link: "/multo" },
         { name: "Bobs Button", link: "/bobs-button" },
         { name: "Duelling Dice", link: "/duelling-dice" },
+        { name: "Fraction Charts", link: "/fraction-charts" }
       ]
     };
   },

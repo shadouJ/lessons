@@ -288,6 +288,12 @@ const DuellingDice = resolve => {
   });
 };
 
+const FractionCharts = resolve => {
+  require.ensure("./components/lessons/fraction-charts/App.vue", () => {
+    resolve(require("./components/lessons/fraction-charts/App.vue"));
+  });
+};
+
 Vue.use(VueRouter);
 
 const routes = [
@@ -407,6 +413,7 @@ const routes = [
   { path: "/multo", component: Multo, name: "Multo" },
   { path: "/bobs-button", component: BobsButton, name: "Bobs Button" },
   { path: "/duelling-dice", component: DuellingDice, name: "Duelling Dice" },
+  { path: "/fraction-charts", component: FractionCharts, name: "Fraction Charts" }
 ];
 
 const router = new VueRouter({
