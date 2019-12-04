@@ -119,6 +119,7 @@
                 finished: false,
                 timer: null,
                 isStart: false,
+                isAutoStart: false,
                 demoAutoOption: "1",
                 gameNum: "",
             };
@@ -171,7 +172,7 @@
                 }
             },
             startGameAuto() {
-
+                this.isAutoStart = true;
                 if (this.timer) {
                     clearInterval(this.timer);
                     this.timer = null;
@@ -224,6 +225,7 @@
                 this.finished = false;
                 this.timer = null;
                 this.isStart = false;
+                this.isAutoStart = false;
                 this.demoAutoOption = "1";
                 this.gameNum = "";
                 document.getElementById("error").innerHTML =

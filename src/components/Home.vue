@@ -60,7 +60,8 @@ export default {
         { name: "Algebra Charts", link: "/algebra-charts" },
         { name: "Multo", link: "/multo" },
         { name: "Bobs Button", link: "/bobs-button" },
-        { name: "Fraction Charts", link: "/fraction-charts" },
+        { name: "Duelling Dice", link: "/duelling-dice" },
+        { name: "Fraction Charts", link: "/fraction-charts" }
       ]
     };
   },

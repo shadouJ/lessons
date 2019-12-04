@@ -277,10 +277,14 @@ const Multo = resolve => {
     resolve(require("./components/lessons/multo/App.vue"));
   });
 };
-
 const BobsButton = resolve => {
   require.ensure("./components/lessons/bobs-button/App.vue", () => {
     resolve(require("./components/lessons/bobs-button/App.vue"));
+  });
+};
+const DuellingDice = resolve => {
+  require.ensure("./components/lessons/duelling-dice/App.vue", () => {
+    resolve(require("./components/lessons/duelling-dice/App.vue"));
   });
 };
 
@@ -408,7 +412,8 @@ const routes = [
   { path: "/addo", component: Addo, name: "Addo" },
   { path: "/multo", component: Multo, name: "Multo" },
   { path: "/bobs-button", component: BobsButton, name: "Bobs Button" },
-  { path: "/fraction-charts", component: FractionCharts, name: "Fraction Charts" },
+  { path: "/duelling-dice", component: DuellingDice, name: "Duelling Dice" },
+  { path: "/fraction-charts", component: FractionCharts, name: "Fraction Charts" }
 ];
 
 const router = new VueRouter({
