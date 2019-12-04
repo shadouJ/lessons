@@ -294,6 +294,12 @@ const FractionCharts = resolve => {
   });
 };
 
+const Lcm = resolve => {
+  require.ensure("./components/lessons/lcm/App.vue", () => {
+    resolve(require("./components/lessons/lcm/App.vue"));
+  });
+};
+
 Vue.use(VueRouter);
 
 const routes = [
@@ -413,7 +419,12 @@ const routes = [
   { path: "/multo", component: Multo, name: "Multo" },
   { path: "/bobs-button", component: BobsButton, name: "Bobs Button" },
   { path: "/duelling-dice", component: DuellingDice, name: "Duelling Dice" },
-  { path: "/fraction-charts", component: FractionCharts, name: "Fraction Charts" }
+  {
+    path: "/fraction-charts",
+    component: FractionCharts,
+    name: "Fraction Charts"
+  },
+  { path: "/lcm", component: Lcm, name: "LCM" }
 ];
 
 const router = new VueRouter({

@@ -1,8 +1,18 @@
 <template>
-  <transition appear appear-class="options-appear" appear-active-class="options-appear-active">
+  <transition
+    appear
+    appear-class="options-appear"
+    appear-active-class="options-appear-active"
+  >
     <div class="container app--link-list">
-      <div class="app--link-item" v-for="lesson in sortedLessons" :key="lesson.name">
-        <router-link :to="lesson.link" class="btn btn-outline-success">{{lesson.name}}</router-link>
+      <div
+        class="app--link-item"
+        v-for="lesson in sortedLessons"
+        :key="lesson.name"
+      >
+        <router-link :to="lesson.link" class="btn btn-outline-success">{{
+          lesson.name
+        }}</router-link>
       </div>
     </div>
   </transition>
@@ -61,7 +71,8 @@ export default {
         { name: "Multo", link: "/multo" },
         { name: "Bobs Button", link: "/bobs-button" },
         { name: "Duelling Dice", link: "/duelling-dice" },
-        { name: "Fraction Charts", link: "/fraction-charts" }
+        { name: "Fraction Charts", link: "/fraction-charts" },
+        { name: "LCM: Natalie's Task", link: "/lcm" }
       ]
     };
   },
