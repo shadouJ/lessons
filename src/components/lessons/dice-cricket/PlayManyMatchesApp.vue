@@ -2,7 +2,7 @@
   <div class="mt-4 mb-5">
     <h3 class="text-success text-center mb-4">
       Play many games
-      <br>
+      <br />
       <small>{{ gameNumber * 2 }} innings</small>
     </h3>
     <div class="row">
@@ -33,7 +33,7 @@
           class="form-check-input"
           v-model="wicketTaker"
           :value="1"
-        >
+        />
         <label for="wicket-taker-1" class="form-check-label">1</label>
       </div>
       <div class="form-check form-check-inline">
@@ -43,7 +43,7 @@
           class="form-check-input"
           v-model="wicketTaker"
           :value="2"
-        >
+        />
         <label for="wicket-taker-2" class="form-check-label">2</label>
       </div>
       <div class="form-check form-check-inline">
@@ -53,7 +53,7 @@
           class="form-check-input"
           v-model="wicketTaker"
           :value="3"
-        >
+        />
         <label for="wicket-taker-3" class="form-check-label">3</label>
       </div>
       <div class="form-check form-check-inline">
@@ -63,7 +63,7 @@
           class="form-check-input"
           v-model="wicketTaker"
           :value="4"
-        >
+        />
         <label for="wicket-taker-4" class="form-check-label">4</label>
       </div>
       <div class="form-check form-check-inline">
@@ -73,7 +73,7 @@
           class="form-check-input"
           v-model="wicketTaker"
           :value="5"
-        >
+        />
         <label for="wicket-taker-5" class="form-check-label">5</label>
       </div>
       <div class="form-check form-check-inline">
@@ -83,7 +83,7 @@
           class="form-check-input"
           v-model="wicketTaker"
           :value="6"
-        >
+        />
         <label for="wicket-taker-6" class="form-check-label">6</label>
       </div>
     </div>
@@ -116,6 +116,7 @@ import ManyMatchesTable from "./ManyMatchesTable.vue";
 import ManyMatchesGraph from "./ManyMatchesGraph.vue";
 import DemoAutoOption from "../../common/DemoAutoOption.vue";
 import { throwDiceOnce } from "./utils";
+import { calculateTimerInterval } from "../../common/utils";
 
 export default {
   props: ["trialNumber"],
@@ -144,15 +145,7 @@ export default {
   },
   computed: {
     timerInterval() {
-      if (this.trialNumber <= 100) {
-        return 150;
-      } else if (this.trialNumber <= 1000) {
-        return 50;
-      } else if (this.trialNumber <= 5000) {
-        return 30;
-      } else {
-        return 10;
-      }
+      return calculateTimerInterval(this.trialNumber);
     },
     heightUnit() {
       if (this.trialNumber <= 100) {

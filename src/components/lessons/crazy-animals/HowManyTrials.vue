@@ -1,39 +1,38 @@
 <template>
-	<div>
-		<app-how-many-trials-app 
-			v-if="trialNumber&&selectedAnimalData" 
-			:trialNumber="trialNumber" 
-			:selectedAnimalData="selectedAnimalData"
-		></app-how-many-trials-app>
-		<app-select-favorite 
-			v-else-if="trialNumber" 
-			:trialNumber="trialNumber"
-			@selectAnimal="selectedAnimalData=$event"
-		></app-select-favorite>
-		<app-enter-trials-number v-else @acceptTrialNumber="trialNumber=$event"></app-enter-trials-number>
-	</div>	
+  <div>
+    <app-how-many-trials-app
+      v-if="trialNumber&&selectedAnimalData"
+      :trialNumber="trialNumber"
+      :selectedAnimalData="selectedAnimalData"
+    ></app-how-many-trials-app>
+    <app-select-favorite
+      v-else-if="trialNumber"
+      :trialNumber="trialNumber"
+      @selectAnimal="selectedAnimalData=$event"
+    ></app-select-favorite>
+    <app-enter-trials-number v-else @acceptTrialNumber="trialNumber=$event"></app-enter-trials-number>
+  </div>
 </template>
 
 <script>
-import EnterTrialsNumber from './EnterTrialsNumber.vue';
-import SelectFavorite from './SelectFavorite.vue';
-import HowManyTrialsApp from './HowManyTrialsApp.vue';
+import EnterTrialsNumber from "../../common/EnterTrialsNumber.vue";
+import SelectFavorite from "./SelectFavorite.vue";
+import HowManyTrialsApp from "./HowManyTrialsApp.vue";
 
 export default {
-	components: {
-		appEnterTrialsNumber: EnterTrialsNumber,
-		appSelectFavorite: SelectFavorite,
-		appHowManyTrialsApp: HowManyTrialsApp
-	},
-	data: function() {
-		return {
-			trialNumber: null,
-			selectedAnimalData: null
-		}
-	}
-}
+  components: {
+    appEnterTrialsNumber: EnterTrialsNumber,
+    appSelectFavorite: SelectFavorite,
+    appHowManyTrialsApp: HowManyTrialsApp
+  },
+  data: function() {
+    return {
+      trialNumber: null,
+      selectedAnimalData: null
+    };
+  }
+};
 </script>
 
 <style scoped>
-
 </style>

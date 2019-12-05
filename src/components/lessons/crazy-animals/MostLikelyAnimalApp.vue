@@ -10,7 +10,7 @@
         v-model="numberOfAnimals"
         id="2-animals"
         :disabled="isStart"
-      >
+      />
       <label for="2-animals" class="form-check-label mr-3">2 Animals</label>
       <input
         class="form-check-input"
@@ -20,7 +20,7 @@
         v-model="numberOfAnimals"
         id="3-animals"
         :disabled="isStart"
-      >
+      />
       <label for="3-animals" class="form-check-label">3 Animals</label>
     </div>
     <div class="app--animals-table mt-3">
@@ -67,6 +67,7 @@
 
 <script>
 import DemoAutoOption from "./DemoAutoOption.vue";
+import { calculateTimerInterval } from "../../common/utils";
 import {
   throwDiceOnce,
   generateAnimalsParts,
@@ -97,15 +98,7 @@ export default {
       return generateCombinations(this.numberOfAnimals);
     },
     timerInterval() {
-      if (this.trialNumber <= 100) {
-        return 300;
-      } else if (this.trialNumber <= 1000) {
-        return 100;
-      } else if (this.trialNumber <= 5000) {
-        return 80;
-      } else {
-        return 50;
-      }
+      return calculateTimerInterval(this.trialNumber);
     }
   },
   watch: {

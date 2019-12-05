@@ -46,6 +46,8 @@ import TallyGraph from './TallyGraph.vue';
 import ChangeRule from './ChangeRule.vue';
 import DemoAutoOption from './DemoAutoOption';
 import { throwDiceOnce, throwDiceTwo, getTimerInterval } from './utils';
+import { calculateTimerInterval } from "../../common/utils";
+
 export default {
 	props: ['trialNumber'],
 	components: {
@@ -176,7 +178,7 @@ export default {
 	},
 	created() {
 		this.initTallyTable();
-		this.timerInterval = getTimerInterval(this.trialNumber);
+		this.timerInterval = calculateTimerInterval(this.trialNumber);
 	},
 	destroyed() {
 		if(this.timer) {

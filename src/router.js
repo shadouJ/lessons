@@ -24,6 +24,12 @@ const Radioactivity = resolve => {
   });
 };
 
+const SameOrDifferent = resolve => {
+  require.ensure("./components/lessons/same-or-different/App.vue", () => {
+    resolve(require("./components/lessons/same-or-different/App.vue"));
+  });
+};
+
 const GardenBeds = resolve => {
   require.ensure("./components/lessons/garden-beds/App.vue", () => {
     resolve(require("./components/lessons/garden-beds/App.vue"));
@@ -236,13 +242,82 @@ const Ballon = resolve => {
     resolve(require("./components/lessons/2-litre-ballon/App.vue"));
   });
 };
+const NumberCharts = resolve => {
+  require.ensure("./components/lessons/number-charts/App.vue", () => {
+    resolve(require("./components/lessons/number-charts/App.vue"));
+  });
+};
+const RectangleFraction = resolve => {
+  require.ensure("./components/lessons/rectangle-fraction/App.vue", () => {
+    resolve(require("./components/lessons/rectangle-fraction/App.vue"));
+  });
+};
+const GameShow = resolve => {
+  require.ensure("./components/lessons/game-show/App.vue", () => {
+    resolve(require("./components/lessons/game-show/App.vue"));
+  });
+};
+const GoldbachsConjecture = resolve => {
+  require.ensure("./components/lessons/goldbachs-conjecture/App.vue", () => {
+    resolve(require("./components/lessons/goldbachs-conjecture/App.vue"));
+  });
+};
+const BirthMonthParadox = resolve => {
+  require.ensure("./components/lessons/birth-month-paradox/App.vue", () => {
+    resolve(require("./components/lessons/birth-month-paradox/App.vue"));
+  });
+};
+const Addo = resolve => {
+  require.ensure("./components/lessons/addo/App.vue", () => {
+    resolve(require("./components/lessons/addo/App.vue"));
+  });
+};
+const AlgebraCharts = resolve => {
+  require.ensure("./components/lessons/algebra-charts/App.vue", () => {
+    resolve(require("./components/lessons/algebra-charts/App.vue"));
+  });
+};
+
+const Multo = resolve => {
+  require.ensure("./components/lessons/multo/App.vue", () => {
+    resolve(require("./components/lessons/multo/App.vue"));
+  });
+};
+const BobsButton = resolve => {
+  require.ensure("./components/lessons/bobs-button/App.vue", () => {
+    resolve(require("./components/lessons/bobs-button/App.vue"));
+  });
+};
+const DuellingDice = resolve => {
+  require.ensure("./components/lessons/duelling-dice/App.vue", () => {
+    resolve(require("./components/lessons/duelling-dice/App.vue"));
+  });
+};
+
+const FractionCharts = resolve => {
+  require.ensure("./components/lessons/fraction-charts/App.vue", () => {
+    resolve(require("./components/lessons/fraction-charts/App.vue"));
+  });
+};
+
+const Lcm = resolve => {
+  require.ensure("./components/lessons/lcm/App.vue", () => {
+    resolve(require("./components/lessons/lcm/App.vue"));
+  });
+};
 
 Vue.use(VueRouter);
 
 const routes = [
   { path: "/", component: Home, name: "home" },
   { path: "/radioactivity", component: Radioactivity, name: "Radioactivity" },
+  {
+    path: "/same-or-different",
+    component: SameOrDifferent,
+    name: "Same or Different"
+  },
   { path: "/garden-beds", component: GardenBeds, name: "Garden Beds" },
+
   {
     path: "/trigonometry",
     component: Trigonometry,
@@ -321,7 +396,42 @@ const routes = [
     component: DiceDifferences,
     name: "Dice Differences"
   },
-  { path: "/ballon", component: Ballon, name: "2 Litre Ballon" }
+  { path: "/ballon", component: Ballon, name: "2 Litre Ballon" },
+  { path: "/number-charts", component: NumberCharts, name: "Number Charts" },
+  {
+    path: "/rectangle-fraction",
+    component: RectangleFraction,
+    name: "Rectangle Fraction"
+  },
+  { path: "/game-show", component: GameShow, name: "Game Show" },
+  {
+    path: "/goldbachs-conjecture",
+    component: GoldbachsConjecture,
+    name: "Goldbach's Conjecture"
+  },
+  { path: "/addo", component: Addo, name: "Addo" },
+  {
+    path: "/birth-month-paradox",
+    component: BirthMonthParadox,
+    name: "Birth Month Paradox"
+  },
+
+  { path: "/algebra-charts", component: AlgebraCharts, name: "Algebra Charts" },
+  {
+    path: "/goldbachs-conjecture",
+    component: GoldbachsConjecture,
+    name: "Goldbach's Conjecture"
+  },
+  { path: "/addo", component: Addo, name: "Addo" },
+  { path: "/multo", component: Multo, name: "Multo" },
+  { path: "/bobs-button", component: BobsButton, name: "Bobs Button" },
+  { path: "/duelling-dice", component: DuellingDice, name: "Duelling Dice" },
+  {
+    path: "/fraction-charts",
+    component: FractionCharts,
+    name: "Fraction Charts"
+  },
+  { path: "/lcm", component: Lcm, name: "LCM" }
 ];
 
 const router = new VueRouter({

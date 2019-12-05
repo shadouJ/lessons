@@ -1,8 +1,18 @@
 <template>
-  <transition appear appear-class="options-appear" appear-active-class="options-appear-active">
+  <transition
+    appear
+    appear-class="options-appear"
+    appear-active-class="options-appear-active"
+  >
     <div class="container app--link-list">
-      <div class="app--link-item" v-for="lesson in sortedLessons" :key="lesson.name">
-        <router-link :to="lesson.link" class="btn btn-outline-success">{{lesson.name}}</router-link>
+      <div
+        class="app--link-item"
+        v-for="lesson in sortedLessons"
+        :key="lesson.name"
+      >
+        <router-link :to="lesson.link" class="btn btn-outline-success">{{
+          lesson.name
+        }}</router-link>
       </div>
     </div>
   </transition>
@@ -16,6 +26,7 @@ export default {
       lessons: [
         { name: "Radioactivity", link: "/radioactivity" },
         { name: "Garden Beds", link: "/garden-beds" },
+        { name: "Same or Different", link: "/same-or-different" },
         { name: "Tackling Times Tables", link: "/times-tables" },
         { name: "Trigonometry Walking", link: "/trigonometry" },
         { name: "Truth Tiles 1", link: "/truth-tiles-1" },
@@ -50,7 +61,19 @@ export default {
         { name: "What's It Worth", link: "/whats-it-worth" },
         { name: "Doctor Dart", link: "/doctor-dart" },
         { name: "Dice Differences", link: "/dice-differences" },
-        { name: "2 Litre Balloon", link: "/ballon" }
+        { name: "2 Litre Balloon", link: "/ballon" },
+        { name: "Number Charts", link: "/number-charts" },
+        { name: "Rectangle Fraction", link: "/rectangle-fraction" },
+        { name: "Game Show", link: "/game-show" },
+        { name: "Goldbach's Conjecture", link: "/goldbachs-conjecture" },
+        { name: "Addo", link: "/addo" },
+        { name: "Birth Month Paradox", link: "/birth-month-paradox" },
+        { name: "Algebra Charts", link: "/algebra-charts" },
+        { name: "Multo", link: "/multo" },
+        { name: "Bobs Button", link: "/bobs-button" },
+        { name: "Duelling Dice", link: "/duelling-dice" },
+        { name: "Fraction Charts", link: "/fraction-charts" },
+        { name: "LCM: Natalie's Task", link: "/lcm" }
       ]
     };
   },

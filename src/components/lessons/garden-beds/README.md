@@ -1,4 +1,4 @@
-# maths300-lesson-area-of-triangle
+# maths300-lesson-garden-beds
 
 ## Functionality
 * Demonstration: adds tiles around plants 1 by 1 using a button, number of plants is randomly generated (1 to 10).
