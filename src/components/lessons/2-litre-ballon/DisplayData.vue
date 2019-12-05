@@ -3,6 +3,33 @@
     <h3 class="text-center text-success mb-4">Gathering and displaying balloon data</h3>
     <div class="row">
       <div class="col-md-6">
+        <div>
+          <!-- Data table -->
+          <table class="table">
+            <thead>
+              <tr>
+                <th class="text-center">{{this.unit}}({{ this.unit === 'V' ? 'L' : 'cm' }})</th>
+                <th class="text-center">V(L)</th>
+              </tr>
+            </thead>
+            <tbody v-if="isSet">
+              <tr v-for="(item, index) in dataArray" :key="index">
+                <td class="text-center">{{ item.getValue(unit) }}</td>
+                <td class="text-center">{{ item.volume }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <canvas id="dataChart" width="400" height="400"></canvas>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-3"></div>
+
+      <div class="col-md-6">
         <div class="form-group">
           <label for="range">Range of</label>&nbsp;&nbsp;
           <select class="form-control" id="range" v-model="unit" :disabled="isSet">
@@ -23,7 +50,7 @@
               :max="50"
               :disabled="isSet"
               @focus="()=> {this.alertMessage='Please enter the minimum of the range(0 to 50)'}"
-            >
+            />
           </div>
           <div class="form-group col-md-6">
             <label for="max">Max</label>&nbsp;&nbsp;
@@ -35,7 +62,7 @@
               :max="50"
               :disabled="isSet"
               @focus="()=> {this.alertMessage='Please enter the maximum of the range(0 to 50)'}"
-            >
+            />
           </div>
         </div>
         <div v-if="alertMessage" class="alert alert-danger">{{alertMessage}}</div>
@@ -61,28 +88,8 @@
             class="mt-1 mb-3"
           ></app-demo-auto-option>
         </div>
-
-        <div v-if="isSet" class="mt-3">
-          <!-- Data table -->
-          <table class="table">
-            <thead>
-              <tr>
-                <th class="text-center">{{this.unit}}({{ this.unit === 'V' ? 'L' : 'cm' }})</th>
-                <th class="text-center">V(L)</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr v-for="(item, index) in dataArray" :key="index">
-                <td class="text-center">{{ item.getValue(unit) }}</td>
-                <td class="text-center">{{ item.volume }}</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
       </div>
-      <div class="col-md-6">
-        <canvas id="dataChart" width="400" height="400"></canvas>
-      </div>
+      <div class="col-md-3"></div>
     </div>
   </div>
 </template>
@@ -243,9 +250,7 @@ export default {
         this.alertMessage = "Please input an integer number between 0 and 50";
         return;
       } else if (this.min >= this.max) {
-        this.alertMessage = `Please input the minimum number less than ${
-          this.max
-        }`;
+        this.alertMessage = `Please input the minimum number less than ${this.max}`;
         return;
       }
       this.alertMessage = "";
