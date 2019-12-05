@@ -108,6 +108,7 @@ import ManyGamesStat from "./ManyGamesStat.vue";
 import DemoAutoOption from "../../common/DemoAutoOption.vue";
 import { BLANK_GRID_DATA, BLANK_STRATEGY } from "./utils/settings";
 import { pickNumber, checkAddo, checkCanAddo } from "./utils/utils";
+import { calculateTimerInterval } from "../../common/utils";
 
 export default {
   props: ["strategies", "trialNumber"],
@@ -139,13 +140,7 @@ export default {
   },
   computed: {
     timerInterval() {
-      if (this.trialNumber <= 100) {
-        return 80;
-      } else if (this.trialNumber <= 1000) {
-        return 50;
-      } else {
-        return 20;
-      }
+      return calculateTimerInterval();
     }
   },
   watch: {

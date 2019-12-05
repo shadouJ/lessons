@@ -91,11 +91,13 @@
 
         <div class="d-flex">
           <div
-            class="flex-grow-1 app--color-cell"
-            style="background-color: #4ed5d7"
+            class="flex-fill app--color-cell"
+            style="background-color: #4ed5d7; position: relative;"
             @click="currentNumber = 100"
-          ></div>
-          <div class="flex-grow-1 app--color-cell">
+          >
+            <span style="position: absolute; ">Total</span>
+          </div>
+          <div class="flex-fill app--color-cell">
             <span class="app--color-number" v-if="currentNumber===100">100</span>
           </div>
         </div>

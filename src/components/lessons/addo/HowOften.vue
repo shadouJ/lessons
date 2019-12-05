@@ -166,9 +166,11 @@
         <div class="d-flex mt-3">
           <div
             class="flex-fill app--color-cell"
-            style="background: #4ED5D7"
+            style="background: #4ED5D7; position: relative;"
             @click="() => {this.currentNumber = 11}"
-          ></div>
+          >
+            <span style="position: absolute; ">Total</span>
+          </div>
           <div class="flex-fill app--color-cell">
             <span class="app--color-number" v-if="currentNumber===11">121</span>
           </div>
