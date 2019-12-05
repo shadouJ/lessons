@@ -81,8 +81,7 @@
     </div>
 </template>
 <script>
-    import HighchartsContainer from './HighchartsComponent.vue';
-
+   import HighchartsContainer from './HighchartsComponent.vue';
     export default {
         components: {
             HighchartsContainer

@@ -15,35 +15,27 @@
             </transition>
 
             <transition appear appear-class="lesson-appear" appear-active-class="lesson-appear-active">
-                <app-whole-number-addition v-if="selectedOption === 1"></app-whole-number-addition>
-                <app-fraction-addition v-else-if="selectedOption === 2"></app-fraction-addition>
+                <app-addition v-if="selectedOption === 1"></app-addition>
+                <app-multiplication v-else-if="selectedOption === 2"></app-multiplication>
             </transition>
         </div>
-<!--        <transition appear appear-class="options-appear" appear-active-class="options-appear-active">-->
-<!--            <app-bottom-nav></app-bottom-nav>-->
-<!--        </transition>-->
 
     </div>
 </template>
 
 <script>
-    // import Title from '../../layout/Title.vue';
     import TitleStatic from '../../layout/TitleStatic.vue';
     import TopNav from '../../layout/TopNav.vue';
     import Options from '../../layout/Options.vue';
     import Addition from './Addition.vue'
     import Multiplication from "./Multiplication.vue";
-    import HelloWorld from "./HighchartsComponent.vue";
-
     export default {
         components: {
-           // appTitle: Title,
             appTitleStatic: TitleStatic,
             appTopNav: TopNav,
             appOptions: Options,
-           // appBottomNav: BottomNav,
-            appWholeNumberAddition: Addition,
-            appFractionAddition: Multiplication,
+            appAddition: Addition,
+            appMultiplication: Multiplication,
         },
         data: function() {
             return {
