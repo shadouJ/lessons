@@ -42,11 +42,22 @@
         </div>
 
         <app-buttons-container :countersNumber="countersNumber"></app-buttons-container>
+
+        <div class="text-center mt-3" v-if="gameStatus===2">
+          <button
+            class="btn btn-outline-success"
+            @click="handleGroupButtons"
+          >Tap here for {{ groups > 0 ? 'next' : 'first'}} group</button>
+        </div>
+
+        <div class="text-center mt-3" v-if="gameStatus===3">
+          <button class="btn btn-outline-success" @click="handleReset">Tap here to reset</button>
+        </div>
       </div>
       <div
         class="col-md-6 col-lg-7 app--buttons-group-box"
         v-if="gameStatus === 2 || gameStatus===3"
-        :style="{'grid-template-columns': 'repeat(auto-fill, minmax('+ (inputCountersNumber/groupSize < 2 ? 20 : 10)  + 'rem, 1fr))'}"
+        :style="{'grid-template-columns': 'repeat(auto-fill, minmax('+ (groupSize <=3 ? 8 : 20)  + 'rem, 1fr))'}"
       >
         <app-buttons-group
           v-for="group in groups"
@@ -60,15 +71,6 @@
       <span v-if="gameStatus===0">Enter a number between 2 and 100</span>
       <span v-if="gameStatus===1">Enter a number between 1 and {{countersNumber}}</span>
       <span v-if="gameStatus===3">Finished</span>
-    </div>
-    <div class="text-center mt-3" v-if="gameStatus===2">
-      <button
-        class="btn btn-outline-success"
-        @click="handleGroupButtons"
-      >Tap here for {{ groups > 0 ? 'next' : 'first'}} group</button>
-    </div>
-    <div class="text-center mt-3" v-if="gameStatus===3">
-      <button class="btn btn-outline-success" @click="handleReset">Tap here to reset</button>
     </div>
   </div>
 </template>
@@ -136,7 +138,5 @@ export default {
 <style scoped>
 .app--buttons-group-box {
   display: grid;
-
-  gap: 1rem;
 }
 </style>
