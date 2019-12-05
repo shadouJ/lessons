@@ -294,18 +294,24 @@ export const drawInitialGraph = (canvas, vueObjPtr) => {
 const drawAtomLeft = (canvas, vueObjPtr) => {
 	const context = canvas.getContext("2d");
 	const width = vueObjPtr.width;
+	const graphHeight = canvas.height - 30;
 
 	//determine x and y coordinates to start the rectangle
 	const xPos = vueObjPtr.startXOffset + vueObjPtr.currentYear*width;
 
 	//determine the percentage of atoms left
-	console.log(vueObjPtr.atomLeft);
 	var percentAtomLeft = vueObjPtr.atomLeft/(vueObjPtr.trialInputs.numAtoms);
-	console.log("%AtomLeft = " + percentAtomLeft);
-	const yPos = canvas.height - canvas.height*percentAtomLeft;
-	const height = canvas.height*percentAtomLeft;
+	// console.log("%AtomLeft = " + percentAtomLeft);
 
-	drawRect('red', context, xPos, yPos, width, height);
+	var yPos = graphHeight - graphHeight*percentAtomLeft;
+	var height = graphHeight*percentAtomLeft;
+
+	//check for small percentage left, then keep it as smallest value to be drawn
+	if (percentAtomLeft*100 <= 1){
+		yPos = graphHeight - graphHeight*0.01;
+		height = graphHeight*0.01;
+	}	
+	drawRect(vueObjPtr.graphColour, context, xPos, yPos, width, height);
 }
 
 //this helper function draws the y axis labels
@@ -343,14 +349,37 @@ const drawYLabels = (canvas, vueObjPtr) => {
 //this function initialise random values for each of the atoms
 const initialiseAtoms = (vueObjPtr) => {
 	for (var i=0; i<vueObjPtr.trialInputs.numAtoms; i++){
-		var randNum = getRandomNumber(0,vueObjPtr.trialInputs.probDecay);
-		vueObjPtr.atoms.push(randNum);
+		vueObjPtr.atoms.push(0);
 	}
 }
 
+//this function rerolls the random values for each atom in the atoms array
 export const rerollAtoms = (vueObjPtr) => {
 	for (var i=0; i<vueObjPtr.atomLeft; i++){
 		var randNum = getRandomNumber(0,vueObjPtr.trialInputs.probDecay);
 		vueObjPtr.atoms[i] = randNum;
 	}
+}
+
+//this function removes the decayed atoms from the atoms array and updates the graph
+export const removeDecayedAtoms = (canvas, vueObjPtr) => {
+	for (var j=0; j<vueObjPtr.atomLeft; j++){
+		if(vueObjPtr.atoms[j] === vueObjPtr.diceRoll){
+			//remove the atom from the arrays
+			vueObjPtr.atoms.splice(j, 1);	
+		}
+	}
+	drawAtomLeft(canvas, vueObjPtr);
+}
+
+//this function draws the half life year at its corresponding position on the canvas
+export const drawHalfLifeYear = (canvas, vueObjPtr) => {
+	const context = canvas.getContext("2d");
+
+	const fontSize = 40;
+	context.font = fontSize + "px arial";
+	context.fillStyle = "darkgreen";
+	const xPosText = vueObjPtr.startXOffset + (vueObjPtr.currentYear+1)*vueObjPtr.width;
+	const yPosText = canvas.height;
+	context.fillText("Year " + vueObjPtr.halfLifeYear, xPosText, yPosText);
 }

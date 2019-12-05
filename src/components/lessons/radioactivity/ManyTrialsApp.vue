@@ -6,35 +6,43 @@
 				<canvas id="app-canvas-graph"></canvas>
 			</div>
 			<div class="row p-3 m-auto">
-				
-					<div class="col-sm-4 app--action">
-						<p class="alert alert-danger" v-if="stage==3">There are {{numDecayed}} {{diceRollText}}</p>
-						<p class="alert alert-danger" v-else>There are {{atomLeft}} atoms</p>
+				<div class="col-sm-6 app--action">
+					<div v-if="showStart">
+						<button v-if="isAuto" id="startButton" type="button" class="btn btn-outline-success" @click="start">Tap here to begin</button>
+						<button v-else id="startButton" type="button" class="btn btn-outline-success" @click="start">Tap here for Year 1</button>
 					</div>
-					<div class="col-sm-3 app--action">
-						<button v-if="showStart" id="startButton" type="button" class="btn btn-outline-success" @click="start">Tap here to start</button>
-						<div v-if="!showStart">
-							<div v-if="!isFinished">
-								<div v-if="isAuto">
+					<div v-if="!showStart">
+						<div v-if="!isFinished">
+							<div v-if="isAuto">
+								<div v-if="showHalfWay">
+									<button type="button" class="btn btn-outline-success" @click="showHalfWay=!showHalfWay">Just over half-way. Tap here to continue</button>
+								</div>
+								<div v-else>
 									<button type="button" class="btn btn-outline-success mr-3" @click="showPause=!showPause" v-if="showPause">Tap here to pause</button>
 									<button type="button" class="btn btn-outline-success mr-3" @click="showPause=!showPause" v-if="!showPause">Tap here to resume</button>
 								</div>
-								<div v-else>
-									<button type="button" class="btn btn-outline-success" @click="nextStage" :disabled="disableButton" v-if="stage==1">Tap here to throw dice</button>
-									<button type="button" class="btn btn-outline-success" @click="nextStage" :disabled="disableButton" v-else>Tap here to continue</button>
-								</div>
 							</div>
-							<div v-else><button type="button" class="btn btn-outline-dark" @click="reset" v-if="isFinished">Tap here to reset</button></div>
+							<div v-else>
+								<button type="button" class="btn btn-outline-success" @click="showHalfWay=!showHalfWay" v-if="showHalfWay">Just over half-way. Tap here to continue</button>
+								<button type="button" class="btn btn-outline-success" @click="nextStage" v-else>Tap here for next game</button>
+							</div>
 						</div>
-						<div class="form-check form-check-inline">
-							<input type="radio" class="form-check-input" id="demo" name="demoOption" value= "demo" v-model="mode">
-							<label class="form-check-label" for="demo">Demo</label>
-							<input type="radio" class="ml-2 form-check-input" id="auto" name="autoOption" value= "auto" v-model="mode">
-							<label class="form-check-label" for="auto">Auto</label>
+						<div v-else>
+							<button type="button" class="btn btn-outline-dark" @click="reset">Tap here to reset</button>
 						</div>
 					</div>
+					<div class="form-check form-check-inline">
+						<input type="radio" class="form-check-input" id="demo" name="demoOption" value= "demo" v-model="mode">
+						<label class="form-check-label" for="demo">Demo</label>
+						<input type="radio" class="ml-2 form-check-input" id="auto" name="autoOption" value= "auto" v-model="mode">
+						<label class="form-check-label" for="auto">Auto</label>
+					</div>
+					<div v-if="isFinished">
+						<p class="alert alert-info mt-1">Finished</p>
+					</div>
+				</div>
 				
-				<div class="col-sm-5 table-container">
+				<div class="col-sm-6 table-container">
 					<table class="table">
 						<tr>
 							<td class="entryDesc">Initial number of atoms:</td>
@@ -70,7 +78,8 @@ import {
 	drawInitialGraph,
 	rerollAtoms,
 	getRandomNumber,
-	decayedAtoms
+	removeDecayedAtoms,
+	drawHalfLifeYear
 } from './utils';
 
 export default {
@@ -80,13 +89,12 @@ export default {
 	},
 	data: function() {
 		return {
-			//variables used for showing start button
+			//variables used for showing start button and half way button
 			showStart: true,
-
-			disableButton: false,
+			showHalfWay: false,
 
 			//variable used by the canvas
-			width: 20,
+			width: 15,
 			startXOffset: 100,
 
 			//array used for storing all the atoms
@@ -94,27 +102,33 @@ export default {
 			key: 1,
 
 			//variables for current round/year
-			stage: 0,
 			currentYear: 0,
 			diceRoll: 0,
-			numDecayed: 0,
 
 			//this variable is used for for auto or demo mode
-			mode: 'demo',
+			mode: 'auto',
 
 			//used for auto mode buttons
-			showPause: false,
+			showPause: true,
 			//this id is used to kill the timer interval
 			intervalId: 0,
-			timeDelay: 100,
+
+			//time delay is updated based on every half life cycle of the atoms
+			timeDelay: 200,
+
 			//used for the graph drawing
-			graphIntervalId: 0,
-			graphDelay: 10
+			halfLifeYear: -1,
+			graphColour: 'red'
 		}
 	},
 	computed: {
+		fractionLeft: function(){
+			//calculate the time delay based on percentage of atoms left delay
+			var percentLeft = this.atomLeft/this.trialInputs.numAtoms;
+			return percentLeft;
+		},
 		isFinished: function(){
-			if (this.atoms.length === 0 || this.currentYear > 20){
+			if (this.atoms.length === 0){
 				return true;
 			}
 			else{
@@ -143,6 +157,12 @@ export default {
 				return 0 + '%';
 			var res = parseFloat((1/this.trialInputs.probDecay).toFixed(2));
 			return res;
+		},
+		overHalfWay: function(){
+			if (this.atomLeft < this.trialInputs.numAtoms/2)
+				return true;
+			else
+				return false;
 		}
 	},
 	watch: {
@@ -159,6 +179,37 @@ export default {
 				clearInterval(this.intervalId);
 			else
 				this.autoMode();
+		},
+		overHalfWay: function(){
+			//check for half decayed atoms
+			if (this.overHalfWay == true){
+				//update the required variables
+				this.showHalfWay = true;
+				this.halfLifeYear = this.currentYear;
+				this.graphColour = 'blue';
+
+				//draw the half-life year on the canvas
+				const canvasGraph = document.querySelector('#app-canvas-graph');
+				drawHalfLifeYear(canvasGraph, this);
+
+				//clear the interval if auto mode
+				if (this.isAuto){
+					clearInterval(this.intervalId);
+					this.showPause = false;
+				}
+			}
+		},
+		fractionLeft: function(){
+			//observe the percentage of atom left and update time delay at every half life (i.e. restart the auto process)
+			if ((this.fractionLeft*200) <= this.timeDelay/2){
+				this.timeDelay = this.fractionLeft*200;
+
+				if (this.isAuto){
+					//clear the previous timer and restart the new timer with new delay
+					clearInterval(this.intervalId);
+					this.autoMode();
+				}
+			}
 		}
 	},
 	methods: {
@@ -169,14 +220,12 @@ export default {
 				if (this.showPause == true){
 					//timer to delay the execution of next stage
 					this.intervalId = setInterval(() => {
-						//continue until 2 blocks taken
 						if (this.isFinished){
 							//Clear the interval addition timer.
 							clearInterval(this.intervalId);
 						}
 						else{
-							if (!this.disableButton)
-								this.nextStage();
+							this.nextStage();
 						}
 					}, this.timeDelay);
 				}
@@ -185,59 +234,42 @@ export default {
 
 		//this method runs the function based on current stage of the decay process
 		nextStage(){
-			const canvasAtoms = null;
-			const canvasGraph = document.querySelector('#app-canvas-graph');
-			//there are 4 different stages for each year, 
-			//stage 0 for generating rand number for atoms
-			if (this.stage == 0){
-				//generate the random values for the atoms
-				rerollAtoms(canvasGraph, this);
-			}
-			//stage 1 for generating the dice roll
-			else if (this.stage == 1){
-				this.diceRoll = getRandomNumber(1,7);
-			}
-			//stage 2 is for highlighting the atoms with the dice roll (i.e. decayed atoms)
-			else if (this.stage == 2){
-				decayedAtoms(canvasAtoms, canvasGraph, this, true);
-			}
-			//stage 3, removes all the rolls for the atoms and sets decayed atoms to blue and removes them from atoms array
-			else if (this.stage == 3){
-				decayedAtoms(canvasAtoms, canvasGraph, this, false);
-			}
+			//update variables for current round/year
+			this.currentYear += 1;
+			
+			//generate the random values for the atoms
+			rerollAtoms(this);
+			
+			//generating the dice roll
+			this.diceRoll = getRandomNumber(0,this.trialInputs.probDecay);
 
-			//update the stage
-			this.stage += 1;
-			if (this.stage === 4){
-				//reset variables for current round/year
-				this.numDecayed = 0;
-				this.stage = 0;
-				this.currentYear += 1;
-			}
+			//removes all the rolls for the atoms with the dice roll above
+			const canvasGraph = document.querySelector('#app-canvas-graph');
+			removeDecayedAtoms(canvasGraph, this);
 		},
 		//This function initialises random numbers for all the 100 
 		start(){
 			//remove the Start button
 			this.showStart = false;
 
-			this.stage += 1;
-
 			if (this.isAuto)
 				this.autoMode();
 			//else demo mode
+			else
+				this.nextStage();
 		},
 		reset(){
-			this.showStart = true;
-			this.currentYear = 0;
-			
 			//reset the variables
 			this.atoms.splice(0,this.atoms.length);
+			this.showStart = true;
+			this.currentYear = 0;
+			this.halfLifeYear = -1;
+			this.graphColour = 'red';
 
 			//reset the canvas
 			this.initialiseCanvases();
 		},
 		initialiseCanvases(){
-
 			//reset the canvas
 			const canvas = document.querySelector('#app-canvas-graph');
 			canvas.width = canvas.width;
@@ -248,12 +280,10 @@ export default {
 	},
 	mounted() {
 		this.initialiseCanvases();
-		console.log(this.trialInputs);
 	},
 	beforeDestroy(){
 		//Clear the interval addition timer.
 		clearInterval(this.intervalId);
-		clearInterval(this.graphIntervalId);
 	}
 }
 </script>

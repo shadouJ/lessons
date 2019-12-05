@@ -4,7 +4,7 @@
 		<h5 style="color: darkgreen">Birthday paradox: What is the chance, for a given group of people, at least two share the same birthday?</h5>
 		<div class="app--enter-number form-group row mt-5">
 			<label for="trial-numbers" class="col-form-label col-sm-6">
-				<span style="color: darkred">Enter the number of atoms</span> (10 - 1000000):
+				<span style="color: darkred">Enter the number of atoms</span> (10 - 10,000):
 			</label>
 			<div class="col-sm-6">
 				<input type="number" class="form-control" v-model="numAtoms" required>
@@ -39,7 +39,7 @@
 				if (( !this.numAtoms || 
 					isNaN(Number(this.numAtoms)) || 
 					this.numAtoms < 1 || 
-					this.numAtoms > 1000000 ) ||
+					this.numAtoms > 10000 ) ||
 					( !this.probDecay || 
 					isNaN(Number(this.probDecay)) || 
 					this.probDecay < 2 || 
