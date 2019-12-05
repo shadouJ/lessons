@@ -100,20 +100,20 @@
 </template>
 
 <script>
-import _ from "lodash";
-import GridList from "./GridList.vue";
+// import _ from "lodash";
+// import GridList from "./GridList.vue";
 import Grid from "./Grid.vue";
 import Strategies from "./Strategies.vue";
 import ManyGamesStat from "./ManyGamesStat.vue";
 import DemoAutoOption from "../../common/DemoAutoOption.vue";
-import { BLANK_GRID_DATA, BLANK_STRATEGY } from "./utils/settings";
+import { BLANK_STRATEGY } from "./utils/settings";
 import { pickNumber, checkAddo, checkCanAddo } from "./utils/utils";
 import { calculateTimerInterval } from "../../common/utils";
 
 export default {
   props: ["strategies", "trialNumber"],
   components: {
-    appGridList: GridList,
+    // appGridList: GridList,
     appGrid: Grid,
     appStrategies: Strategies,
     appManyGamesStat: ManyGamesStat,
