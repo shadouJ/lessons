@@ -300,6 +300,12 @@ const Lcm = resolve => {
   });
 };
 
+const HuntingStars = resolve => {
+  require.ensure("./components/lessons/hunting-stars/App.vue", () => {
+    resolve(require("./components/lessons/hunting-stars/App.vue"));
+  });
+};
+
 Vue.use(VueRouter);
 
 const routes = [
@@ -424,7 +430,8 @@ const routes = [
     component: FractionCharts,
     name: "Fraction Charts"
   },
-  { path: "/lcm", component: Lcm, name: "LCM" }
+  { path: "/lcm", component: Lcm, name: "LCM" },
+  { path: "/hunting-stars", component: HuntingStars, name: "Hunting For Stars" }
 ];
 
 const router = new VueRouter({
