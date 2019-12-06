@@ -68,7 +68,8 @@ export default {
         { name: "Duelling Dice", link: "/duelling-dice" },
         { name: "Fraction Charts", link: "/fraction-charts" },
         { name: "LCM: Natalie's Task", link: "/lcm" },
-        { name: "Hunting For Stars", link: "hunting-stars" }
+        { name: "Hunting For Stars", link: "/hunting-stars" },
+        { name: "Cracked Tiles", link: "/cracked-tiles" }
       ]
     };
   },

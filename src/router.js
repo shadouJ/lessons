@@ -312,6 +312,12 @@ const HuntingStars = resolve => {
   });
 };
 
+const CrackedTiles = resolve => {
+  require.ensure("./components/lessons/cracked-tiles/App.vue", () => {
+    resolve(require("./components/lessons/cracked-tiles/App.vue"));
+  });
+};
+
 Vue.use(VueRouter);
 
 const routes = [
@@ -423,12 +429,12 @@ const routes = [
   },
 
   { path: "/algebra-charts", component: AlgebraCharts, name: "Algebra Charts" },
-  {
-    path: "/goldbachs-conjecture",
-    component: GoldbachsConjecture,
-    name: "Goldbach's Conjecture"
-  },
-  { path: "/addo", component: Addo, name: "Addo" },
+  // {
+  //   path: "/goldbachs-conjecture",
+  //   component: GoldbachsConjecture,
+  //   name: "Goldbach's Conjecture"
+  // },
+  // { path: "/addo", component: Addo, name: "Addo" },
   { path: "/multo", component: Multo, name: "Multo" },
   { path: "/bobs-button", component: BobsButton, name: "Bobs Button" },
   { path: "/duelling-dice", component: DuellingDice, name: "Duelling Dice" },
@@ -438,7 +444,12 @@ const routes = [
     name: "Fraction Charts"
   },
   { path: "/lcm", component: Lcm, name: "LCM" },
-  { path: "/hunting-stars", component: HuntingStars, name: "Hunting For Stars" }
+  {
+    path: "/hunting-stars",
+    component: HuntingStars,
+    name: "Hunting For Stars"
+  },
+  { path: "/cracked-tiles", component: CrackedTiles, name: "Cracked Tiles" }
 ];
 
 const router = new VueRouter({
