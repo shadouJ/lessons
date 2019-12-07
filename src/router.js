@@ -324,6 +324,12 @@ const BillardBall = resolve => {
   });
 };
 
+const Palindromes = resolve => {
+  require.ensure("./components/lessons/palindromes/App.vue", () => {
+    resolve(require("./components/lessons/palindromes/App.vue"));
+  });
+};
+
 Vue.use(VueRouter);
 
 const routes = [
@@ -460,6 +466,11 @@ const routes = [
     path: "/billard-ball",
     component: BillardBall,
     name: "Billard Ball Bounces"
+  },
+  {
+    path: "/palindromes",
+    component: Palindromes,
+    name: "Palindromes"
   }
 ];
 
