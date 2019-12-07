@@ -318,6 +318,12 @@ const CrackedTiles = resolve => {
   });
 };
 
+const BillardBall = resolve => {
+  require.ensure("./components/lessons/billard-ball/App.vue", () => {
+    resolve(require("./components/lessons/billard-ball/App.vue"));
+  });
+};
+
 Vue.use(VueRouter);
 
 const routes = [
@@ -449,7 +455,12 @@ const routes = [
     component: HuntingStars,
     name: "Hunting For Stars"
   },
-  { path: "/cracked-tiles", component: CrackedTiles, name: "Cracked Tiles" }
+  { path: "/cracked-tiles", component: CrackedTiles, name: "Cracked Tiles" },
+  {
+    path: "/billard-ball",
+    component: BillardBall,
+    name: "Billard Ball Bounces"
+  }
 ];
 
 const router = new VueRouter({

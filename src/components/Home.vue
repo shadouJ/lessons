@@ -69,7 +69,8 @@ export default {
         { name: "Fraction Charts", link: "/fraction-charts" },
         { name: "LCM: Natalie's Task", link: "/lcm" },
         { name: "Hunting For Stars", link: "/hunting-stars" },
-        { name: "Cracked Tiles", link: "/cracked-tiles" }
+        { name: "Cracked Tiles", link: "/cracked-tiles" },
+        { name: "Billard Ball Bounces", link: "/billard-ball" }
       ]
     };
   },

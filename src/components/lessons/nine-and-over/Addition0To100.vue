@@ -37,18 +37,18 @@
             <div v-else>
               <h6>
                 Starting number is {{ numberSet.startingNumber }}
-                <br>
+                <br />
                 Target number is {{ numberSet.targetNumber }}
               </h6>
               <div class="app--dice text-center mt-4" v-if="diceNumber1 || diceNumber2">
                 <app-dice :index="1" :number="diceNumber1" class="m-1"></app-dice>
-                <br>
+                <br />
                 <app-dice :index="2" v-if="diceNumber2" :number="diceNumber2" class="m-1"></app-dice>
               </div>
             </div>
           </div>
         </div>
-        <br>
+        <br />
         <app-spelling-board :isDisable="true" :spellingNumber="currentSpellingNumber"></app-spelling-board>
         <div v-if="numberSet" class="text-center mt-3">
           <button
@@ -149,7 +149,7 @@ export default {
     },
     handleSetNumber($event) {
       // In the beginning of a game, set starting number and target number
-      console.log($event);
+      // console.log($event);
       this.numberSet = $event;
       this.step += 1; // step -> 1
       this.currentPlugboardNumber = $event.startingNumber;
@@ -162,11 +162,11 @@ export default {
       let diffToTarget =
         this.numberSet.targetNumber - this.currentPlugboardNumber;
       if (diffToTarget <= 6) {
-        console.log(diffToTarget);
+        // console.log(diffToTarget);
         this.diceNumber1 = diffToTarget;
         this.diceNumber2 = null;
       } else if (diffToTarget <= 12) {
-        console.log(diffToTarget);
+        // console.log(diffToTarget);
         let tempDiceNumber1, tempDiceNumber2;
         do {
           tempDiceNumber1 = throwDiceOnce();
@@ -175,7 +175,7 @@ export default {
         this.diceNumber1 = tempDiceNumber1;
         this.diceNumber2 = tempDiceNumber2;
       } else {
-        console.log(diffToTarget);
+        // console.log(diffToTarget);
         this.diceNumber1 = throwDiceOnce();
         this.diceNumber2 = throwDiceOnce();
       }
@@ -184,7 +184,7 @@ export default {
     },
     handleCheckPlugboard() {
       // Check number in plugboard
-      console.log(this.currentPlugboardNumber);
+      // console.log(this.currentPlugboardNumber);
       this.numberToCheck = this.currentSpellingNumber + this.diceNumber;
       if (this.numberToCheck === this.currentPlugboardNumber) {
         this.isPlugboardNumberCheckedRight = true;
@@ -194,7 +194,7 @@ export default {
       }
     },
     handleCheckCalculator($event) {
-      console.log($event);
+      // console.log($event);
       if ($event.inputCorrect) {
         this.isCalNumberCheckedRight = true;
         this.currentSpellingNumber = $event.value;

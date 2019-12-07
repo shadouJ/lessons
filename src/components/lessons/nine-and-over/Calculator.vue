@@ -112,7 +112,7 @@ export default {
     },
     calNumber(value) {
       if (!value) {
-        console.log("value", value);
+        // console.log("value", value);
         this.numberCalArr = [];
         return;
       }
@@ -193,7 +193,7 @@ export default {
           default:
             break;
         }
-        console.log(result);
+        // console.log(result);
         this.numberCalArr = result.toString().split("");
         this.tempNumber = null;
         this.operator = null;

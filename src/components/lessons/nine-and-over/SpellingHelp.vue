@@ -69,7 +69,7 @@ export default {
         return;
       }
       let word = e.target.getAttribute("data-word");
-      console.log(word);
+      // console.log(word);
       this.$emit("setSpelling", word);
     }
   }

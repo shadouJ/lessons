@@ -29,8 +29,7 @@
 
 <script>
 import TitleStatic from "../../layout/TitleStatic.vue";
-import TopNav from "../../layout/TopNav.vue";
-import BottomNav from "../../layout/BottomNav.vue";
+import TopNav from "../../layout/TopNav.vue"; 
 import Options from "../../layout/Options.vue";
 import OneGame from "./OneGame.vue";
 import ManyGames from "./ManyGames.vue";
@@ -42,8 +41,7 @@ export default {
   components: {
     appTitleStatic: TitleStatic,
     appTopNav: TopNav,
-    appOptions: Options,
-    appBottomNav: BottomNav,
+    appOptions: Options, 
     appOneGame: OneGame,
     appManyGames: ManyGames,
     appBuildTable: BuildTable,

@@ -318,7 +318,7 @@ export default {
       }
       if (this.shape === 1) {
         randomNumber = pickRandomNumber(0, triangleData.length);
-        console.log(randomNumber);
+        // console.log(randomNumber);
         this.shapeData = triangleData[randomNumber];
       }
     }

@@ -13,7 +13,7 @@
             :value="0"
             v-model="shape"
             :disabled="shapeSelected"
-          >
+          />
           <label for="shape-square" class="form-check-label">Square</label>
         </div>
         <div class="form-check">
@@ -25,11 +25,11 @@
             :value="1"
             v-model="shape"
             :disabled="shapeSelected"
-          >
+          />
           <label for="shape-triangle" class="form-check-label">Triangle</label>
         </div>
-        <br>
-        <br>
+        <br />
+        <br />
         <div class="form-check">
           <input
             type="radio"
@@ -39,7 +39,7 @@
             :value="1"
             v-model="numberType"
             :disabled="shapeSelected"
-          >
+          />
           <label for="type-whole-number" class="form-check-label">Whole number</label>
         </div>
         <div class="form-check">
@@ -51,7 +51,7 @@
             :value="2"
             v-model="numberType"
             :disabled="shapeSelected"
-          >
+          />
           <label for="type-decimals" class="form-check-label">Decimals</label>
         </div>
         <div class="form-check">
@@ -63,7 +63,7 @@
             :value="3"
             v-model="numberType"
             :disabled="shapeSelected"
-          >
+          />
           <label for="type-fractions" class="form-check-label">Fractions</label>
         </div>
 
@@ -139,7 +139,7 @@
             name="myAnswerUp"
             style="width: 10%; display: inline"
             v-model.number="myAnswerUp"
-          >
+          />
           /
           <input
             class="form-control"
@@ -147,10 +147,10 @@
             name="myAnswerDown"
             style="width: 10%; display: inline"
             v-model.number="myAnswerDown"
-          >
+          />
         </span>
         <span v-else>
-          <input type="number" name="myAnswer" v-model.number="myAnswer">
+          <input type="number" name="myAnswer" v-model.number="myAnswer" />
         </span>
       </p>
       <div
@@ -339,7 +339,7 @@ export default {
       }
       if (this.shape === 1) {
         randomNumber = pickRandomNumber(0, triangleData.length);
-        console.log(randomNumber);
+        // console.log(randomNumber);
         this.shapeData = triangleData[randomNumber];
       }
     }
