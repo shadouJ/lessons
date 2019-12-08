@@ -30,6 +30,7 @@
             :gridData="selectedStrategy.strategyData[0]"
             :gameStatus="gameStatus"
             :multiplicationList="multiplicationList"
+            :index="1"
             @duplicateNumber="duplicateNumber = $event"
             @showMessage="message = $event"
           ></app-grid>
@@ -42,6 +43,7 @@
             :gridData="selectedStrategy.strategyData[1]"
             :gameStatus="gameStatus"
             :multiplicationList="multiplicationList"
+            :index="2"
             @duplicateNumber="duplicateNumber = $event"
             @showMessage="message = $event"
           ></app-grid>
@@ -54,6 +56,7 @@
             :gridData="selectedStrategy.strategyData[2]"
             :gameStatus="gameStatus"
             :multiplicationList="multiplicationList"
+            :index="3"
             @duplicateNumber="duplicateNumber = $event"
             @showMessage="message = $event"
           ></app-grid>
@@ -66,6 +69,7 @@
         >
           <div class="mr-2" style="font-size: 2rem;">{{ number1 }} X {{ number2 }} =</div>
           <div>
+            <form @submit="(e) => { e.preventDefault(); this.handleEnterAnswer()}">
             <input
               ref="inputAnswer"
               class="form-control-lg"
@@ -74,6 +78,7 @@
               style="width: 60%"
               autofocus
             />
+            </form>
           </div>
         </div>
       </div>
@@ -84,7 +89,8 @@
         :style="{
           visibility: message ? 'visible' : 'hidden'
         }"
-        class="alert alert-danger"
+        class="alert"
+        :class="[number1 * number2===answer && message!=='Try again' ? 'alert-success' : 'alert-danger']"
       >{{ message }}</p>
       <button
         class="btn btn-outline-success"
@@ -248,6 +254,13 @@ export default {
       this.answer = null;
       this.multiplicationList = [];
     }
+  },
+  created() {
+    window.addEventListener("keyup", e => {
+      if (e.code == "Space" && this.gameStatus === 2) {
+        this.handleDrawTwoNumbers();
+      }
+    });
   }
 };
 </script>

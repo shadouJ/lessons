@@ -31,6 +31,7 @@
             :gridData="selectedStrategy.strategyData[0]"
             :gameStatus="gameStatus"
             :additionList="additionList"
+            :index="1"
             @duplicateNumber="duplicateNumber = $event"
             @showMessage="message = $event"
           ></app-grid>
@@ -45,6 +46,7 @@
             :gridData="selectedStrategy.strategyData[1]"
             :gameStatus="gameStatus"
             :additionList="additionList"
+            :index="2"
             @duplicateNumber="duplicateNumber = $event"
             @showMessage="message = $event"
           ></app-grid>
@@ -60,6 +62,7 @@
             @duplicateNumber="duplicateNumber = $event"
             :gameStatus="gameStatus"
             :additionList="additionList"
+            :index="3"
             @showMessage="message = $event"
           ></app-grid>
         </div>
@@ -71,14 +74,16 @@
         >
           <div class="mr-2" style="font-size: 2rem;">{{ add1 }} + {{ add2 }} =</div>
           <div>
-            <input
-              ref="inputAnswer"
-              class="form-control-lg"
-              type="number"
-              v-model.number="answer"
-              style="width: 60%"
-              autofocus
-            />
+            <form @submit="(e) => { e.preventDefault(); this.handleEnterAnswer()}">
+              <input
+                ref="inputAnswer"
+                class="form-control-lg"
+                type="number"
+                v-model.number="answer"
+                style="width: 60%"
+                autofocus
+              />
+            </form>
           </div>
         </div>
       </div>
@@ -88,7 +93,8 @@
         :style="{
           visibility: message ? 'visible' : 'hidden'
         }"
-        class="alert alert-danger"
+        class="alert"
+        :class="[add1+add2===answer && message!=='Try again' ? 'alert-success' : 'alert-danger']"
       >{{ message }}</p>
       <button
         class="btn btn-outline-success"
@@ -115,12 +121,12 @@
 </template>
 
 <script>
-import _ from "lodash";
-import GridList from "./GridList.vue";
+// import _ from "lodash";
+// import GridList from "./GridList.vue";
 import Grid from "./Grid.vue";
 import Strategies from "./Strategies.vue";
 import GameStat from "./GameStat.vue";
-import { BLANK_GRID_DATA, BLANK_STRATEGY } from "./utils/settings";
+import { BLANK_STRATEGY } from "./utils/settings";
 import { pickNumber, checkAddo } from "./utils/utils";
 
 export default {
@@ -245,6 +251,13 @@ export default {
       this.answer = null;
       this.additionList = [];
     }
+  },
+  created() {
+    window.addEventListener("keyup", e => {
+      if (e.code == "Space" && this.gameStatus === 2) {
+        this.handleDrawTwoNumbers();
+      }
+    });
   }
 };
 </script>

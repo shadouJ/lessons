@@ -31,6 +31,7 @@
             :gameStatus="gameStatus"
             :multiplicationList="multiplicationList"
             :noStyle="true"
+            :index="1"
             @duplicateNumber="duplicateNumber=$event"
             @showMessage="message=$event"
           ></app-grid>
@@ -44,6 +45,7 @@
             :gameStatus="gameStatus"
             :multiplicationList="multiplicationList"
             :noStyle="true"
+            :index="2"
             @duplicateNumber="duplicateNumber=$event"
             @showMessage="message=$event"
           ></app-grid>
@@ -57,6 +59,7 @@
             :gameStatus="gameStatus"
             :multiplicationList="multiplicationList"
             :noStyle="true"
+            :index="3"
             @duplicateNumber="duplicateNumber=$event"
             @showMessage="message=$event"
           ></app-grid>
