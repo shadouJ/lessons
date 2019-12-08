@@ -330,6 +330,12 @@ const Palindromes = resolve => {
   });
 };
 
+const ChocolateChipCookies = resolve => {
+  require.ensure("./components/lessons/chip-cookies/App.vue", () => {
+    resolve(require("./components/lessons/chip-cookies/App.vue"));
+  });
+};
+
 Vue.use(VueRouter);
 
 const routes = [
@@ -471,6 +477,11 @@ const routes = [
     path: "/palindromes",
     component: Palindromes,
     name: "Palindromes"
+  },
+  {
+    path: "/chocolate-chip-cookies",
+    component: ChocolateChipCookies,
+    name: "Chocolate Chip Cookies"
   }
 ];
 
