@@ -1,10 +1,8 @@
 <template>
   <div class="container">
-    <h3 class="text-success text-center my-3">
-      Find pairs of numbers for a given LCM
-    </h3>
+    <h3 class="text-success text-center my-3">Find pairs of numbers for a given LCM</h3>
     <div class="row">
-      <div class="col-md-6">
+      <div class="col-md-4 col-sm-6">
         <h5>Enter a chosen LCM</h5>
         <input
           type="text"
@@ -15,57 +13,44 @@
         />
         <div class="text-center my-3">
           <button
-            class="btn btn-outline-success"
+            class="btn btn-outline-success mb-3"
             @click="handleCheckPrime"
             v-if="gameStatus === 0"
             :disabled="!lcmNumber || lcmNumber <= 2"
-          >
-            OK
-          </button>
+          >OK</button>
+          <div
+            v-if="gameStatus===0 && (lcmNumber===0 || lcmNumber===1)"
+            class="alert alert-danger"
+          >Enter a number greater than 1</div>
           <div v-if="gameStatus > 0" class="alert alert-danger">
             {{
-              primeFactors.length > 1
-                ? `${lcmNumber} is made up of ${primeFactors.length} prime factors.`
-                : `${lcmNumber} is a prime number`
+            primeFactors.length > 1
+            ? `${lcmNumber} is made up of ${primeFactors.length} prime factors.`
+            : `${lcmNumber} is a prime number`
             }}
           </div>
           <button
             class="btn btn-outline-success"
             v-if="gameStatus === 1"
             @click="handleCalculateFactors"
-          >
-            Tap here to calculate factors
-          </button>
+          >Tap here to calculate factors</button>
           <button
             class="btn btn-outline-success"
             v-if="gameStatus === 2"
             @click="handleCalFirstGroupPairs"
-          >
-            Tap here to calculate the first group of number pairs
-          </button>
+          >Tap here to calculate the first group of number pairs</button>
           <button
             class="btn btn-outline-success"
             v-if="gameStatus === 3"
             @click="handleCalSecondGroupPairs"
-          >
-            Tap here to calculate the second group of number pairs
-          </button>
-          <button
-            class="btn btn-outline-dark"
-            v-if="gameStatus === 4"
-            @click="handleReset"
-          >
-            Reset
-          </button>
-        </div>
-
-        <div class="row">
-          <div class="col-sm-6">
+          >Tap here to calculate the second group of number pairs</button>
+          <button class="btn btn-outline-dark" v-if="gameStatus === 4" @click="handleReset">Reset</button>
+          <div class="mt-3">
             <h5 class="text-primary" v-if="gameStatus > 0">
               {{
-                primeFactors.length > 1
-                  ? `${primeFactors.length} primes`
-                  : "Prime"
+              primeFactors.length > 1
+              ? `${primeFactors.length} primes`
+              : "Prime"
               }}
             </h5>
             <ul class="list-group app--list" v-if="gameStatus > 0">
@@ -73,32 +58,27 @@
                 class="list-group-item"
                 v-for="(factor, index) in primeFactors"
                 :key="index"
-              >
-                {{ factor }}
-              </li>
-            </ul>
-          </div>
-          <div class="col-sm-6">
-            <h5 class="text-primary">
-              <span v-if="gameStatus > 1">{{ factors.length }}</span> Factors
-            </h5>
-            <ul class="list-group app--list" v-if="gameStatus > 1">
-              <li
-                class="list-group-item"
-                v-for="(factor, index) in factors"
-                :key="index"
-              >
-                {{ factor }}
-              </li>
+              >{{ factor }}</li>
             </ul>
           </div>
         </div>
       </div>
 
-      <div class="col-md-6">
-        <h5 class="text-primary text-center" v-if="gameStatus <= 2">
-          LCM Pairs
+      <div class="col-md-2 col-sm-6 mb-3">
+        <h5 class="text-primary text-center">
+          <span v-if="gameStatus > 1">{{ factors.length }}</span> Factors
         </h5>
+        <ul class="list-group app--list" v-if="gameStatus > 1">
+          <li
+            class="list-group-item text-center"
+            v-for="(factor, index) in factors"
+            :key="index"
+          >{{ factor }}</li>
+        </ul>
+      </div>
+
+      <div class="col-md-6 col-sm-12">
+        <h5 class="text-primary text-center" v-if="gameStatus <= 2">LCM Pairs</h5>
         <h5 class="text-primary text-center" v-if="gameStatus > 2">
           {{ firstGroupPairs.length + secondGroupPairs.length }} pairs with a
           LCM of {{ lcmNumber }}
@@ -110,9 +90,7 @@
                 class="list-group-item"
                 v-for="(factor, index) in firstGroupPairs"
                 :key="index"
-              >
-                {{ factor }} , {{ lcmNumber }}
-              </li>
+              >{{ factor }} , {{ lcmNumber }}</li>
             </ul>
           </div>
           <div class="col-sm-6">
@@ -121,9 +99,7 @@
                 class="list-group-item"
                 v-for="(item, index) in secondGroupPairs"
                 :key="index"
-              >
-                {{ item[0] }} , {{ item[1] }}
-              </li>
+              >{{ item[0] }} , {{ item[1] }}</li>
             </ul>
           </div>
         </div>
