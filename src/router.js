@@ -336,6 +336,12 @@ const ChocolateChipCookies = resolve => {
   });
 };
 
+const BeetleGame = resolve => {
+  require.ensure("./components/lessons/beetle-game/App.vue", () => {
+    resolve(require("./components/lessons/beetle-game/App.vue"));
+  });
+};
+
 Vue.use(VueRouter);
 
 const routes = [
@@ -482,7 +488,8 @@ const routes = [
     path: "/chocolate-chip-cookies",
     component: ChocolateChipCookies,
     name: "Chocolate Chip Cookies"
-  }
+  },
+  { path: "/beetle-game", component: BeetleGame, name: "Beetle Game" },
 ];
 
 const router = new VueRouter({

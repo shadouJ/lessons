@@ -68,7 +68,8 @@ export default {
         { name: "Cracked Tiles", link: "/cracked-tiles" },
         { name: "Billard Ball Bounces", link: "/billard-ball" },
         { name: "Palindromes", link: "/palindromes" },
-        { name: "Chocolate Chip Cookies", link: "/chocolate-chip-cookies" }
+        { name: "Chocolate Chip Cookies", link: "/chocolate-chip-cookies" },
+        { name: "Beetle Game", link: "/beetle-game" },
       ]
     };
   },
