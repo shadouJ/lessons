@@ -7,8 +7,8 @@ export default {};
 
 <style scoped>
 .app--button {
-  width: 40px;
-  height: 40px;
+  width: 34px;
+  height: 34px;
   border-radius: 50%;
   background-color: red;
   border: 1px solid #000;

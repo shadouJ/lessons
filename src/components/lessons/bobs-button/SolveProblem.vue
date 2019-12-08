@@ -186,7 +186,7 @@ export default {
 .app--list {
   height: auto !important;
   max-height: 600px;
-  overflow-y: scroll;
+  overflow-y: auto;
 }
 .app--test-result p {
   height: 50px;

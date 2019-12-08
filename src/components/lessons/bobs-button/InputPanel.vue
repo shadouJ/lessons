@@ -81,6 +81,7 @@
       </div>
     </div>
     <div class="text-center col-12 mt-3">
+      <p class="text-center text-danger">Input a number: left over should be smaller than group size</p>
       <button class="btn btn-outline-success" @click="handleOK" :disabled="!isValidInput">OK</button>
     </div>
   </div>

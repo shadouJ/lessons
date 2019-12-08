@@ -34,7 +34,10 @@
             {{ number }}
             <span style="visibility: hidden">p</span>
           </li>
-          <li class="list-group-item d-flex justify-content-end text-primary">
+          <li
+            class="list-group-item d-flex justify-content-end text-primary"
+            :style="{ 'background-color': lcm && '#FEEDD6'}"
+          >
             {{ lcm }}
             <span style="visibility: hidden">p</span>
           </li>
@@ -46,7 +49,7 @@
             <span style="visibility: hidden">p</span>
             {{ factor }}
           </li>
-          <li class="list-group-item text-primary">
+          <li class="list-group-item text-primary" :style="{ 'background-color': lcm && '#FEEDD6'}">
             <span style="visibility: hidden">p</span>
             {{ lcmFactors }}
           </li>
