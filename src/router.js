@@ -18,6 +18,12 @@ import Home from "./components/Home.vue";
 // import ChancesWithCrosses from "./components/lessons/chances-with-crosses/App.vue"
 // import FaysNines from "./components/lessons/fays-nines/App.vue"
 
+const GreedyPig = resolve => {
+  require.ensure("./components/lessons/greedy-pig/App.vue", () => {
+    resolve(require("./components/lessons/greedy-pig/App.vue"));
+  });
+};
+
 const Radioactivity = resolve => {
   require.ensure("./components/lessons/radioactivity/App.vue", () => {
     resolve(require("./components/lessons/radioactivity/App.vue"));
@@ -340,6 +346,7 @@ Vue.use(VueRouter);
 
 const routes = [
   { path: "/", component: Home, name: "home" },
+  { path: "/greedy-pig", component: GreedyPig, name: "Greedy Pig" },
   { path: "/radioactivity", component: Radioactivity, name: "Radioactivity" },
   {
     path: "/same-or-different",

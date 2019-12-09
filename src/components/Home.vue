@@ -14,6 +14,7 @@ export default {
     return {
       // Add a lesson object with name and link properties whenever a new lesson is created
       lessons: [
+        { name: "Greedy Pig", link: "/greedy-pig" },
         { name: "Radioactivity", link: "/radioactivity" },
         { name: "Garden Beds", link: "/garden-beds" },
         { name: "Same or Different", link: "/same-or-different" },
