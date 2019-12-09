@@ -36,9 +36,7 @@
 						<label class="form-check-label" for="auto">Auto</label>
 					</div>
 				</div>
-				<div class="app--demo-auto-option col-sm-2 app--action" v-if="stage==2 || stage==3">
-					<app-dice :number="diceRoll" ></app-dice>
-				</div>
+				
 				<div class="col-2"></div>
 			</div>
 		</div>
@@ -47,7 +45,7 @@
 
 <script>
 /* eslint-disable */
-import Dice from './Dice.vue';
+
 import { 
 	drawGrid,
 	drawGraph,
