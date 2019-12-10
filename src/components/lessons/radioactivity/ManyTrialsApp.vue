@@ -210,6 +210,11 @@ export default {
 					this.autoMode();
 				}
 			}
+		},
+		showHalfWay: function(){
+			//update the showPause to start after the showHalfWay button is clicked
+			if (!this.showHalfWay)
+				this.showPause = true;
 		}
 	},
 	methods: {
@@ -265,6 +270,7 @@ export default {
 			this.currentYear = 0;
 			this.halfLifeYear = -1;
 			this.graphColour = 'red';
+			this.timeDelay = 200;
 
 			//reset the canvas
 			this.initialiseCanvases();

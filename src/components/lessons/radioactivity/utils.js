@@ -226,7 +226,12 @@ export const decayedAtoms = (canvasAtoms, canvasGraph, vueObjPtr, highlight) => 
 			}
 		}
 		vueObjPtr.numDecayed = decayed.length;
+
 		//set a delay to show incremental build up
+		var timeDelay = 10;
+		if (decayed.length != 0)
+			timeDelay = (vueObjPtr.timeDelay-100)/decayed.length;
+
 		var i = 0;
 		if (decayed.length > 0){
 			vueObjPtr.graphIntervalId = setInterval(() => {
@@ -249,7 +254,7 @@ export const decayedAtoms = (canvasAtoms, canvasGraph, vueObjPtr, highlight) => 
 					//Clear the interval addition timer.
 					clearInterval(vueObjPtr.graphIntervalId);
 				}
-			}, vueObjPtr.graphDelay);
+			}, timeDelay);
 		}
 		else {
 			vueObjPtr.disableButton = false;
