@@ -94,7 +94,6 @@ export default {
 			showHalfWay: false,
 
 			//variable used by the canvas
-			width: 15,
 			startXOffset: 100,
 
 			//array used for storing all the atoms
@@ -122,6 +121,15 @@ export default {
 		}
 	},
 	computed: {
+		//adjust the width to fit the graph in the canvas
+		width: function(){
+			if (this.trialInputs.probDecay <=50)
+				return 15;
+			else if (this.trialInputs.probDecay >50 && this.trialInputs.probDecay<80)
+				return 10;
+			else
+				return 8;
+		},
 		fractionLeft: function(){
 			//calculate the time delay based on percentage of atoms left delay
 			var percentLeft = this.atomLeft/this.trialInputs.numAtoms;
